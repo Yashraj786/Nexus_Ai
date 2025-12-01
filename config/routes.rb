@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       get :download
     end
 
-    resources :messages, only: [:create], defaults: { format: :json } do
+    resources :messages, only: [:create], controller: 'chat_sessions/messages' do
       member do
         post :retry
       end

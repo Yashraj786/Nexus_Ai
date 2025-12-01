@@ -31,6 +31,8 @@ class NPlusOneTest < ApplicationSystemTestCase
     end
 
     visit chat_sessions_url
+    # Verify the page loaded with no N+1 queries (Bullet.raise would have failed if there were)
+    assert_text "My Sessions"
   end
 
   test "no N+1 queries when loading a chat session show page" do
@@ -39,5 +41,7 @@ class NPlusOneTest < ApplicationSystemTestCase
     create_list(:feedback, 3, { chat_session: chat_session, user: @user })
 
     visit chat_session_url(chat_session)
+    # Verify the page loaded with no N+1 queries (Bullet.raise would have failed if there were)
+    assert_text "Run Metrics"
   end
 end

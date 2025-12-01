@@ -2,8 +2,12 @@
 require "application_system_test_case"
 
 class RunMetricsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
+    @user = users(:one)
     @chat_session = chat_sessions(:one)
+    sign_in @user
   end
 
   test "visiting a chat session with run metrics" do

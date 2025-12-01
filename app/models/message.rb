@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Message < ApplicationRecord
-  belongs_to :chat_session, counter_cache: true
+  belongs_to :chat_session, counter_cache: :messages_count
 
   MAX_CONTENT_LENGTH = 10_000
 
@@ -16,5 +16,10 @@ class Message < ApplicationRecord
 
   def system?
     role == 'system'
+  end
+
+  # Helper method for sanitized check
+  def sanitized?
+    respond_to?(:sanitized) && sanitized
   end
 end

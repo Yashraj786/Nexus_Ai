@@ -5,6 +5,7 @@ class RecreateMessagesTable < ActiveRecord::Migration[8.1]
       t.string :role, null: false # 'user', 'assistant', or 'system_instruction'
       t.text :content, null: false
       t.jsonb :metadata # Stores tokens, latency, etc.
+      t.boolean :sanitized, default: false, null: false
 
       t.timestamps
     end

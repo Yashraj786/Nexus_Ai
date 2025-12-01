@@ -22,7 +22,7 @@
                 </h4>
                 <p class="text-sm text-gray-600">
                   <i data-lucide="<%= session.persona&.icon || 'bot' %>" class="w-4 h-4 inline mr-1 text-orange-500"></i>
-                  <%= session.persona&.name || "General" %> • <%= session.messages.count %> messages
+                  <%= session.persona&.name || "General" %> • <%= session.messages_count || 0 %> messages
                 </p>
               </div>
               <div class="text-orange-500 font-semibold text-sm">→</div>

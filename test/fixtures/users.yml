@@ -5,15 +5,21 @@ one:
   email: "test@example.com"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   admin: true
+  features:
+    pro_session_analytics: true
 
 two:
   id: "a12bcb20-2efb-4366-bcda-9dcb781d73c9"
   email: "user2@example.com"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   admin: false
+  features:
+    pro_session_analytics: true
 
 three:
   id: "b12bcb20-2efb-4366-bcda-9dcb781d73c0"
   email: "user3@example.com"
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
   admin: false
+  features:
+    pro_session_analytics: true
