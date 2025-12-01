@@ -25,7 +25,7 @@ module Ai
     def generate_content(context)
       validate_configuration!
 
-      case @provider
+      result = case @provider
       when 'openai'
         generate_with_openai(context)
       when 'anthropic'
@@ -39,7 +39,12 @@ module Ai
       else
         { success: false, error: "Unsupported provider: #{@provider}" }
       end
+
+      # Log the API usage
+      log_usage(result)
+      result
     rescue StandardError => e
+      log_usage(handle_error(e))
       handle_error(e)
     end
 
@@ -262,6 +267,25 @@ module Ai
         success: false,
         error: "API request failed: #{error.message}"
       }
+    end
+
+    def log_usage(result)
+      status = result[:success] ? 'success' : 'error'
+      error_message = result[:error] if result[:error]
+      request_tokens = result[:request_tokens]
+      response_tokens = result[:response_tokens]
+
+      ApiUsageLog.log_request(
+        @user,
+        @provider,
+        @model,
+        status: status,
+        request_tokens: request_tokens,
+        response_tokens: response_tokens,
+        error_message: error_message
+      )
+    rescue StandardError => e
+      Rails.logger.error "Failed to log API usage: #{e.message}"
     end
   end
 end

@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_01_205941) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_01_211354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "api_usage_logs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "error_message"
+    t.string "model", null: false
+    t.string "provider", null: false
+    t.integer "request_tokens"
+    t.integer "response_tokens"
+    t.string "status", default: "success", null: false
+    t.integer "total_tokens"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["provider", "created_at"], name: "index_api_usage_logs_on_provider_and_created_at"
+    t.index ["user_id", "created_at"], name: "index_api_usage_logs_on_user_id_and_created_at"
+  end
 
   create_table "audit_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "action"
@@ -108,6 +123,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_01_205941) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "api_usage_logs", "users"
   add_foreign_key "audit_events", "chat_sessions"
   add_foreign_key "audit_events", "users"
   add_foreign_key "capture_logs", "users"

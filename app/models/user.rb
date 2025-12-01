@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :feedbacks, dependent: :destroy
   has_many :audit_events, dependent: :destroy
   has_many :capture_logs, dependent: :destroy
+  has_many :api_usage_logs, dependent: :destroy
 
   # Validations
   validates :api_provider, presence: true, if: :api_configured?
