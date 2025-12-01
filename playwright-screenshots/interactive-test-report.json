@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-12-01T18:32:12.915Z",
+  "tests": [
+    {
+      "name": "Homepage loads",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:13.689Z",
+      "details": ""
+    },
+    {
+      "name": "Element discovery",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:13.734Z",
+      "details": "Found 2 links, 0 buttons"
+    },
+    {
+      "name": "New Session button clickable",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:14.855Z",
+      "details": ""
+    },
+    {
+      "name": "Persona selection works",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:15.962Z",
+      "details": ""
+    },
+    {
+      "name": "Message input found",
+      "passed": false,
+      "timestamp": "2025-12-01T18:32:15.963Z",
+      "details": ""
+    },
+    {
+      "name": "Sidebar visible",
+      "passed": false,
+      "timestamp": "2025-12-01T18:32:15.964Z",
+      "details": ""
+    },
+    {
+      "name": "Mobile viewport configured",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:16.158Z",
+      "details": ""
+    },
+    {
+      "name": "Form elements present",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:16.165Z",
+      "details": "6 inputs found"
+    },
+    {
+      "name": "Keyboard navigation works",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:16.369Z",
+      "details": ""
+    },
+    {
+      "name": "Accessibility attributes present",
+      "passed": true,
+      "timestamp": "2025-12-01T18:32:16.371Z",
+      "details": ""
+    }
+  ],
+  "interactions": [
+    {
+      "action": "Discovered",
+      "target": "2 links",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:13.734Z"
+    },
+    {
+      "action": "Discovered",
+      "target": "0 buttons",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:13.734Z"
+    },
+    {
+      "action": "Found",
+      "target": "New Session button",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:13.737Z"
+    },
+    {
+      "action": "Click",
+      "target": "New Session button",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:13.737Z"
+    },
+    {
+      "action": "Found",
+      "target": "1 interactive elements",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:14.863Z"
+    },
+    {
+      "action": "Click",
+      "target": "Persona: Remember me",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:14.865Z"
+    },
+    {
+      "action": "Found",
+      "target": "1 forms",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:16.165Z"
+    },
+    {
+      "action": "Found",
+      "target": "6 input elements",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:16.165Z"
+    },
+    {
+      "action": "Tab",
+      "target": "Focused on: INPUT",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:16.369Z"
+    },
+    {
+      "action": "Found",
+      "target": "0 ARIA elements",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:16.371Z"
+    },
+    {
+      "action": "Found",
+      "target": "1 heading elements",
+      "status": "success",
+      "timestamp": "2025-12-01T18:32:16.371Z"
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "interactive-01-homepage.png",
+    "interactive-02-new-session.png",
+    "interactive-03-persona-selected.png",
+    "interactive-05-mobile-view.png"
+  ]
+}

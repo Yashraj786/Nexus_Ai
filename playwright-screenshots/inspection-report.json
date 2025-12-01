@@ -1,76 +1,76 @@
 {
-  "timestamp": "2025-12-01T18:06:25.715Z",
+  "timestamp": "2025-12-01T18:20:20.468Z",
   "results": [
     {
       "name": "Homepage loads",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:26.396Z",
+      "timestamp": "2025-12-01T18:20:21.222Z",
       "details": ""
     },
     {
       "name": "Page title correct",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:26.440Z",
-      "details": "Nexus AI // Professional"
+      "timestamp": "2025-12-01T18:20:21.256Z",
+      "details": "Nexus AI // Cyberpunk"
     },
     {
       "name": "Login form renders",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:26.492Z",
+      "timestamp": "2025-12-01T18:20:21.309Z",
       "details": ""
     },
     {
       "name": "Health endpoint responds",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:26.539Z",
+      "timestamp": "2025-12-01T18:20:21.363Z",
       "details": "Status: 503"
     },
     {
       "name": "CSS/JS loaded",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:26.558Z",
+      "timestamp": "2025-12-01T18:20:21.379Z",
       "details": "CSS: loaded, JS: loaded"
     },
     {
       "name": "Security headers present",
       "passed": "0",
-      "timestamp": "2025-12-01T18:06:26.573Z",
+      "timestamp": "2025-12-01T18:20:21.392Z",
       "details": ""
     },
     {
       "name": "No fatal console errors",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.589Z",
+      "timestamp": "2025-12-01T18:20:23.407Z",
       "details": "Found: 0 errors"
     },
     {
       "name": "Mobile viewport works",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.789Z",
+      "timestamp": "2025-12-01T18:20:23.604Z",
       "details": ""
     },
     {
       "name": "Form validation attributes",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.838Z",
+      "timestamp": "2025-12-01T18:20:23.661Z",
       "details": ""
     },
     {
       "name": "404 page handling",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.854Z",
+      "timestamp": "2025-12-01T18:20:23.680Z",
       "details": "Status: 404"
     },
     {
       "name": "Backend connectivity",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.869Z",
+      "timestamp": "2025-12-01T18:20:23.695Z",
       "details": ""
     },
     {
       "name": "API endpoints accessible",
       "passed": true,
-      "timestamp": "2025-12-01T18:06:28.884Z",
+      "timestamp": "2025-12-01T18:20:23.711Z",
       "details": "Status: 503"
     }
   ],

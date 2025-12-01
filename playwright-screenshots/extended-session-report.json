@@ -1,0 +1,1235 @@
+{
+  "timestamp": "2025-12-01T18:32:45.703Z",
+  "duration_ms": 60111,
+  "pages_visited": [
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:32:46.110Z",
+      "load_time_ms": 148
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:32:47.225Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:32:48.342Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:32:49.454Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:32:50.177Z",
+      "load_time_ms": 21
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:32:51.276Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:32:52.394Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:32:53.505Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:32:54.224Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:32:55.295Z",
+      "load_time_ms": 24
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:32:56.366Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:32:57.471Z",
+      "load_time_ms": 21
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:32:58.192Z",
+      "load_time_ms": 21
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:32:59.260Z",
+      "load_time_ms": 27
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:00.376Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:01.440Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:02.156Z",
+      "load_time_ms": 18
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:03.241Z",
+      "load_time_ms": 23
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:04.313Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:05.401Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:06.107Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:07.175Z",
+      "load_time_ms": 27
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:08.275Z",
+      "load_time_ms": 24
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:09.340Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:10.056Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:11.129Z",
+      "load_time_ms": 24
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:12.194Z",
+      "load_time_ms": 22
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:13.306Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:14.025Z",
+      "load_time_ms": 21
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:15.093Z",
+      "load_time_ms": 22
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:16.208Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:17.321Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:18.039Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:19.112Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:20.224Z",
+      "load_time_ms": 22
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:21.336Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:22.039Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:23.108Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:24.178Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:25.286Z",
+      "load_time_ms": 18
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:25.990Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:27.058Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:28.156Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:29.271Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:29.989Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:31.061Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:32.177Z",
+      "load_time_ms": 27
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:33.269Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:33.971Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:35.042Z",
+      "load_time_ms": 27
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:36.110Z",
+      "load_time_ms": 24
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:37.175Z",
+      "load_time_ms": 21
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:37.888Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:38.958Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:40.077Z",
+      "load_time_ms": 28
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:41.186Z",
+      "load_time_ms": 20
+    },
+    {
+      "url": "http://localhost:3000/",
+      "timestamp": "2025-12-01T18:33:41.886Z",
+      "load_time_ms": 19
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions",
+      "timestamp": "2025-12-01T18:33:42.941Z",
+      "load_time_ms": 26
+    },
+    {
+      "url": "http://localhost:3000/chat_sessions/new",
+      "timestamp": "2025-12-01T18:33:44.058Z",
+      "load_time_ms": 25
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "timestamp": "2025-12-01T18:33:45.125Z",
+      "load_time_ms": 21
+    }
+  ],
+  "elements_clicked": [
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Sign In",
+      "href": "/login",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "View My Sessions",
+      "href": "/chat_sessions",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "New Session",
+      "href": "/chat_sessions/new",
+      "success": true
+    },
+    {
+      "text": "Create Account",
+      "href": "/register",
+      "success": true
+    },
+    {
+      "text": "← Back to Home",
+      "href": "/",
+      "success": true
+    },
+    {
+      "text": "Go back to safety",
+      "href": "/",
+      "success": true
+    }
+  ],
+  "forms_tested": [
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    },
+    {
+      "type": "email",
+      "placeholder": null,
+      "filled": true
+    },
+    {
+      "type": "email",
+      "placeholder": "your@email.com",
+      "filled": true
+    },
+    {
+      "type": "checkbox",
+      "checked": true
+    }
+  ],
+  "errors": [
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:32:49.443Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:32:49.445Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:32:53.493Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:32:53.495Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:32:57.458Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:32:57.460Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:01.428Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:01.430Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:05.389Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:05.392Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:09.329Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:09.330Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:13.293Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:13.295Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:17.308Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:17.311Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:21.325Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:21.327Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:25.275Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:25.277Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:29.260Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:29.262Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:33.258Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:33.260Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:37.162Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:37.164Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:41.175Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:41.177Z"
+    },
+    {
+      "url": "http://localhost:3000/users/sign_in",
+      "status": 404,
+      "timestamp": "2025-12-01T18:33:45.112Z"
+    },
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:33:45.114Z"
+    }
+  ],
+  "performance": {
+    "avg_load_time": 25,
+    "total_requests": 883,
+    "unique_urls": 4
+  },
+  "coverage": {
+    "unique_urls": 4,
+    "unique_elements_count": 0
+  }
+}

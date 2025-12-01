@@ -1,0 +1,252 @@
+[1;32mContinuous Integration[0m
+[1;90mRunning tests, style checks, and security audits[0m
+[1;35m
+
+Setup[0m
+[1;90mbin/setup --skip-server
+[0m
+== Installing dependencies ==
+The Gemfile's dependencies are satisfied
+
+== Preparing database ==
+== 20251201205941 AddApiKeyConfigToUsers: migrating ===========================
+-- add_column(:users, :api_provider, :string)
+   -> 0.0056s
+-- add_column(:users, :encrypted_api_key, :text)
+   -> 0.0014s
+-- add_column(:users, :api_model_name, :string)
+   -> 0.0024s
+-- add_column(:users, :api_configured_at, :datetime)
+   -> 0.0014s
+== 20251201205941 AddApiKeyConfigToUsers: migrated (0.0108s) ==================
+
+
+== Removing old logs and tempfiles ==
+[1;32m
+✅ Setup passed in 2.48s[0m
+[1;35m
+
+Style: Ruby[0m
+[1;90mbin/rubocop
+[0m
+/Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/site_ruby/3.3.0/bundler/rubygems_integration.rb:236:in `block in replace_bin_path': can't find executable rubocop for gem rubocop. rubocop is not currently included in the bundle, perhaps you meant to add it to your Gemfile? (Gem::Exception)
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/site_ruby/3.3.0/rubygems.rb:249:in `bin_path'
+	from bin/rubocop:8:in `<main>'
+[1;31m
+❌ Style: Ruby failed in 0.14s[0m
+[1;35m
+
+Security: Gem audit[0m
+[1;90mbin/bundler-audit
+[0m
+/Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require': cannot load such file -- bundler/audit/cli (LoadError)
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:17:in `require'
+	from bin/bundler-audit:3:in `<main>'
+[1;31m
+❌ Security: Gem audit failed in 0.95s[0m
+[1;35m
+
+Security: Importmap vulnerability audit[0m
+[1;90mbin/importmap audit
+[0m
+[1;31m
+❌ Security: Importmap vulnerability audit failed in 0.00s[0m
+[1;35m
+
+Security: Brakeman code analysis[0m
+[1;90mbin/brakeman --quiet --no-pager --exit-on-warn --exit-on-error
+[0m
+/Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/site_ruby/3.3.0/bundler/rubygems_integration.rb:236:in `block in replace_bin_path': can't find executable brakeman for gem brakeman. brakeman is not currently included in the bundle, perhaps you meant to add it to your Gemfile? (Gem::Exception)
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/site_ruby/3.3.0/rubygems.rb:249:in `bin_path'
+	from bin/brakeman:7:in `<main>'
+[1;31m
+❌ Security: Brakeman code analysis failed in 0.57s[0m
+[1;35m
+
+Tests: Rails[0m
+[1;90mbin/rails test
+[0m
+DEPRECATION WARNING: resource received a hash argument only. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path_names. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument controller. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+/Users/yashramteke/code/Yashraj786/Nexus_Ai/app/controllers/messages_controller.rb:1:in `<main>': uninitialized constant ChatSessions (NameError)
+
+class ChatSessions::MessagesController < ApplicationController
+      ^^^^^^^^^^^^
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:26:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/cref.rb:62:in `const_get'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/cref.rb:62:in `get'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:173:in `block in actual_eager_load_dir'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:47:in `block in ls'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:25:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:25:in `ls'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:168:in `actual_eager_load_dir'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:17:in `block (2 levels) in eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:16:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:16:in `block in eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:10:in `synchronize'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:10:in `eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader.rb:431:in `block in eager_load_all'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/registry/loaders.rb:10:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/registry/loaders.rb:10:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader.rb:429:in `eager_load_all'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/application/finisher.rb:79:in `block in <module:Finisher>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:24:in `instance_exec'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:24:in `run'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:103:in `block in run_initializers'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:231:in `block in tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:353:in `block (2 levels) in each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:434:in `each_strongly_connected_component_from'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:352:in `block in each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:59:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:59:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:350:in `call'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:350:in `each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:229:in `tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:208:in `tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:102:in `run_initializers'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/application.rb:442:in `initialize!'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/environment.rb:5:in `<main>'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/test_helper.rb:2:in `require_relative'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/test_helper.rb:2:in `<main>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/channels/chat_channel_test.rb:1:in `<main>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:71:in `block in load_tests'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:69:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:69:in `load_tests'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/minitest/rails_plugin.rb:140:in `block in plugin_rails_options'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1715:in `block in parse_in_order'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:913:in `search'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1832:in `block in visit'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1831:in `reverse_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1831:in `visit'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1715:in `parse_in_order'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1630:in `order!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1739:in `permute!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1764:in `parse!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:237:in `block in process_args'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1153:in `initialize'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:149:in `new'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:149:in `process_args'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:286:in `run'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:86:in `block in autorun'
+[1;31m
+❌ Tests: Rails failed in 2.72s[0m
+[1;35m
+
+Tests: System[0m
+[1;90mbin/rails test:system
+[0m
+DEPRECATION WARNING: resource received a hash argument only. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path_names. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument controller. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+/Users/yashramteke/code/Yashraj786/Nexus_Ai/app/controllers/messages_controller.rb:1:in `<main>': uninitialized constant ChatSessions (NameError)
+
+class ChatSessions::MessagesController < ApplicationController
+      ^^^^^^^^^^^^
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:26:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/cref.rb:62:in `const_get'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/cref.rb:62:in `get'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:173:in `block in actual_eager_load_dir'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:47:in `block in ls'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:25:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/helpers.rb:25:in `ls'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:168:in `actual_eager_load_dir'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:17:in `block (2 levels) in eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:16:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:16:in `block in eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:10:in `synchronize'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader/eager_load.rb:10:in `eager_load'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader.rb:431:in `block in eager_load_all'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/registry/loaders.rb:10:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/registry/loaders.rb:10:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/loader.rb:429:in `eager_load_all'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/application/finisher.rb:79:in `block in <module:Finisher>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:24:in `instance_exec'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:24:in `run'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:103:in `block in run_initializers'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:231:in `block in tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:353:in `block (2 levels) in each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:434:in `each_strongly_connected_component_from'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:352:in `block in each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:59:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:59:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:350:in `call'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:350:in `each_strongly_connected_component'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:229:in `tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/tsort-0.2.0/lib/tsort.rb:208:in `tsort_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/initializable.rb:102:in `run_initializers'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/application.rb:442:in `initialize!'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/environment.rb:5:in `<main>'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/test_helper.rb:2:in `require_relative'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/test_helper.rb:2:in `<main>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/application_system_test_case.rb:1:in `<main>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+	from /Users/yashramteke/code/Yashraj786/Nexus_Ai/test/system/n_plus_one_test.rb:2:in `<main>'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/bundled_gems.rb:75:in `block (2 levels) in replace_require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:71:in `block in load_tests'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:69:in `each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/rails/test_unit/runner.rb:69:in `load_tests'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/railties-8.1.1/lib/minitest/rails_plugin.rb:140:in `block in plugin_rails_options'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1715:in `block in parse_in_order'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:913:in `search'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1832:in `block in visit'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1831:in `reverse_each'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1831:in `visit'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1715:in `parse_in_order'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1630:in `order!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1739:in `permute!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1764:in `parse!'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:237:in `block in process_args'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/3.3.0/optparse.rb:1153:in `initialize'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:149:in `new'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:149:in `process_args'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:286:in `run'
+	from /Users/yashramteke/.rbenv/versions/3.3.5/lib/ruby/gems/3.3.0/gems/minitest-5.26.2/lib/minitest.rb:86:in `block in autorun'
+[1;31m
+❌ Tests: System failed in 0.71s[0m
+[1;35m
+
+Tests: Seeds[0m
+[1;90menv RAILS_ENV=test bin/rails db:seed:replant
+[0m
+DEPRECATION WARNING: resource received a hash argument only. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument path_names. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+DEPRECATION WARNING: resource received a hash argument controller. Please use a keyword instead. Support to hash argument will be removed in Rails 8.2. (called from block in <main> at /Users/yashramteke/code/Yashraj786/Nexus_Ai/config/routes.rb:15)
+bin/rails aborted!
+NoMethodError: undefined method `seed_defaults' for class Persona (NoMethodError)
+/Users/yashramteke/code/Yashraj786/Nexus_Ai/db/seeds.rb:7:in `<main>'
+Tasks: TOP => db:seed:replant => db:seed
+(See full trace by running task with --trace)
+Seeding personas...
+[1;31m
+❌ Tests: Seeds failed in 0.74s[0m
+[1;31m
+❌ Continuous Integration failed in 8.29s[0m

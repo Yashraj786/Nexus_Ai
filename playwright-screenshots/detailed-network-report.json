@@ -1,0 +1,132 @@
+{
+  "timestamp": "2025-12-01T18:31:12.215Z",
+  "network_requests": [
+    {
+      "url": "http://localhost:3000/",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.829Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.911Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.918Z"
+    },
+    {
+      "url": "https://unpkg.com/lucide@latest",
+      "status": 302,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.933Z"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.973Z"
+    },
+    {
+      "url": "https://unpkg.com/lucide@0.555.0/dist/umd/lucide.min.js",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:12.978Z"
+    },
+    {
+      "url": "http://localhost:3000/login",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:13.533Z"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:13.536Z"
+    },
+    {
+      "url": "https://unpkg.com/lucide@latest",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:13.536Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:13.537Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:13.537Z"
+    },
+    {
+      "url": "http://localhost:3000/nonexistent-page-12345",
+      "status": 404,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:14.058Z"
+    },
+    {
+      "url": "https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:14.062Z"
+    },
+    {
+      "url": "https://unpkg.com/lucide@latest",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:14.062Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:14.063Z"
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js",
+      "status": 200,
+      "method": "GET",
+      "timestamp": "2025-12-01T18:31:14.063Z"
+    }
+  ],
+  "network_failures": [],
+  "console_logs": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-12-01T18:31:14.060Z"
+    }
+  ],
+  "screenshots": [
+    "detailed-homepage.png"
+  ],
+  "tests": [
+    {
+      "name": "Homepage loads",
+      "passed": true,
+      "timestamp": "2025-12-01T18:31:13.479Z",
+      "details": ""
+    },
+    {
+      "name": "Login page loads",
+      "passed": true,
+      "timestamp": "2025-12-01T18:31:14.049Z",
+      "details": ""
+    },
+    {
+      "name": "404 page loads",
+      "passed": true,
+      "timestamp": "2025-12-01T18:31:14.572Z",
+      "details": ""
+    }
+  ]
+}
