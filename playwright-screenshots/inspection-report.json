@@ -1,0 +1,88 @@
+{
+  "timestamp": "2025-12-01T18:04:50.259Z",
+  "results": [
+    {
+      "name": "Homepage loads",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:50.669Z",
+      "details": ""
+    },
+    {
+      "name": "Page title correct",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:50.705Z",
+      "details": "Nexus AI // Professional"
+    },
+    {
+      "name": "Login form renders",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:50.750Z",
+      "details": ""
+    },
+    {
+      "name": "Health endpoint",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:50.777Z",
+      "details": "Status: 200"
+    },
+    {
+      "name": "CSS/JS loaded",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:50.793Z",
+      "details": "CSS: loaded, JS: loaded"
+    },
+    {
+      "name": "Security headers present",
+      "passed": "0",
+      "timestamp": "2025-12-01T18:04:50.806Z",
+      "details": ""
+    },
+    {
+      "name": "No fatal console errors",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:52.820Z",
+      "details": "Found: 0 errors"
+    },
+    {
+      "name": "Mobile viewport works",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:53.020Z",
+      "details": ""
+    },
+    {
+      "name": "Form validation attributes",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:53.083Z",
+      "details": ""
+    },
+    {
+      "name": "404 page handling",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:53.098Z",
+      "details": "Status: 404"
+    },
+    {
+      "name": "Backend connectivity",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:53.113Z",
+      "details": ""
+    },
+    {
+      "name": "API endpoints accessible",
+      "passed": true,
+      "timestamp": "2025-12-01T18:04:53.128Z",
+      "details": "Status: 200"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    {
+      "type": "console_error",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "screenshots": [
+    "01-homepage.png",
+    "02-login-page.png"
+  ]
+}
