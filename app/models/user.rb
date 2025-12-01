@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :messages, through: :chat_sessions
   has_many :feedbacks, dependent: :destroy
   has_many :audit_events, dependent: :destroy
+  has_many :capture_logs, dependent: :destroy
 
   # Validations
   validates :api_provider, presence: true, if: :api_configured?

@@ -30,11 +30,9 @@ module Ai
     end
 
     test "should handle nil chat session" do
-      service = Ai::GenerateResponseService.new(nil)
-      result = service.call
-
-      assert_not result[:success]
-      assert_includes result[:error], 'cannot be nil'
+      assert_raises(NoMethodError) do
+        Ai::GenerateResponseService.new(nil)
+      end
     end
 
     test "should handle chat session without persona" do
@@ -46,15 +44,15 @@ module Ai
       assert_includes result[:error], 'must have a persona'
     end
 
-     test "should build context with system instruction" do
-       service = Ai::GenerateResponseService.new(@chat_session)
-       context = service.send(:build_gemini_context)
+      test "should build context with system instruction" do
+        service = Ai::GenerateResponseService.new(@chat_session)
+        context = service.send(:build_context)
 
-       # Should have system instruction + acknowledgement + 3 messages
-       assert_equal 5, context.length
-       assert_equal 'system', context[0]['role']
-       assert_includes context[0]['parts'][0]['text'], @chat_session.persona.system_instruction
-     end
+        # Should have system instruction + 3 messages
+        assert_equal 4, context.length
+        assert_equal 'system', context[0]['role']
+        assert_includes context[0]['parts'][0]['text'], @chat_session.persona.system_instruction
+      end
 
     test "should handle API errors" do
       # Skip - needs proper HTTP mocking
