@@ -24,6 +24,7 @@
   </div>
   <div class="flex-1"></div>
   <div class="space-y-2 text-sm border-t border-gray-200 pt-3">
+    <%= link_to "⚙️ Settings", settings_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
     <%= link_to "Beta Info", help_beta_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
     <%= link_to "Case Study", help_case_study_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
     <% if current_user.admin? %>
