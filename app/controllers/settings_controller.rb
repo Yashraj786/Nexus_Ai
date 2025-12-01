@@ -7,6 +7,9 @@ class SettingsController < ApplicationController
     @supported_providers = User::SUPPORTED_PROVIDERS
     @api_configured = @user.api_configured?
     @fallback_configured = @user.fallback_configured?
+    @usage_stats = ApiUsageLog.usage_stats(@user)
+    @today_stats = ApiUsageLog.today_stats(@user)
+    @recent_logs = @user.api_usage_logs.recent.limit(10)
   end
 
   # Update API configuration
