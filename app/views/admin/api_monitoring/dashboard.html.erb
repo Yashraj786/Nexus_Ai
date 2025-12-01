@@ -1,0 +1,107 @@
+<div class="container mx-auto max-w-6xl px-4 py-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold">API Monitoring Dashboard</h1>
+    <%= link_to "← Back to Admin", admin_dashboard_path, class: "btn btn-secondary" %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+    <div class="card bg-base-200 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg">Errors in Last Hour</h3>
+        <div class="text-4xl font-bold text-error"><%= @error_count_last_hour %></div>
+        <p class="text-sm text-gray-600 mt-2">API errors, rate limits, and timeouts</p>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg">Errors in Last 24 Hours</h3>
+        <div class="text-4xl font-bold text-warning"><%= @error_count_last_day %></div>
+        <p class="text-sm text-gray-600 mt-2">Total errors across all users</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="card bg-base-200 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg mb-4">Errors by Provider (24h)</h3>
+        <% if @provider_error_stats.any? %>
+          <div class="space-y-2">
+            <% @provider_error_stats.each do |provider, count| %>
+              <div class="flex items-center gap-2">
+                <span class="badge"><%= provider.upcase %></span>
+                <div class="progress progress-error flex-1" role="progressbar" aria-valuenow="<%= count %>" aria-valuemin="0" aria-valuemax="<%= @provider_error_stats.values.max %>">
+                  <div class="progress-bar" style="width: <%= (count.to_f / @provider_error_stats.values.max * 100).to_i %>%"></div>
+                </div>
+                <span class="font-bold"><%= count %></span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-sm text-gray-600">No errors in the last 24 hours</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-lg">
+      <div class="card-body">
+        <h3 class="card-title text-lg mb-4">Top Users with Errors (24h)</h3>
+        <% if @user_error_stats.any? %>
+          <div class="space-y-2">
+            <% @user_error_stats.sort_by { |_email, count| -count }.first(5).each do |email, count| %>
+              <div class="flex items-center justify-between text-sm">
+                <span><%= email %></span>
+                <span class="badge badge-error"><%= count %> errors</span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-sm text-gray-600">No errors in the last 24 hours</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-200 shadow-lg">
+    <div class="card-body">
+      <h3 class="card-title text-lg mb-4">Recent Errors</h3>
+      <% if @recent_errors.any? %>
+        <div class="overflow-x-auto">
+          <table class="table table-compact w-full">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>User</th>
+                <th>Provider</th>
+                <th>Status</th>
+                <th>Error Message</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @recent_errors.each do |log| %>
+                <tr class="hover">
+                  <td><%= time_ago_in_words(log.created_at) %> ago</td>
+                  <td><%= log.user.email %></td>
+                  <td><span class="badge"><%= log.provider.upcase %></span></td>
+                  <td>
+                    <% if log.status == 'error' %>
+                      <span class="badge badge-error">Error</span>
+                    <% elsif log.status == 'rate_limited' %>
+                      <span class="badge badge-warning">Rate Limited</span>
+                    <% else %>
+                      <span class="badge badge-info"><%= log.status.titleize %></span>
+                    <% end %>
+                  </td>
+                  <td><span class="text-xs text-gray-600"><%= truncate(log.error_message, length: 50) %></span></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <p class="text-sm text-gray-600">No recent errors</p>
+      <% end %>
+    </div>
+  </div>
+</div>

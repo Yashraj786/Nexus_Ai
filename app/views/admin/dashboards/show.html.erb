@@ -5,7 +5,10 @@
 <% top_error_types = @metrics[:top_error_types] || [] %>
 
 <div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold mb-4">API Observability Dashboard</h1>
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="text-2xl font-bold">API Observability Dashboard</h1>
+    <%= link_to "API Monitoring", admin_api_monitoring_path, class: "btn btn-sm btn-outline" %>
+  </div>
   <p class="text-gray-500 mb-6">Metrics for the last <%= @metrics[:time_window_minutes] || 60 %> minutes</p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">

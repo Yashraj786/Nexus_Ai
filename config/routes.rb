@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :dashboard, only: [:show]
     resources :feedbacks, only: [:index]
+    get 'api-monitoring', to: 'api_monitoring#dashboard', as: :api_monitoring
   end
 
   # Mount Action Cable
