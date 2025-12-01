@@ -5,18 +5,12 @@ class HealthController < ApplicationController
 
   def index
     status = {}
-    
-    # Critical: Database connectivity
     status[:database] = check_database
-    
-    # Optional: Redis connectivity (log but don't fail)
     status[:redis] = check_redis
-    
-    # Optional: AI API Key (useful but not critical for demo)
     status[:ai_api_key] = check_ai_api_key
 
-    # Only fail if database is down
-    overall_status = status[:database] ? :ok : :service_unavailable
+    # Return 503 if any critical service is down
+    overall_status = status.values.all? ? :ok : :service_unavailable
     render json: status, status: overall_status
   end
 
@@ -31,12 +25,10 @@ class HealthController < ApplicationController
   end
 
   def check_redis
-    begin
-      Redis.new.ping == 'PONG'
-    rescue StandardError => e
-      Rails.logger.warn "Health check: Redis connection failed (non-critical) - #{e.message}"
-      false # Redis is optional for development
-    end
+    Redis.new.ping == 'PONG'
+  rescue StandardError => e
+    Rails.logger.error "Health check: Redis connection failed - #{e.message}"
+    false
   end
 
   def check_ai_api_key
