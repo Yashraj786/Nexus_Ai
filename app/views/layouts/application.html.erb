@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
   <head>
-    <title>Nexus AI // Cyberpunk</title>
+    <title>Nexus AI - Minimal Futuristic</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="Nexus AI - Your gateway to multiple LLM providers">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -16,13 +17,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- Minimal Futuristic Design System -->
+    <%= stylesheet_link_tag "futuristic-minimal", "data-turbo-track": "reload" %>
+    
     <% if respond_to?(:vite_javascript_tag) %>
       <%= vite_javascript_tag 'application' %>
       <%= vite_stylesheet_tag 'application' %>
     <% end %>
   </head>
 
-  <body class="h-full flex flex-col font-inter antialiased bg-cyber-bg text-cyber-text">
+  <body class="h-full flex flex-col antialiased bg-white text-black">
 
     <!-- Flash Messages (fixed at top for all states) -->
     <% flash.each do |type, msg| %>

@@ -111,6 +111,81 @@
         </div>
        <% end %>
 
+       <div class="divider">Fallback Provider (Optional)</div>
+
+       <p class="text-sm text-gray-600 mb-4">Configure a backup LLM provider to automatically switch if your primary provider fails.</p>
+
+       <%= form_with model: @user, local: true, url: settings_update_fallback_provider_path, method: :patch, class: "space-y-4" do |f| %>
+         <div class="form-control">
+           <label class="label">
+             <span class="label-text font-semibold">Fallback Provider</span>
+           </label>
+           <select name="user[fallback_provider]" class="select select-bordered">
+             <option value="">-- No Fallback --</option>
+             <option value="openai" <%= 'selected' if @user.fallback_provider == 'openai' %>>OpenAI (GPT-4, GPT-3.5)</option>
+             <option value="anthropic" <%= 'selected' if @user.fallback_provider == 'anthropic' %>>Anthropic (Claude)</option>
+             <option value="gemini" <%= 'selected' if @user.fallback_provider == 'gemini' %>>Google Gemini</option>
+             <option value="ollama" <%= 'selected' if @user.fallback_provider == 'ollama' %>>Ollama (Local)</option>
+             <option value="custom" <%= 'selected' if @user.fallback_provider == 'custom' %>>Custom API</option>
+           </select>
+           <label class="label">
+             <span class="label-text-alt">Choose a backup LLM provider</span>
+           </label>
+         </div>
+
+         <div class="form-control">
+           <label class="label">
+             <span class="label-text font-semibold">Fallback Model Name</span>
+           </label>
+           <input 
+             type="text" 
+             name="user[fallback_model_name]" 
+             placeholder="e.g., gpt-4, claude-3-opus, gemini-1.5-flash"
+             value="<%= @user.fallback_model_name %>"
+             class="input input-bordered" 
+           />
+           <label class="label">
+             <span class="label-text-alt">The specific model to use for fallback</span>
+           </label>
+         </div>
+
+         <div class="form-control">
+           <label class="label">
+             <span class="label-text font-semibold">Fallback API Key</span>
+           </label>
+           <input 
+             type="password" 
+             name="user[encrypted_fallback_api_key]" 
+             placeholder="Your fallback API key (leave blank to keep existing)"
+             class="input input-bordered"
+           />
+           <label class="label">
+             <span class="label-text-alt">Your API key is encrypted and stored securely</span>
+           </label>
+         </div>
+
+         <div class="alert alert-info">
+           <svg class="stroke-current shrink-0 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+           <span>Fallback providers must be different from your primary provider for redundancy.</span>
+         </div>
+
+         <div class="flex gap-4 mt-6">
+           <button type="submit" class="btn btn-primary">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+             Save Fallback Provider
+           </button>
+
+           <% if @fallback_configured %>
+             <%= form_with url: settings_clear_fallback_provider_path, method: :delete, local: true, style: "display:inline" do |f| %>
+               <button type="submit" class="btn btn-error" onclick="return confirm('Are you sure?')">
+                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                 Clear Fallback
+               </button>
+             <% end %>
+           <% end %>
+         </div>
+       <% end %>
+
        <div class="divider">API Usage Dashboard</div>
 
        <% if @usage_stats[:total_requests] > 0 %>
