@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+developer:
+  id: "c48bcb20-4efb-4366-bcda-9dcb781d73c8"
+  name: "Developer"
+  system_instruction: "You are a helpful software developer assistant"
+  icon: "code"
+
+analyst:
+  id: "d48bcb20-5efb-4366-bcda-9dcb781d73c8"
+  name: "Data Analyst"
+  system_instruction: "You are a data analysis expert"
+  icon: "bar-chart"

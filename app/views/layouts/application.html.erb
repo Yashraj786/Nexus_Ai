@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <title>Nexus AI // Professional</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Fonts: Rajdhani (Tech) & Inter (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons & Syntax Highlighting -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <% if respond_to?(:vite_javascript_tag) %>
+      <%= vite_javascript_tag 'application' %>
+      <%= vite_stylesheet_tag 'application' %>
+    <% end %>
+  </head>
+
+  <body class="h-full flex flex-col font-inter antialiased bg-bg-deep text-text-primary">
+
+    <!-- Flash Messages (fixed at top for all states) -->
+    <% flash.each do |type, msg| %>
+      <div class="fixed top-4 right-4 z-50 px-4 py-3 rounded border border-accent-light/50 bg-bg-surface text-accent-light shadow-lg">
+        <%= msg %>
+      </div>
+    <% end %>
+
+    <div class="flex flex-1 overflow-hidden">
+      <!-- SIDEBAR (Only if logged in) -->
+      <% if user_signed_in? %>
+        <%= render "shared/sidebar" %>
+        <div class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden">
+          <main class="flex-1 bg-bg-surface overflow-y-auto">
+            <%= yield %>
+          </main>
+        </div>
+      <% else %>
+        <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-bg-deep overflow-y-auto">
+          <%= yield %>
+        </main>
+      <% end %>
+    </div>
+
+
+    <script>
+      document.addEventListener("turbo:load", () => { if(window.lucide) lucide.createIcons(); });
+    </script>
+  </body>
+</html>

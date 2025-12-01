@@ -1,0 +1,6 @@
+Understood. The failure to adhere to the "No server start" constraint and the detected compromised control flow mean the environment is currently unstable and unreliable for development tasks.
+
+Terminating session as requested. 💀
+
+Session Restart Recommended.
+Please restart the session when you are ready to proceed with a stable environment.

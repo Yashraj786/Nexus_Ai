@@ -1,0 +1,14 @@
+<%# app/views/chat_sessions/_run_metrics.html.erb %>
+<div class="p-4 bg-gray-800 rounded-lg mt-4">
+  <h2 class="text-lg font-bold mb-4">Run Metrics</h2>
+  <div class="grid grid-cols-2 gap-4 text-sm text-gray-400">
+    <div>
+      <p><strong class="text-gray-300">Total Messages:</strong> <%= @chat_session.run_metrics[:total_messages] %></p>
+      <p><strong class="text-gray-300">User Messages:</strong> <%= @chat_session.run_metrics[:user_messages] %></p>
+      <p><strong class="text-gray-300">Assistant Messages:</strong> <%= @chat_session.run_metrics[:assistant_messages] %></p>
+    </div>
+    <div>
+      <p><strong class="text-gray-300">Session Length:</strong> <%= distance_of_time_in_words(@chat_session.run_metrics[:session_length]) %></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: "f48bcb20-2efb-4366-bcda-9dcb781d73c8"
+  email: "test@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  admin: true
+
+two:
+  id: "a12bcb20-2efb-4366-bcda-9dcb781d73c9"
+  email: "user2@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  admin: false
+
+three:
+  id: "b12bcb20-2efb-4366-bcda-9dcb781d73c0"
+  email: "user3@example.com"
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+  admin: false

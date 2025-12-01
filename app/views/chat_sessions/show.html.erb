@@ -1,0 +1,79 @@
+<div class="h-full flex" data-controller="sidebar">
+  <div class="flex-1 flex flex-col"
+       data-controller="chat clipboard"
+       data-chat-session-id-value="<%= @chat_session.id %>"
+       data-clipboard-title-value="<%= @chat_session.title %>"
+       data-clipboard-persona-value="<%= @chat_session.persona&.name %>"
+       data-clipboard-restore-url-value="<%= chat_session_url(@chat_session) %>">
+
+    <!-- Header -->
+    <header class="flex-none h-16 border-b border-[#27272a] flex items-center justify-between px-6 bg-[#050505]/80 backdrop-blur-md z-10">
+      <div class="flex items-center gap-4">
+        <i data-lucide="<%= @chat_session.persona&.icon || 'message-square' %>" class="w-6 h-6 text-accent-light"></i>
+        <h1 class="text-xl font-rajdhani font-bold tracking-wide">
+          <%= @chat_session.persona&.name&.upcase || 'GENERIC CHAT' %>
+        </h1>
+      </div>
+      <div>
+        <button data-action="click->clipboard#copy" class="action-chip">Save to Notes</button>
+        <%= link_to "Report a Problem", new_chat_session_feedback_path(@chat_session), class: "action-chip" %>
+        <button data-action="click->chat#export" class="action-chip">Export</button>
+        <button data-action="app-launcher#toggle" class="action-chip">Apps</button>
+        <button data-action="click->sidebar#toggle" class="lg:hidden action-chip">Insights</button>
+      </div>
+    </header>
+
+    <!-- Chat Area -->
+    <div id="chat-container" class="flex-1 min-h-0 overflow-y-auto p-6 scroll-smooth space-y-6" data-chat-target="messages" data-clipboard-target="source">
+      <% @chat_session.messages.order(:created_at).each do |msg| %>
+        <div class="message flex w-full <%= msg.user? ? 'justify-end' : 'justify-start' %>" data-role="<%= msg.role %>" data-content="<%= msg.content %>">
+          <div class="max-w-[85%] p-4 text-sm leading-relaxed shadow-lg 
+            <%= msg.user? ? 
+              'bg-gradient-to-br from-[#202020] to-[#151515] border border-[#333] rounded-xl text-gray-200' : 
+              'bg-transparent border-l-2 border-[#00f3ff] pl-4 text-gray-300' %>">
+            
+            <div class="prose prose-invert max-w-none">
+               <%= markdown(msg.content) %> 
+               <% if msg.sanitized? %>
+                 <span class="text-xs text-gray-500 ml-2" title="Content was sanitized for security or formatting."> (sanitized)</span>
+               <% end %>
+            </div>
+            
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Input Area -->
+    <div class="flex-none p-6 bg-[#050505] border-t border-[#27272a]">
+      <div data-chat-target="retryBanner" class="hidden text-center text-sm text-yellow-400 mb-2">
+        The AI is taking longer than usual; retrying safely…
+      </div>
+      <%= form_with(model: [@chat_session, Message.new], class: "max-w-4xl mx-auto relative group", data: { action: "submit->chat#sendMessage", chat_target: "form", chat_max_length_value: Message::MAX_CONTENT_LENGTH }) do |f| %>
+        
+        <!-- Input Glow -->
+        <div class="absolute -inset-0.5 bg-gradient-to-r from-[#00f3ff]/20 to-purple-500/20 rounded-xl blur opacity-0 transition duration-500 group-hover:opacity-100"></div>
+        
+        <div class="relative flex items-end gap-2 bg-[#0a0a0a] p-2 rounded-xl border border-[#27272a] focus-within:border-[#00f3ff]/50 transition-all">
+          
+          <%= f.text_area :content, rows: 1, 
+              data: { chat_target: "input" },
+              maxlength: Message::MAX_CONTENT_LENGTH,
+              class: "flex-1 bg-transparent border-none text-white placeholder-gray-600 p-3 min-h-[50px] max-h-[200px] resize-none focus:ring-0 text-sm",
+              placeholder: "Command the system..." %>
+              
+          <button type="submit" class="bg-gradient-to-r from-[#00f3ff] to-[#00a8ff] text-black font-bold rounded-lg p-3 mb-1 transition-all hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(0,243,255,0.4)]">
+            <i data-lucide="arrow-up" class="w-5 h-5 text-black"></i>
+          </button>
+          
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="w-72 border-l border-gray-700 hidden lg:block" data-sidebar-target="sidebar">
+    <%= render "session_insights" %>
+  </div>
+</div>
+
+<%= render "app_launcher_modal" %>

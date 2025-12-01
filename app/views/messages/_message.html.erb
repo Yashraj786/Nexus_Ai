@@ -1,0 +1,11 @@
+<div class="message flex w-full <%= message.user? ? 'justify-end' : 'justify-start' %>" data-role="<%= message.role %>" data-content="<%= message.content %>">
+  <div class="max-w-[85%] p-4 text-sm leading-relaxed shadow-lg 
+    <%= message.user? ? 
+      'bg-gradient-to-br from-[#202020] to-[#151515] border border-[#333] rounded-xl text-gray-200' : 
+      'bg-transparent border-l-2 border-[#00f3ff] pl-4 text-gray-300' %>">
+    <span class="font-bold text-xs text-accent"><%= message.user? ? (message.user.email || 'Anonymous') : message.role.capitalize %></span>
+    <div class="prose prose-invert max-w-none mt-1">
+      <%= markdown(message.content) %>
+    </div>
+  </div>
+</div>

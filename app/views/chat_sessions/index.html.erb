@@ -1,0 +1,35 @@
+<div class="h-full flex flex-col">
+  <header class="h-20 border-b border-[#27272a] flex items-center justify-between px-8">
+    <div>
+      <h1 class="text-2xl font-bold text-white">My Sessions</h1>
+      <p class="text-sm text-gray-500">Your conversation history</p>
+    </div>
+    <%= link_to "New Session", new_chat_session_path, class: "btn-primary px-6 py-3" %>
+  </header>
+
+  <div class="flex-1 overflow-y-auto p-8">
+    <% if current_user.feature_enabled?(:pro_session_analytics) %>
+      <%= render "shared/onboarding_checklist" %>
+    <% end %>
+    <% if @chat_sessions.any? %>
+      <div class="max-w-4xl mx-auto space-y-3">
+        <% @chat_sessions.each do |session| %>
+          <%= link_to chat_session_path(session), class: "block bg-[#0a0a0a] border border-[#27272a] hover:border-[#00f3ff]/50 rounded-lg p-5 transition" do %>
+            <h4 class="text-base font-semibold text-white mb-1">
+              <%= session.title || "Untitled Session" %>
+            </h4>
+            <p class="text-sm text-gray-500">
+              <%= session.persona&.name || "General" %> • <%= session.messages.count %> messages
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="max-w-md mx-auto text-center py-20">
+        <h3 class="text-xl font-bold text-white mb-3">No Sessions Yet</h3>
+        <p class="text-gray-400 mb-8">Start your first conversation</p>
+        <%= link_to "Create First Session", new_chat_session_path, class: "btn-primary px-8 py-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>

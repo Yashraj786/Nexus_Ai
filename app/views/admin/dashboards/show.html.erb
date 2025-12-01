@@ -1,0 +1,93 @@
+<%# app/views/admin/dashboards/show.html.erb %>
+<% slo_p95 = @metrics[:slo_p95_latency] || {} %>
+<% slo_success = @metrics[:slo_success_rate] || {} %>
+<% open_incidents = @metrics[:open_incidents] || [] %>
+<% top_error_types = @metrics[:top_error_types] || [] %>
+
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">API Observability Dashboard</h1>
+  <p class="text-gray-500 mb-6">Metrics for the last <%= @metrics[:time_window_minutes] || 60 %> minutes</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">p95 Latency</h2>
+      <p class="text-3xl font-bold">
+        <%= slo_p95[:value] || 0.0 %>s
+        <span class="<%= (slo_p95[:passed].nil? || slo_p95[:passed]) ? 'text-green-400' : 'text-red-400' %> text-sm ml-2">
+          <%= (slo_p95[:passed].nil? || slo_p95[:passed]) ? '(Passed)' : '(Failed)' %>
+        </span>
+      </p>
+      <p class="text-xs text-gray-500">Threshold: <%= slo_p95[:threshold] || 0.0 %>s</p>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">Success Rate</h2>
+      <p class="text-3xl font-bold">
+        <%= slo_success[:value] || 0.0 %>%
+        <span class="<%= (slo_success[:passed].nil? || slo_success[:passed]) ? 'text-green-400' : 'text-red-400' %> text-sm ml-2">
+          <%= (slo_success[:passed].nil? || slo_success[:passed]) ? '(Passed)' : '(Failed)' %>
+        </span>
+      </p>
+      <p class="text-xs text-gray-500">Threshold: <%= slo_success[:threshold] || 0.0 %>%</p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">Requests/min</h2>
+      <p class="text-3xl font-bold"><%= @metrics[:requests_per_minute] || 0.0 %></p>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">Failures/min</h2>
+      <p class="text-3xl font-bold"><%= @metrics[:failures_per_minute] || 0.0 %></p>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">Retries/min</h2>
+      <p class="text-3xl font-bold"><%= @metrics[:retries_per_minute] || 0.0 %></p>
+    </div>
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-gray-400 text-sm font-medium">Avg. Latency (s)</h2>
+      <p class="text-3xl font-bold"><%= @metrics[:average_latency] || 0.0 %></p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">Feedback (Last 7 Days)</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-gray-800 p-4 rounded-lg">
+        <h2 class="text-gray-400 text-sm font-medium">User-Reported Issues</h2>
+        <p class="text-3xl font-bold"><%= @metrics[:user_reported_issues_7_days] || 0 %></p>
+      </div>
+      <div class="bg-gray-800 p-4 rounded-lg">
+        <h2 class="text-gray-400 text-sm font-medium">Recent Open Incidents</h2>
+        <ul class="space-y-2 mt-2">
+          <% open_incidents.each do |feedback| %>
+            <li class="flex justify-between text-sm">
+              <span><%= feedback.message.truncate(50) %></span>
+              <span class="text-gray-500"><%= time_ago_in_words(feedback.created_at) %> ago</span>
+            </li>
+          <% end %>
+          <% if open_incidents.empty? %>
+            <li>No open incidents.</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">Top Error Types</h2>
+    <div class="bg-gray-800 p-4 rounded-lg">
+      <ul class="space-y-2">
+        <% top_error_types.each do |error, count| %>
+          <li class="flex justify-between">
+            <span><%= error %></span>
+            <span class="font-bold"><%= count %></span>
+          </li>
+        <% end %>
+        <% if top_error_types.empty? %>
+          <li>No errors recorded in this time window.</li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

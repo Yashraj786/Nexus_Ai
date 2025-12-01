@@ -1,0 +1,47 @@
+<%# app/views/chat_sessions/_app_launcher_modal.html.erb %>
+<div class="fixed inset-0 bg-bg-deep bg-opacity-75 flex items-center justify-center z-50 hidden"
+     data-controller="app-launcher"
+     data-app-launcher-target="modal"
+     data-action="click->app-launcher#hide">
+  
+  <div class="bg-bg-surface border border-border-color rounded-lg shadow-xl p-8 w-full max-w-2xl transform transition-all">
+    <h2 class="text-2xl font-bold font-rajdhani text-text-primary mb-6 text-center">App Launcher</h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <a href="https://www.canva.com" target="_blank" class="app-card">
+        <i data-lucide="layout-grid" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">Canva</h3>
+        <p class="text-sm text-text-secondary">Design Tool</p>
+      </a>
+      <a href="https://www.figma.com" target="_blank" class="app-card">
+        <i data-lucide="layers" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">Figma</h3>
+        <p class="text-sm text-text-secondary">UI/UX Design</p>
+      </a>
+      <a href="https://github.com" target="_blank" class="app-card">
+        <i data-lucide="github" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">GitHub</h3>
+        <p class="text-sm text-text-secondary">Code Hosting</p>
+      </a>
+      <a href="https://mail.google.com" target="_blank" class="app-card">
+        <i data-lucide="mail" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">Gmail</h3>
+        <p class="text-sm text-text-secondary">Email</p>
+      </a>
+      <a href="https://calendar.google.com" target="_blank" class="app-card">
+        <i data-lucide="calendar" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">Calendar</h3>
+        <p class="text-sm text-text-secondary">Schedule</p>
+      </a>
+      <a href="https://docs.google.com" target="_blank" class="app-card">
+        <i data-lucide="file-text" class="w-10 h-10 text-accent-light mb-2"></i>
+        <h3 class="text-lg font-bold font-rajdhani">Docs</h3>
+        <p class="text-sm text-text-secondary">Documents</p>
+      </a>
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <button data-action="app-launcher#toggle" class="btn-secondary">Close</button>
+    </div>
+  </div>
+</div>

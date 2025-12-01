@@ -1,0 +1,40 @@
+<div class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-md">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
+      <p class="text-gray-400">Sign in to your account</p>
+    </div>
+
+    <div class="bg-[#0a0a0a] border border-[#27272a] rounded-lg p-8">
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <%= f.input :email,
+            required: true,
+            autofocus: true,
+            input_html: { class: "input-modern" },
+            label_html: { class: "text-gray-400 text-sm mb-2" } %>
+
+        <%= f.input :password,
+            required: true,
+            input_html: { class: "input-modern" },
+            label_html: { class: "text-gray-400 text-sm mb-2" } %>
+
+        <% if devise_mapping.rememberable? %>
+          <%= f.input :remember_me, as: :boolean, wrapper_html: { class: "mb-4" } %>
+        <% end %>
+
+        <%= f.button :submit, "Sign In", class: "w-full btn-primary py-3 mt-4" %>
+
+      <% end %>
+
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-400">
+          Don't have an account?
+          <%= link_to "Sign Up", new_registration_path(resource_name), class: "text-[#00f3ff] hover:underline ml-1" %>
+        </p>
+      </div>
+    </div>
+
+    <%= link_to "← Back to Home", root_path, class: "block text-center mt-6 text-gray-500 hover:text-gray-400" %>
+  </div>
+</div>

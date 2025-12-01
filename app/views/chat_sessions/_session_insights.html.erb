@@ -1,0 +1,37 @@
+<%# app/views/chat_sessions/_session_insights.html.erb %>
+<% if current_user.feature_enabled?(:pro_session_analytics) %>
+  <%= render "session_timeline" %>
+  <div class="p-4 bg-gray-800 rounded-lg">
+    <h2 class="text-lg font-bold mb-4">Session Insights</h2>
+    <div class="text-sm text-gray-400">
+      <p><strong class="text-gray-300">UUID:</strong> <%= @chat_session.id.truncate(12) %></p>
+      <p><strong class="text-gray-300">Created:</strong> <%= time_ago_in_words(@chat_session.created_at) %> ago</p>
+      <p><strong class="text-gray-300">Status:</strong> <span class="<%= @chat_session.status == 'active' ? 'text-green-400' : 'text-gray-500' %>"><%= @chat_session.status.humanize %></span></p>
+    </div>
+
+    <hr class="my-4 border-gray-700">
+
+    <h3 class="text-md font-bold mb-2">Feedback</h3>
+    <ul class="space-y-2">
+      <% @feedbacks.each do |feedback| %>
+        <li class="text-sm">
+          <div class="flex justify-between">
+            <span class="font-semibold"><%= feedback.category.humanize %></span>
+            <span class="text-xs text-gray-500"><%= time_ago_in_words(feedback.created_at) %> ago</span>
+          </div>
+          <p class="text-gray-400"><%= feedback.message.truncate(50) %></p>
+          <%= link_to "Open feedback", [feedback.chat_session, feedback], class: "text-blue-400 hover:underline text-xs" %>
+        </li>
+      <% end %>
+      <% if @feedbacks.empty? %>
+        <li class="text-sm text-gray-500">No feedback for this session.</li>
+      <% end %>
+    </ul>
+  </div>
+  <%= render "run_metrics" %>
+<% end %>
+
+<% if current_user.admin? %>
+  <%= render "audit_trail" %>
+<% end %>
+

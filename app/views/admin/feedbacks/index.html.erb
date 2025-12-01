@@ -1,0 +1,36 @@
+<%# app/views/admin/feedbacks/index.html.erb %>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Feedback Inbox</h1>
+
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <table class="w-full text-sm text-left text-gray-400">
+      <thead class="text-xs text-gray-400 uppercase bg-gray-700">
+        <tr>
+          <th scope="col" class="px-6 py-3">Date</th>
+          <th scope="col" class="px-6 py-3">User</th>
+          <th scope="col" class="px-6 py-3">Chat Session</th>
+          <th scope="col" class="px-6 py-3">Category</th>
+          <th scope="col" class="px-6 py-3">Priority</th>
+          <th scope="col" class="px-6 py-3">Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @feedbacks.each do |feedback| %>
+          <tr class="bg-gray-800 border-b border-gray-700">
+            <td class="px-6 py-4"><%= feedback.created_at.strftime('%b %d, %Y') %></td>
+            <td class="px-6 py-4"><%= feedback.user.email %></td>
+            <td class="px-6 py-4"><%= link_to feedback.chat_session.title, chat_session_path(feedback.chat_session), class: "text-blue-400 hover:underline" %></td>
+            <td class="px-6 py-4"><%= feedback.category.humanize %></td>
+            <td class="px-6 py-4"><%= feedback.feedback_priority.humanize %></td>
+            <td class="px-6 py-4 truncate max-w-xs"><%= feedback.message %></td>
+          </tr>
+        <% end %>
+        <% if @feedbacks.empty? %>
+          <tr>
+            <td colspan="6" class="px-6 py-4 text-center">No feedback yet.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

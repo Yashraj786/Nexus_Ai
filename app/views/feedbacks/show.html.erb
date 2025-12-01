@@ -1,0 +1,37 @@
+<%# app/views/feedbacks/show.html.erb %>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Feedback Details</h1>
+
+  <div class="bg-gray-800 p-4 rounded-lg">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <p><strong class="text-gray-300">Chat Session:</strong> <%= link_to @chat_session.title, chat_session_path(@chat_session), class: "text-blue-400 hover:underline" %></p>
+        <p><strong class="text-gray-300">User:</strong> <%= @feedback.user.email %></p>
+      </div>
+      <div>
+        <p><strong class="text-gray-300">Category:</strong> <%= @feedback.category.humanize %></p>
+        <p><strong class="text-gray-300">Priority:</strong> <%= @feedback.feedback_priority.humanize %></p>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <h3 class="text-md font-bold mb-2">Message</h3>
+      <p class="text-gray-400"><%= @feedback.message %></p>
+    </div>
+
+    <hr class="my-4 border-gray-700">
+
+    <h3 class="text-md font-bold mb-2">Request Details</h3>
+    <div class="text-sm text-gray-400">
+      <p><strong class="text-gray-300">User Agent:</strong> <%= @feedback.request_details['user_agent'] %></p>
+      <p><strong class="text-gray-300">IP Address:</strong> <%= @feedback.request_details['ip_address'] %></p>
+    </div>
+
+    <hr class="my-4 border-gray-700">
+
+    <h3 class="text-md font-bold mb-2">API Events Snapshot</h3>
+    <div class="bg-gray-900 p-4 rounded-lg overflow-x-auto">
+      <pre class="text-xs text-gray-400"><%= JSON.pretty_generate(@feedback.api_events_snapshot) %></pre>
+    </div>
+  </div>
+</div>

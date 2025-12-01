@@ -1,0 +1,20 @@
+<%# app/views/shared/_onboarding_checklist.html.erb %>
+<% unless current_user.all_onboarding_steps_completed? %>
+  <div class="p-4 bg-gray-800 rounded-lg mb-4" data-controller="onboarding">
+    <h2 class="text-lg font-bold mb-4">Getting started with Nexus Pro</h2>
+    <ul class="space-y-2">
+      <% User::ONBOARDING_STEPS.each do |step| %>
+        <li class="flex items-center text-sm">
+          <% if current_user.onboarding_steps_completed.include?(step) %>
+            <i data-lucide="check-circle" class="w-4 h-4 text-green-400 mr-2"></i>
+            <span class="text-gray-500 line-through"><%= step.humanize %></span>
+          <% else %>
+            <i data-lucide="circle" class="w-4 h-4 text-gray-500 mr-2"></i>
+            <span><%= step.humanize %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to "Dismiss", "#", class: "text-xs text-gray-500 mt-4 block", data: { action: "click->onboarding#dismiss" } %>
+  </div>
+<% end %>

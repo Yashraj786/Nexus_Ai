@@ -1,0 +1,8 @@
+<%# app/views/messages/create.turbo_stream.erb %>
+<%= turbo_stream.append "chat-container" do %>
+  <%= render partial: "messages/message", locals: { message: @message } %>
+<% end %>
+<%# Clear input field after successful submission %>
+<%= turbo_stream.replace "message_form" do %>
+  <%= render partial: "messages/form", locals: { chat_session: @chat_session, message: Message.new } %>
+<% end %>

@@ -1,0 +1,17 @@
+<%# app/views/chat_sessions/_audit_trail.html.erb %>
+<div class="p-4 bg-gray-800 rounded-lg mt-4">
+  <h2 class="text-lg font-bold mb-4">Audit Trail</h2>
+  <ul class="space-y-2">
+    <% @chat_session.audit_events.recent.each do |event| %>
+      <li class="text-sm">
+        <div class="flex justify-between">
+          <span class="font-semibold"><%= event.action.humanize %></span>
+          <span class="text-xs text-gray-500"><%= time_ago_in_words(event.created_at) %> ago by <%= event.user.email %></span>
+        </div>
+      </li>
+    <% end %>
+    <% if @chat_session.audit_events.empty? %>
+      <li class="text-sm text-gray-500">No audit events for this session.</li>
+    <% end %>
+  </ul>
+</div>

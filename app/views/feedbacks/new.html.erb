@@ -1,0 +1,28 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Report a Problem for Chat Session: <%= @chat_session.title %></h1>
+
+  <%= form_with(model: [@chat_session, @feedback], class: "max-w-xl mx-auto") do |f| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+      <div>
+        <%= f.label :category, class: "block text-sm font-medium text-gray-300" %>
+        <%= f.select :category, Feedback.categories.keys.map { |c| [c.humanize, c] }, {}, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div>
+        <%= f.label :feedback_priority, "Priority", class: "block text-sm font-medium text-gray-300" %>
+        <%= f.select :feedback_priority, Feedback.feedback_priorities.keys.map { |p| [p.humanize, p] }, {}, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :message, "What went wrong or what would you like to report?", class: "block text-sm font-medium text-gray-300" %>
+      <%= f.text_area :message, rows: 5, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "Please describe the issue in detail.", required: true, maxlength: Feedback::MAX_MESSAGE_LENGTH %>
+      <% if @feedback.errors[:message].any? %>
+        <p class="mt-2 text-sm text-red-500"><%= @feedback.errors[:message].join(", ") %></p>
+      <% end %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= f.submit "Submit Feedback", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

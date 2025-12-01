@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyber-Midnight Theme CSS Variables */
+:root {
+  --bg-deep: #050505;
+  --bg-surface: #0a0a0a;
+  --bg-dark-surface: #121212;
+  --border-color: #27272a;
+  --accent-light: #00f3ff;
+  --accent-dark: #00a8ff;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-accent: #00f3ff;
+  --glow-color: rgba(0, 243, 255, 0.5);
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --success-color: #22c55e;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--text-accent);
+}
+
+/* Component Styles */
+
+.sidebar-glass {
+  background-color: rgba(10, 10, 10, 0.7); /* Slightly transparent dark surface */
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.input-modern {
+  @apply bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg p-3;
+  transition: all 0.3s ease-in-out;
+}
+.input-modern:focus {
+  @apply outline-none ring-2 ring-[var(--accent-light)] border-[var(--accent-light)];
+  box-shadow: 0 0 15px var(--glow-color);
+}
+.input-modern:disabled {
+  @apply bg-[var(--bg-dark-surface)] text-[var(--text-secondary)] opacity-70 cursor-not-allowed;
+}
+
+
+.action-chip {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide
+         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-dark)] text-black cursor-pointer
+         hover:-translate-y-0.5 hover:shadow-[0_0_15px_var(--glow-color)] transition-all duration-200 ease-in-out;
+}
+
+
+.btn-primary {
+  @apply inline-flex items-center justify-center px-5 py-2 rounded-lg font-bold uppercase tracking-wide
+         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-dark)] text-black cursor-pointer
+         hover:-translate-y-0.5 hover:shadow-[0_0_20px_var(--glow-color)] transition-all duration-200 ease-in-out;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-5 py-2 rounded-lg font-semibold uppercase tracking-wide
+         bg-transparent border border-[var(--border-color)] text-[var(--text-primary)] cursor-pointer
+         hover:border-[var(--accent-light)] hover:text-[var(--text-accent)] hover:shadow-[0_0_10px_var(--glow-color)] transition-all duration-200 ease-in-out;
+}
+
+.app-card {
+  @apply bg-white/5 border border-white/10 rounded-xl p-6 text-center backdrop-blur-md;
+  transition: all 0.3s ease-in-out;
+}
+.app-card:hover {
+  @apply bg-white/10 border-[var(--accent-light)] shadow-[0_0_25px_var(--glow-color)];
+  transform: translateY(-5px);
+}

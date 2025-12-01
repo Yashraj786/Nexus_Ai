@@ -1,0 +1,47 @@
+<%# app/views/chat_sessions/_session_timeline.html.erb %>
+<div class="p-4 bg-gray-800 rounded-lg">
+  <h2 class="text-lg font-bold mb-4">Session Timeline</h2>
+  <div class="flex items-center justify-between text-xs text-gray-400">
+    <div class="text-center">
+      <div class="w-4 h-4 rounded-full bg-green-400 mx-auto"></div>
+      <p class="mt-1">Started</p>
+      <p class="text-gray-500"><%= time_ago_in_words(@chat_session.timeline[:started_at]) %> ago</p>
+    </div>
+    <div class="flex-1 h-px bg-gray-700"></div>
+    <div class="text-center">
+      <% if @chat_session.timeline[:first_reply_at] %>
+        <div class="w-4 h-4 rounded-full bg-green-400 mx-auto"></div>
+        <p class="mt-1">First Reply</p>
+        <p class="text-gray-500"><%= time_ago_in_words(@chat_session.timeline[:first_reply_at]) %> ago</p>
+      <% else %>
+        <div class="w-4 h-4 rounded-full bg-gray-600 mx-auto"></div>
+        <p class="mt-1">First Reply</p>
+        <p class="text-gray-500">Pending</p>
+      <% end %>
+    </div>
+    <div class="flex-1 h-px bg-gray-700"></div>
+    <div class="text-center">
+      <% if @chat_session.timeline[:last_reply_at] %>
+        <div class="w-4 h-4 rounded-full bg-green-400 mx-auto"></div>
+        <p class="mt-1">Last Reply</p>
+        <p class="text-gray-500"><%= time_ago_in_words(@chat_session.timeline[:last_reply_at]) %> ago</p>
+      <% else %>
+        <div class="w-4 h-4 rounded-full bg-gray-600 mx-auto"></div>
+        <p class="mt-1">Last Reply</p>
+        <p class="text-gray-500">Pending</p>
+      <% end %>
+    </div>
+    <div class="flex-1 h-px bg-gray-700"></div>
+    <div class="text-center">
+      <% if @chat_session.timeline[:last_feedback_at] %>
+        <div class="w-4 h-4 rounded-full bg-yellow-400 mx-auto"></div>
+        <p class="mt-1">Feedback</p>
+        <p class="text-gray-500"><%= time_ago_in_words(@chat_session.timeline[:last_feedback_at]) %> ago</p>
+      <% else %>
+        <div class="w-4 h-4 rounded-full bg-gray-600 mx-auto"></div>
+        <p class="mt-1">Feedback</p>
+        <p class="text-gray-500">None</p>
+      <% end %>
+    </div>
+  </div>
+</div>

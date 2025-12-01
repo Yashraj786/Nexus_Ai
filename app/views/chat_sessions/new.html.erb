@@ -1,0 +1,22 @@
+<div class="max-w-5xl mx-auto p-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">Select AI Persona</h1>
+  
+  <% if defined?(@personas) && @personas.present? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @personas.each do |persona| %>
+        <%= button_to chat_sessions_path(persona_id: persona.id), 
+                    method: :post, 
+                    class: "block p-6 bg-gray-800 rounded-lg border border-gray-700 hover:border-cyan-400 transition-all text-left" do %>
+          <h3 class="text-xl font-bold mb-2"><%= persona.name %></h3>
+          <p class="text-sm text-gray-400"><%= persona.system_instruction.truncate(100) %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="bg-red-900/20 border border-red-500 rounded-lg p-6 text-center">
+      <h2 class="text-xl font-bold text-red-400 mb-2">No Personas Found</h2>
+      <p class="text-gray-300 mb-4">Run <code class="bg-gray-800 px-2 py-1 rounded">rails db:seed</code> to create default personas</p>
+      <p class="text-sm text-gray-500">Personas count: <%= Persona.count %></p>
+    </div>
+  <% end %>
+</div>
