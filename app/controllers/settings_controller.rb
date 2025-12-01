@@ -9,6 +9,7 @@ class SettingsController < ApplicationController
     @fallback_configured = @user.fallback_configured?
     @usage_stats = ApiUsageLog.usage_stats(@user)
     @today_stats = ApiUsageLog.today_stats(@user)
+    @rate_limits = ApiUsageLog.get_user_limits(@user)
     @recent_logs = @user.api_usage_logs.recent.limit(10)
   end
 

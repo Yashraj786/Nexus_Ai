@@ -171,6 +171,42 @@
          </div>
        <% end %>
 
+       <div class="divider">Rate Limits</div>
+
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+         <div class="bg-base-100 p-4 rounded-lg">
+           <h4 class="font-semibold text-sm mb-2">Per Minute</h4>
+           <div class="progress progress-info" role="progressbar" aria-valuenow="<%= @rate_limits[:minute][:used] %>" aria-valuemin="0" aria-valuemax="<%= @rate_limits[:minute][:limit] %>">
+             <div class="progress-bar" style="width: <%= (@rate_limits[:minute][:used].to_f / @rate_limits[:minute][:limit] * 100).to_i %>%"></div>
+           </div>
+           <p class="text-xs text-gray-600 mt-2"><%= @rate_limits[:minute][:used] %> / <%= @rate_limits[:minute][:limit] %> requests</p>
+         </div>
+
+         <div class="bg-base-100 p-4 rounded-lg">
+           <h4 class="font-semibold text-sm mb-2">Per Hour</h4>
+           <div class="progress progress-info" role="progressbar" aria-valuenow="<%= @rate_limits[:hour][:used] %>" aria-valuemin="0" aria-valuemax="<%= @rate_limits[:hour][:limit] %>">
+             <div class="progress-bar" style="width: <%= (@rate_limits[:hour][:used].to_f / @rate_limits[:hour][:limit] * 100).to_i %>%"></div>
+           </div>
+           <p class="text-xs text-gray-600 mt-2"><%= @rate_limits[:hour][:used] %> / <%= @rate_limits[:hour][:limit] %> requests</p>
+         </div>
+
+         <div class="bg-base-100 p-4 rounded-lg">
+           <h4 class="font-semibold text-sm mb-2">Per Day</h4>
+           <div class="progress progress-info" role="progressbar" aria-valuenow="<%= @rate_limits[:day][:used] %>" aria-valuemin="0" aria-valuemax="<%= @rate_limits[:day][:limit] %>">
+             <div class="progress-bar" style="width: <%= (@rate_limits[:day][:used].to_f / @rate_limits[:day][:limit] * 100).to_i %>%"></div>
+           </div>
+           <p class="text-xs text-gray-600 mt-2"><%= @rate_limits[:day][:used] %> / <%= @rate_limits[:day][:limit] %> requests</p>
+         </div>
+       </div>
+
+       <div class="alert alert-info">
+         <svg class="stroke-current shrink-0 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+         <div>
+           <h4 class="font-semibold">API Rate Limits</h4>
+           <p class="text-sm mt-2">These are soft limits to prevent abuse. Exceeding these limits will prevent API calls until the window resets. Your LLM provider may have additional rate limits.</p>
+         </div>
+       </div>
+
        <div class="divider">FAQ</div>
 
       <div class="space-y-4">

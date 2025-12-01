@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApiUsageLog < ApplicationRecord
+  include RateLimiteable
+
   belongs_to :user
 
   validates :provider, :model, :status, presence: true

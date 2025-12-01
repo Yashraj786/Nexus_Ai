@@ -35,6 +35,16 @@ module Ai
     def generate_content(context, retry_with_fallback: true)
       validate_configuration!
 
+      # Check rate limits before making request
+      rate_limit_check = ApiUsageLog.check_rate_limit(@user)
+      if rate_limit_check[:limited]
+        return {
+          success: false,
+          error: rate_limit_check[:reason],
+          rate_limited: true
+        }
+      end
+
       result = case @provider
       when 'openai'
         generate_with_openai(context)
