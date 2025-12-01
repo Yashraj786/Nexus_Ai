@@ -1,34 +1,110 @@
 <!-- app/views/pages/nexus.html.erb -->
-<div class="h-full flex flex-col items-center justify-center text-center p-8">
-  <h1 class="text-5xl font-bold font-rajdhani text-accent-light mb-4">Welcome to Nexus AI</h1>
-  <p class="text-lg text-text-secondary mb-8 max-w-2xl">
-    Your intelligent workspace for seamless collaboration with AI.
-    Nexus AI provides a suite of tools to enhance your productivity and creativity,
-    with robust observability and a feedback-driven development process.
-  </p>
-  <div class="flex gap-4">
-    <%= link_to "New Session", new_chat_session_path, class: "btn-primary" %>
-    <%= link_to "View My Sessions", chat_sessions_path, class: "btn-secondary" %>
+<div class="min-h-screen bg-white flex flex-col">
+  <!-- Hero Section -->
+  <div class="flex-1 flex flex-col items-center justify-center text-center px-6 py-16">
+    <div class="space-y-6 max-w-3xl">
+      <h1 class="text-6xl font-bold font-rajdhani tracking-wider">
+        <span class="text-black">NEXUS</span>
+        <span class="text-orange-600"> AI</span>
+      </h1>
+      <p class="text-xl text-gray-700 leading-relaxed">
+        Your gateway to unlimited AI possibilities. Use any LLM provider—OpenAI, Anthropic, Gemini, or Ollama—all in one place.
+      </p>
+      <div class="flex gap-4 justify-center pt-4">
+        <% if user_signed_in? %>
+          <%= link_to "New Session", new_chat_session_path, class: "btn btn-primary" %>
+          <%= link_to "My Sessions", chat_sessions_path, class: "btn btn-secondary" %>
+        <% else %>
+          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary" %>
+          <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div class="mt-16 text-left max-w-4xl w-full">
-    <h2 class="text-3xl font-bold font-rajdhani text-accent-light mb-4">Key Features</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="app-card">
-        <i data-lucide="bot" class="w-10 h-10 text-accent-light mb-2"></i>
-        <h3 class="text-lg font-bold font-rajdhani">Multi-Persona AI</h3>
-        <p class="text-sm text-text-secondary">Engage with specialized AI assistants for different tasks.</p>
+  <!-- Features Section -->
+  <div class="bg-gray-50 px-6 py-20">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold font-rajdhani text-center mb-16 tracking-wide">KEY FEATURES</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="zap" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Multi-Provider Support</h3>
+            <p class="text-gray-600">Switch between OpenAI, Anthropic, Google Gemini, Ollama, or custom APIs.</p>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="shield" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Automatic Failover</h3>
+            <p class="text-gray-600">Configure a fallback provider to ensure uninterrupted AI access.</p>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="bar-chart-2" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Usage Analytics</h3>
+            <p class="text-gray-600">Monitor API usage, costs, and performance in real-time.</p>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="lock" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Secure & Private</h3>
+            <p class="text-gray-600">Your API keys are encrypted. Data flows directly to your chosen provider.</p>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="users" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Multiple Personas</h3>
+            <p class="text-gray-600">Create specialized AI assistants for different tasks and workflows.</p>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="card">
+          <div class="card-body space-y-4">
+            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+              <i data-lucide="trending-up" class="w-6 h-6 text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-bold font-rajdhani">Rate Limiting</h3>
+            <p class="text-gray-600">Built-in rate limits protect your account from abuse.</p>
+          </div>
+        </div>
       </div>
-      <div class="app-card">
-        <i data-lucide="bar-chart-2" class="w-10 h-10 text-accent-light mb-2"></i>
-        <h3 class="text-lg font-bold font-rajdhani">Observability</h3>
-        <p class="text-sm text-text-secondary">Monitor AI performance with a real-time dashboard and SLOs.</p>
-      </div>
-      <div class="app-card">
-        <i data-lucide="shield-check" class="w-10 h-10 text-accent-light mb-2"></i>
-        <h3 class="text-lg font-bold font-rajdhani">Reliability</h3>
-        <p class="text-sm text-text-secondary">Robust retry logic and error handling ensure a stable experience.</p>
-      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="px-6 py-20 bg-white">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+      <h2 class="text-3xl font-bold font-rajdhani">Ready to Get Started?</h2>
+      <p class="text-gray-600 text-lg">Configure your preferred LLM provider and start chatting with AI in minutes.</p>
+      <% if !user_signed_in? %>
+        <%= link_to "Create Account", new_user_registration_path, class: "btn btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
