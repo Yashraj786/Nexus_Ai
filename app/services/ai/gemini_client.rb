@@ -4,6 +4,16 @@ require 'net/http'
 require 'json'
 
 module Ai
+  # DEPRECATED: This class is kept for backward compatibility only.
+  # Use Ai::LlmClient instead, which supports multiple LLM providers.
+  #
+  # The LlmClient allows users to bring their own API keys for:
+  # - OpenAI (GPT-4, GPT-3.5)
+  # - Anthropic (Claude)
+  # - Google Gemini
+  # - Ollama (local)
+  # - Custom endpoints
+  #
   # HTTP client for Google Gemini API
   # Handles low-level API communication with proper error handling
   class GeminiClient

@@ -7,10 +7,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   has_many :chat_sessions, -> { includes(:persona) }, dependent: :destroy, inverse_of: :user
-  has_many :capture_logs, dependent: :destroy
   has_many :messages, through: :chat_sessions
   has_many :feedbacks, dependent: :destroy
   has_many :audit_events, dependent: :destroy
+
+  # Validations
+  validates :api_provider, presence: true, if: :api_configured?
+  validates :api_model_name, presence: true, if: :api_configured?
+  validates :encrypted_api_key, presence: true, if: :api_configured?
+
+  # Supported LLM providers
+  SUPPORTED_PROVIDERS = ['openai', 'anthropic', 'gemini', 'ollama', 'custom'].freeze
 
   ONBOARDING_STEPS = [
     "created_first_session",
@@ -39,5 +46,28 @@ class User < ApplicationRecord
 
   def all_onboarding_steps_completed?
     (ONBOARDING_STEPS - onboarding_steps_completed).empty?
+  end
+
+  # API Key management methods
+  def api_configured?
+    api_provider.present? && encrypted_api_key.present? && api_model_name.present?
+  end
+
+  def update_api_config(provider, api_key, model_name)
+    update(
+      api_provider: provider,
+      encrypted_api_key: api_key,
+      api_model_name: model_name,
+      api_configured_at: Time.current
+    )
+  end
+
+  def clear_api_config
+    update(
+      api_provider: nil,
+      encrypted_api_key: nil,
+      api_model_name: nil,
+      api_configured_at: nil
+    )
   end
 end

@@ -9,10 +9,16 @@ Rails.application.routes.draw do
   get 'help/beta', to: 'help#beta'
   get 'help/case_study', to: 'help#case_study'
 
-   # Root and authentication
-   root 'pages#nexus'
-   get 'nexus', to: 'pages#nexus'
-   devise_for :users, path: '', path_names: { sign_in: :login, sign_out: :logout, sign_up: :register }
+  # Root and authentication
+    root 'pages#nexus'
+    get 'nexus', to: 'pages#nexus'
+    devise_for :users, path: '', path_names: { sign_in: :login, sign_out: :logout, sign_up: :register }
+
+    # Settings for API configuration
+    get 'settings', to: 'settings#show'
+    patch 'settings/api-key', to: 'settings#update_api_key', as: :settings_update_api_key
+    delete 'settings/api-key', to: 'settings#clear_api_key', as: :settings_clear_api_key
+    post 'settings/test-api', to: 'settings#test_api', as: :settings_test_api
 
   # Chat sessions with proper nesting
   resources :chat_sessions, only: [:index, :show, :new, :create, :destroy, :update] do

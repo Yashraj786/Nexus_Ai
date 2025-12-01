@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_29_171448) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_01_205941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -86,10 +86,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_29_171448) do
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "admin", default: false, null: false
+    t.datetime "api_configured_at"
+    t.string "api_model_name"
+    t.string "api_provider"
     t.datetime "created_at", null: false
     t.datetime "current_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "email", default: "", null: false
+    t.text "encrypted_api_key"
     t.string "encrypted_password", default: "", null: false
     t.jsonb "features"
     t.datetime "last_sign_in_at"
