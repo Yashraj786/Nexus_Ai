@@ -22,7 +22,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     chat_session.messages.create!(role: role, content: content)
   end
 
-  def create_feedback(chat_session:, user:, message: 'Test feedback', category: 'bug', priority: 'low')
-    chat_session.feedbacks.create!(user: user, message: message, category: category, priority: priority)
+  def create_feedback(chat_session:, user:, message: 'Test feedback', category: 'bug', feedback_priority: 'low')
+    chat_session.feedbacks.create!(user: user, message: message, category: category, feedback_priority: feedback_priority)
   end
 end
