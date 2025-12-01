@@ -5,17 +5,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   private
 
-  # Helper to create chat sessions, messages, and feedback
-  def create_list(factory, count, *args)
+  # Helper to create chat sessions, messages, and feedback using fixture-based approach
+  def create_list(model_name, count, attrs = {})
     if count == 1
-      send("create_#{factory}", *args)
+      send("create_#{model_name}", **attrs)
     else
-      count.times.map { send("create_#{factory}", *args) }
+      count.times.map { send("create_#{model_name}", **attrs) }
     end
   end
 
   def create_chat_session(user:, persona: personas(:developer))
-    ChatSession.create!(user: user, persona: persona)
+    ChatSession.create!(user: user, persona: persona, title: "Test Session")
   end
 
   def create_message(chat_session:, role: 'user', content: 'Test message')

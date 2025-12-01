@@ -2,6 +2,8 @@
 require "application_system_test_case"
 
 class OnboardingChecklistTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @user = users(:one)
     @user.update(features: { pro_session_analytics: true })

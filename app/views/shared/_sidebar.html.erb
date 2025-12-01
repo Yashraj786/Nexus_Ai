@@ -1,31 +1,41 @@
 <aside class="sidebar-glass w-72 p-4 fixed left-0 top-0 h-full flex flex-col gap-4">
-  <span class="brand-font text-accent-light text-xl tracking-tight mb-4">NEXUS</span>
+  <div class="flex items-center gap-2 mb-4">
+    <span class="text-2xl font-rajdhani font-bold text-cyan-600">◆</span>
+    <span class="font-rajdhani text-lg font-bold tracking-widest text-cyan-600">NEXUS</span>
+  </div>
   <%= link_to new_chat_session_path, class: "btn-primary w-full" do %>
-    New Session
+    <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New Session
   <% end %>
-  <h3 class="text-xs text-accent-light mt-6 mb-2">RECENT ACTIVITY</h3>
+  <h3 class="text-xs font-rajdhani font-bold text-cyan-600 mt-6 mb-3 uppercase tracking-widest">Recent Activity</h3>
   <div class="space-y-2">
     <% current_user.chat_sessions.order(updated_at: :desc).limit(10).each do |session| %>
-      <%= link_to chat_session_path(session), class: "block p-3 rounded-lg hover:bg-accent-light/10 transition-colors" do %>
+      <%= link_to chat_session_path(session), class: "block p-3 rounded-lg border border-transparent hover:border-orange-400/50 hover:bg-orange-50/30 transition-all" do %>
         <div class="flex items-center gap-2">
-          <i data-lucide="<%= session.persona&.icon || 'message-square' %>" class="w-4 h-4 text-accent-light"></i>
-          <span class="text-sm truncate">
+          <i data-lucide="<%= session.persona&.icon || 'message-square' %>" class="w-4 h-4 text-orange-500 flex-shrink-0"></i>
+          <span class="text-sm text-gray-700 truncate font-medium">
             <%= session.title || "New #{session.persona.try(:name) || 'Generic'} Chat" %>
           </span>
         </div>
-        <div class="text-xs text-text-secondary mt-1">
+        <div class="text-xs text-gray-500 mt-1">
           <%= time_ago_in_words(session.updated_at) %> ago
         </div>
       <% end %>
     <% end %>
   </div>
   <div class="flex-1"></div>
-  <%= link_to "Beta Info", help_beta_path, class: "text-text-primary hover:text-accent-light font-bold" %>
-  <%= link_to "Case Study", help_case_study_path, class: "text-text-primary hover:text-accent-light font-bold" %>
-  <% if current_user.admin? %>
-    <%= link_to "Admin Dashboard", admin_dashboard_path, class: "text-text-primary hover:text-accent-light font-bold" %>
-    <%= link_to "Feedback Inbox", admin_feedbacks_path, class: "text-text-primary hover:text-accent-light font-bold" %>
-  <% end %>
-  <span class="text-xs text-success-color mb-2">ONLINE</span>
-  <%= button_to "LOGOUT", destroy_user_session_path, method: :delete, class: "text-error-color hover:text-red-300 font-bold" %>
+  <div class="space-y-2 text-sm border-t border-gray-200 pt-3">
+    <%= link_to "Beta Info", help_beta_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
+    <%= link_to "Case Study", help_case_study_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
+    <% if current_user.admin? %>
+      <%= link_to "Admin Dashboard", admin_dashboard_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
+      <%= link_to "Feedback Inbox", admin_feedbacks_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
+    <% end %>
+  </div>
+  <div class="flex items-center gap-2 justify-between border-t border-gray-200 pt-3">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+      <span class="text-xs font-rajdhani font-bold text-gray-600 uppercase">Online</span>
+    </div>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-xs text-red-500 hover:text-red-600 font-bold transition-colors" %>
+  </div>
 </aside>

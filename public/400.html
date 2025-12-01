@@ -24,45 +24,45 @@
         font-size: 16px;
       }
 
-      body {
-        background: #FFF;
-        color: #261B23;
-        display: grid;
-        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Aptos, Roboto, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-size: clamp(1rem, 2.5vw, 2rem);
-        -webkit-font-smoothing: antialiased;
-        font-style: normal;
-        font-weight: 400;
-        letter-spacing: -0.0025em;
-        line-height: 1.4;
-        min-height: 100dvh;
-        place-items: center;
-        text-rendering: optimizeLegibility;
-        -webkit-text-size-adjust: 100%;
-      }
+       body {
+         background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+         color: #1a1a1a;
+         display: grid;
+         font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Aptos, Roboto, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+         font-size: clamp(1rem, 2.5vw, 2rem);
+         -webkit-font-smoothing: antialiased;
+         font-style: normal;
+         font-weight: 400;
+         letter-spacing: -0.0025em;
+         line-height: 1.4;
+         min-height: 100dvh;
+         place-items: center;
+         text-rendering: optimizeLegibility;
+         -webkit-text-size-adjust: 100%;
+       }
 
-      #error-description {
-        fill: #d30001;
-      }
+       #error-description {
+         fill: #ff6b35;
+       }
 
-      #error-id {
-        fill: #f0eff0;
-      }
+       #error-id {
+         fill: #f0f0f0;
+       }
 
-      @media (prefers-color-scheme: dark) {
-        body {
-          background: #101010;
-          color: #e0e0e0;
-        }
+       @media (prefers-color-scheme: dark) {
+         body {
+           background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+           color: #f8f8f8;
+         }
 
-        #error-description {
-          fill: #FF6161;
-        }
+         #error-description {
+           fill: #ffa86b;
+         }
 
-        #error-id {
-          fill: #2c2c2c;
-        }
-      }
+         #error-id {
+           fill: #3a3a3a;
+         }
+       }
 
       a {
         color: inherit;

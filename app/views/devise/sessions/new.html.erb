@@ -1,40 +1,78 @@
-<div class="min-h-screen flex items-center justify-center px-4">
+<div class="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-cyber-bg via-cyber-bg to-[#f5f5f5]">
   <div class="w-full max-w-md">
-    <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-      <p class="text-gray-400">Sign in to your account</p>
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="inline-block mb-4">
+        <div class="w-14 h-14 bg-gradient-to-r from-cyber-accent to-cyber-accent-bright rounded-full flex items-center justify-center">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+      </div>
+      <h2 class="text-4xl font-bold text-cyber-text mb-3 font-rajdhani">Nexus AI</h2>
+      <p class="text-cyber-text-secondary text-lg">Cyberpunk Intelligence Interface</p>
     </div>
 
-    <div class="bg-[#0a0a0a] border border-[#27272a] rounded-lg p-8">
+    <!-- Login Card -->
+    <div class="bg-white border-2 border-cyber-border rounded-2xl p-8 shadow-lg">
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-        <%= f.input :email,
-            required: true,
-            autofocus: true,
-            input_html: { class: "input-modern" },
-            label_html: { class: "text-gray-400 text-sm mb-2" } %>
+        <!-- Email Input -->
+        <div class="mb-6">
+          <%= f.input :email,
+              required: true,
+              autofocus: true,
+              input_html: { class: "input-modern w-full", placeholder: "your@email.com" },
+              label: "Email Address",
+              label_html: { class: "block text-cyber-text font-semibold mb-3 font-rajdhani" } %>
+        </div>
 
-        <%= f.input :password,
-            required: true,
-            input_html: { class: "input-modern" },
-            label_html: { class: "text-gray-400 text-sm mb-2" } %>
+        <!-- Password Input -->
+        <div class="mb-6">
+          <%= f.input :password,
+              required: true,
+              input_html: { class: "input-modern w-full", placeholder: "••••••••" },
+              label: "Password",
+              label_html: { class: "block text-cyber-text font-semibold mb-3 font-rajdhani" } %>
+        </div>
 
+        <!-- Remember Me -->
         <% if devise_mapping.rememberable? %>
-          <%= f.input :remember_me, as: :boolean, wrapper_html: { class: "mb-4" } %>
+          <div class="mb-6">
+            <%= f.input :remember_me, as: :boolean, 
+                wrapper_html: { class: "flex items-center" },
+                input_html: { class: "w-4 h-4 text-cyber-accent border-2 border-cyber-border rounded cursor-pointer" },
+                label_html: { class: "ml-3 text-cyber-text font-medium cursor-pointer" } %>
+          </div>
         <% end %>
 
-        <%= f.button :submit, "Sign In", class: "w-full btn-primary py-3 mt-4" %>
+        <!-- Sign In Button -->
+        <%= f.button :submit, "SIGN IN", class: "w-full btn-primary py-3 mt-2 text-lg" %>
 
       <% end %>
 
-      <div class="mt-6 text-center">
-        <p class="text-sm text-gray-400">
-          Don't have an account?
-          <%= link_to "Sign Up", new_registration_path(resource_name), class: "text-[#00f3ff] hover:underline ml-1" %>
-        </p>
+      <!-- Divider -->
+      <div class="relative my-6">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t-2 border-cyber-border"></div>
+        </div>
+        <div class="relative flex justify-center text-sm">
+          <span class="px-2 bg-white text-cyber-text-secondary">or</span>
+        </div>
+      </div>
+
+      <!-- Sign Up Link -->
+      <div class="text-center">
+        <p class="text-cyber-text-secondary mb-4">New to Nexus AI?</p>
+        <%= link_to "Create Account", new_registration_path(resource_name), class: "btn-secondary w-full py-3 inline-flex justify-center" %>
       </div>
     </div>
 
-    <%= link_to "← Back to Home", root_path, class: "block text-center mt-6 text-gray-500 hover:text-gray-400" %>
+    <!-- Back Link -->
+    <%= link_to "← Back to Home", root_path, class: "block text-center mt-8 text-cyber-text-secondary hover:text-cyber-accent font-medium transition-colors" %>
+
+    <!-- Decorative Elements -->
+    <div class="absolute top-10 right-10 w-20 h-20 bg-gradient-to-r from-cyber-accent to-cyber-accent-bright rounded-full blur-3xl opacity-10"></div>
+    <div class="absolute bottom-10 left-10 w-32 h-32 bg-gradient-to-r from-cyber-accent to-cyber-accent-bright rounded-full blur-3xl opacity-5"></div>
   </div>
 </div>
