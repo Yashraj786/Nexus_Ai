@@ -72,4 +72,36 @@ class User < ApplicationRecord
       api_configured_at: nil
     )
   end
+
+  # Fallback provider management
+  def fallback_configured?
+    fallback_provider.present? && encrypted_fallback_api_key.present? && fallback_model_name.present?
+  end
+
+  def update_fallback_config(provider, api_key, model_name)
+    update(
+      fallback_provider: provider,
+      encrypted_fallback_api_key: api_key,
+      fallback_model_name: model_name
+    )
+  end
+
+  def clear_fallback_config
+    update(
+      fallback_provider: nil,
+      encrypted_fallback_api_key: nil,
+      fallback_model_name: nil
+    )
+  end
+
+  # Get fallback provider config
+  def fallback_provider_config
+    return nil unless fallback_configured?
+
+    {
+      provider: fallback_provider,
+      api_key: encrypted_fallback_api_key,
+      model_name: fallback_model_name
+    }
+  end
 end

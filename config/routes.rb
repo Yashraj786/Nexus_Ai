@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     get 'settings', to: 'settings#show'
     patch 'settings/api-key', to: 'settings#update_api_key', as: :settings_update_api_key
     delete 'settings/api-key', to: 'settings#clear_api_key', as: :settings_clear_api_key
+    patch 'settings/fallback-provider', to: 'settings#update_fallback_provider', as: :settings_update_fallback_provider
+    delete 'settings/fallback-provider', to: 'settings#clear_fallback_provider', as: :settings_clear_fallback_provider
     post 'settings/test-api', to: 'settings#test_api', as: :settings_test_api
 
   # Chat sessions with proper nesting

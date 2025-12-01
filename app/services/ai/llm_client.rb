@@ -8,12 +8,22 @@ module Ai
   # Users can bring their own API keys for OpenAI, Anthropic, Gemini, etc.
   class LlmClient
     TIMEOUT = 30 # seconds
+    MAX_RETRIES = 2 # Allow fallback to one alternate provider
 
-    def initialize(user)
+    def initialize(user, use_fallback: false)
       @user = user
-      @provider = user.api_provider
-      @api_key = user.encrypted_api_key
-      @model = user.api_model_name
+      
+      if use_fallback && user.fallback_configured?
+        @provider = user.fallback_provider
+        @api_key = user.encrypted_fallback_api_key
+        @model = user.fallback_model_name
+        @using_fallback = true
+      else
+        @provider = user.api_provider
+        @api_key = user.encrypted_api_key
+        @model = user.api_model_name
+        @using_fallback = false
+      end
     end
 
     # Check if user has configured their API key
@@ -21,8 +31,8 @@ module Ai
       @user.api_configured?
     end
 
-    # Generate content using the user's configured LLM
-    def generate_content(context)
+    # Generate content using the user's configured LLM with optional fallback
+    def generate_content(context, retry_with_fallback: true)
       validate_configuration!
 
       result = case @provider
@@ -38,6 +48,13 @@ module Ai
         generate_with_custom(context)
       else
         { success: false, error: "Unsupported provider: #{@provider}" }
+      end
+
+      # If primary provider failed and we have a fallback, try it
+      if !result[:success] && retry_with_fallback && !@using_fallback && @user.fallback_configured?
+        Rails.logger.info "Primary provider #{@provider} failed, attempting fallback provider..."
+        fallback_client = Ai::LlmClient.new(@user, use_fallback: true)
+        result = fallback_client.generate_content(context, retry_with_fallback: false)
       end
 
       # Log the API usage

@@ -6,6 +6,7 @@ class SettingsController < ApplicationController
   def show
     @supported_providers = User::SUPPORTED_PROVIDERS
     @api_configured = @user.api_configured?
+    @fallback_configured = @user.fallback_configured?
   end
 
   # Update API configuration
@@ -31,6 +32,30 @@ class SettingsController < ApplicationController
     @user.clear_api_config
     AuditEvent.log_action(@user, 'api_key_cleared', {})
     redirect_to settings_path, notice: 'API configuration cleared.'
+  end
+
+  # Update fallback provider
+  def update_fallback_provider
+    @user.fallback_provider = settings_params[:fallback_provider]
+    @user.fallback_model_name = settings_params[:fallback_model_name]
+    
+    if settings_params[:encrypted_fallback_api_key].present?
+      @user.encrypted_fallback_api_key = settings_params[:encrypted_fallback_api_key]
+    end
+
+    if @user.save
+      AuditEvent.log_action(@user, 'fallback_provider_updated', { provider: @user.fallback_provider })
+      redirect_to settings_path, notice: 'Fallback provider configured successfully.'
+    else
+      redirect_to settings_path, alert: 'Failed to update fallback provider.'
+    end
+  end
+
+  # Clear fallback provider
+  def clear_fallback_provider
+    @user.clear_fallback_config
+    AuditEvent.log_action(@user, 'fallback_provider_cleared', {})
+    redirect_to settings_path, notice: 'Fallback provider cleared.'
   end
 
   # Test API connection
@@ -66,6 +91,6 @@ class SettingsController < ApplicationController
   end
 
   def settings_params
-    params.require(:user).permit(:api_provider, :api_model_name, :encrypted_api_key)
+    params.require(:user).permit(:api_provider, :api_model_name, :encrypted_api_key, :fallback_provider, :fallback_model_name, :encrypted_fallback_api_key)
   end
 end
