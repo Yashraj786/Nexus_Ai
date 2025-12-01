@@ -1,42 +1,71 @@
-<aside class="sidebar-glass w-72 p-4 fixed left-0 top-0 h-full flex flex-col gap-4">
-  <div class="flex items-center gap-2 mb-4">
-    <span class="text-2xl font-rajdhani font-bold text-cyan-600">◆</span>
-    <span class="font-rajdhani text-lg font-bold tracking-widest text-cyan-600">NEXUS</span>
+<aside class="w-72 bg-gray-50 border-r border-gray-200 p-6 fixed left-0 top-0 h-full flex flex-col gap-6">
+  <!-- Logo -->
+  <div class="flex items-center gap-3 pb-4 border-b border-gray-200">
+    <div class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
+      <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+    </div>
+    <span class="font-rajdhani text-lg font-bold tracking-wider text-black">NEXUS</span>
   </div>
-  <%= link_to new_chat_session_path, class: "btn-primary w-full" do %>
-    <i data-lucide="plus" class="w-4 h-4 mr-2"></i>New Session
+
+  <!-- New Session Button -->
+  <%= link_to new_chat_session_path, class: "btn btn-primary w-full justify-center" do %>
+    <i data-lucide="plus" class="w-4 h-4"></i>New Session
   <% end %>
-  <h3 class="text-xs font-rajdhani font-bold text-cyan-600 mt-6 mb-3 uppercase tracking-widest">Recent Activity</h3>
-  <div class="space-y-2">
-    <% current_user.chat_sessions.order(updated_at: :desc).limit(10).each do |session| %>
-      <%= link_to chat_session_path(session), class: "block p-3 rounded-lg border border-transparent hover:border-orange-400/50 hover:bg-orange-50/30 transition-all" do %>
-        <div class="flex items-center gap-2">
-          <i data-lucide="<%= session.persona&.icon || 'message-square' %>" class="w-4 h-4 text-orange-500 flex-shrink-0"></i>
-          <span class="text-sm text-gray-700 truncate font-medium">
-            <%= session.title || "New #{session.persona.try(:name) || 'Generic'} Chat" %>
-          </span>
-        </div>
-        <div class="text-xs text-gray-500 mt-1">
-          <%= time_ago_in_words(session.updated_at) %> ago
-        </div>
+
+  <!-- Recent Sessions -->
+  <div class="flex-1 overflow-y-auto">
+    <h3 class="text-xs font-rajdhani font-bold text-gray-600 mb-3 uppercase tracking-widest">Recent Sessions</h3>
+    <div class="space-y-2">
+      <% current_user.chat_sessions.order(updated_at: :desc).limit(10).each do |session| %>
+        <%= link_to chat_session_path(session), class: "group block p-3 rounded-lg bg-white border border-gray-200 hover:border-orange-600 transition-all" do %>
+          <div class="flex items-center gap-2">
+            <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-4 h-4 text-orange-600 flex-shrink-0 group-hover:text-orange-700"></i>
+            <span class="text-sm text-gray-700 truncate font-medium group-hover:text-orange-600">
+              <%= session.title || "#{session.persona.try(:name) || 'Chat'}" %>
+            </span>
+          </div>
+          <div class="text-xs text-gray-500 mt-1 pl-6">
+            <%= time_ago_in_words(session.updated_at) %> ago
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="space-y-2 border-t border-gray-200 pt-4">
+    <%= link_to settings_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+      <i data-lucide="settings" class="w-4 h-4"></i>
+      Settings
+    <% end %>
+    
+    <%= link_to help_beta_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+      <i data-lucide="info" class="w-4 h-4"></i>
+      Info
+    <% end %>
+    
+    <% if current_user.admin? %>
+      <%= link_to admin_dashboard_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+        <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        Admin
+      <% end %>
+      
+      <%= link_to admin_feedbacks_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+        <i data-lucide="message-square" class="w-4 h-4"></i>
+        Feedback
       <% end %>
     <% end %>
   </div>
-  <div class="flex-1"></div>
-  <div class="space-y-2 text-sm border-t border-gray-200 pt-3">
-    <%= link_to "⚙️ Settings", settings_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
-    <%= link_to "Beta Info", help_beta_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
-    <%= link_to "Case Study", help_case_study_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
-    <% if current_user.admin? %>
-      <%= link_to "Admin Dashboard", admin_dashboard_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
-      <%= link_to "Feedback Inbox", admin_feedbacks_path, class: "block text-gray-700 hover:text-orange-500 font-medium transition-colors" %>
-    <% end %>
-  </div>
-  <div class="flex items-center gap-2 justify-between border-t border-gray-200 pt-3">
-    <div class="flex items-center gap-2">
+
+  <!-- User Status & Logout -->
+  <div class="space-y-2 border-t border-gray-200 pt-4">
+    <div class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg">
       <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-      <span class="text-xs font-rajdhani font-bold text-gray-600 uppercase">Online</span>
+      <span class="text-xs font-rajdhani font-bold text-gray-600 uppercase tracking-wider">Online</span>
     </div>
-    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-xs text-red-500 hover:text-red-600 font-bold transition-colors" %>
+    <%= button_to destroy_user_session_path, method: :delete, class: "w-full btn btn-outline text-red-600 hover:border-red-600 justify-center", data: { confirm: "Are you sure?" } do %>
+      <i data-lucide="log-out" class="w-4 h-4"></i>
+      Logout
+    <% end %>
   </div>
 </aside>
