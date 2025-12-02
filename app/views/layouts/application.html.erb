@@ -53,12 +53,25 @@
     </div>
 
     <script>
-      document.addEventListener("turbo:load", () => { if(window.lucide) lucide.createIcons(); });
+      // Initialize icons on page load and after Turbo navigation
+      function initializeIcons() {
+        if(window.lucide) {
+          lucide.createIcons();
+        }
+      }
       
-      // Add glow effect on hover for interactive elements
-      document.querySelectorAll('.btn-primary, .btn-secondary, .action-chip, .app-card').forEach(el => {
-        el.addEventListener('mouseenter', () => el.classList.add('glow-border'));
-        el.addEventListener('mouseleave', () => el.classList.remove('glow-border'));
+      // Run on initial page load
+      document.addEventListener('DOMContentLoaded', initializeIcons);
+      
+      // Run after Turbo page loads
+      document.addEventListener('turbo:load', initializeIcons);
+      
+      // Ensure form buttons are clickable
+      document.addEventListener('turbo:load', () => {
+        document.querySelectorAll('button, a[href], input[type="submit"]').forEach(el => {
+          el.style.cursor = 'pointer';
+          el.style.pointerEvents = 'auto';
+        });
       });
     </script>
   </body>
