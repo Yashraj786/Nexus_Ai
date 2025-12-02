@@ -1,96 +1,123 @@
 <!-- app/views/pages/nexus.html.erb -->
-<div class="min-h-screen bg-white flex flex-col">
-  <!-- Hero Section -->
-  <div class="flex-1 flex flex-col items-center justify-center text-center px-6 py-16">
-    <div class="space-y-6 max-w-3xl">
-      <h1 class="text-6xl font-bold font-rajdhani tracking-wider">
+<div class="min-h-screen bg-gradient-to-br from-white via-white to-gray-50 flex flex-col">
+  <!-- Hero Section with Gradient Background -->
+  <div class="flex-1 flex flex-col items-center justify-center text-center px-6 py-20 relative overflow-hidden">
+    <!-- Decorative Background Elements -->
+    <div class="absolute inset-0 opacity-30 pointer-events-none">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-20"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-20"></div>
+    </div>
+    
+    <div class="space-y-8 max-w-4xl relative z-10">
+      <div class="inline-block px-4 py-2 bg-orange-100/50 rounded-full border border-orange-200 mb-4">
+        <span class="text-orange-700 text-sm font-semibold tracking-wide">✨ Unified AI Platform</span>
+      </div>
+      
+      <h1 class="text-7xl md:text-8xl font-bold font-rajdhani tracking-widest leading-tight">
         <span class="text-black">NEXUS</span>
-        <span class="text-orange-600"> AI</span>
+        <span class="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700 bg-clip-text text-transparent"> AI</span>
       </h1>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        Your gateway to unlimited AI possibilities. Use any LLM provider—OpenAI, Anthropic, Gemini, or Ollama—all in one place.
+      
+      <p class="text-xl md:text-2xl text-gray-600 leading-relaxed font-light max-w-2xl mx-auto">
+        Your unified gateway to unlimited AI possibilities. Use any LLM provider—OpenAI, Anthropic, Gemini, Ollama—all in one powerful place.
       </p>
-      <div class="flex gap-4 justify-center pt-4">
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-8">
         <% if user_signed_in? %>
-          <%= link_to "New Session", new_chat_session_path, class: "btn btn-primary" %>
-          <%= link_to "My Sessions", chat_sessions_path, class: "btn btn-secondary" %>
+          <%= link_to "New Session", new_chat_session_path, class: "btn-primary px-8 py-4 text-lg font-semibold hover:shadow-glow-lg transition-all transform hover:-translate-y-1" %>
+          <%= link_to "My Sessions", chat_sessions_path, class: "btn-secondary px-8 py-4 text-lg font-semibold hover:border-orange-500 transition-all" %>
         <% else %>
-          <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary" %>
-          <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+          <%= link_to "Get Started", new_user_registration_path, class: "btn-primary px-8 py-4 text-lg font-semibold hover:shadow-glow-lg transition-all transform hover:-translate-y-1" %>
+          <%= link_to "Sign In", new_user_session_path, class: "btn-secondary px-8 py-4 text-lg font-semibold hover:border-orange-500 transition-all" %>
         <% end %>
       </div>
     </div>
   </div>
 
   <!-- Features Section -->
-  <div class="bg-gray-50 px-6 py-20">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold font-rajdhani text-center mb-16 tracking-wide">KEY FEATURES</h2>
+  <div class="bg-gradient-to-b from-white to-gray-50 px-6 py-24">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-20">
+        <h2 class="text-5xl md:text-6xl font-bold font-rajdhani text-gray-900 mb-4 tracking-tight">Powerful Features</h2>
+        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Everything you need to manage multiple AI providers in one unified platform</p>
+      </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Feature 1 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="zap" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="zap" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Multi-Provider Support</h3>
-            <p class="text-gray-600">Switch between OpenAI, Anthropic, Google Gemini, Ollama, or custom APIs.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Multi-Provider Support</h3>
+              <p class="text-gray-600 leading-relaxed">Seamlessly switch between OpenAI, Anthropic, Google Gemini, Ollama, or your custom APIs.</p>
+            </div>
           </div>
         </div>
 
         <!-- Feature 2 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="shield" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="shield" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Automatic Failover</h3>
-            <p class="text-gray-600">Configure a fallback provider to ensure uninterrupted AI access.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Automatic Failover</h3>
+              <p class="text-gray-600 leading-relaxed">Configure a fallback provider to ensure uninterrupted AI access and zero downtime.</p>
+            </div>
           </div>
         </div>
 
         <!-- Feature 3 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="bar-chart-2" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="bar-chart-2" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Usage Analytics</h3>
-            <p class="text-gray-600">Monitor API usage, costs, and performance in real-time.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Usage Analytics</h3>
+              <p class="text-gray-600 leading-relaxed">Monitor API usage, costs, and performance metrics in real-time dashboards.</p>
+            </div>
           </div>
         </div>
 
         <!-- Feature 4 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="lock" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="lock" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Secure & Private</h3>
-            <p class="text-gray-600">Your API keys are encrypted. Data flows directly to your chosen provider.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Secure & Private</h3>
+              <p class="text-gray-600 leading-relaxed">Your API keys are encrypted at rest. Data flows directly to your providers.</p>
+            </div>
           </div>
         </div>
 
         <!-- Feature 5 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="users" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="users" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Multiple Personas</h3>
-            <p class="text-gray-600">Create specialized AI assistants for different tasks and workflows.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Custom Personas</h3>
+              <p class="text-gray-600 leading-relaxed">Create specialized AI assistants for different tasks, workflows, and use cases.</p>
+            </div>
           </div>
         </div>
 
         <!-- Feature 6 -->
-        <div class="card">
-          <div class="card-body space-y-4">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-              <i data-lucide="trending-up" class="w-6 h-6 text-orange-600"></i>
+        <div class="app-card group hover:shadow-glow-lg hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-2">
+          <div class="flex items-start gap-6">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:shadow-lg transition-all">
+              <i data-lucide="trending-up" class="w-7 h-7 text-orange-600"></i>
             </div>
-            <h3 class="text-xl font-bold font-rajdhani">Rate Limiting</h3>
-            <p class="text-gray-600">Built-in rate limits protect your account from abuse.</p>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold font-rajdhani text-gray-900 mb-2">Rate Protection</h3>
+              <p class="text-gray-600 leading-relaxed">Built-in rate limiting protects your account from excessive usage and abuse.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -98,13 +125,27 @@
   </div>
 
   <!-- CTA Section -->
-  <div class="px-6 py-20 bg-white">
-    <div class="max-w-3xl mx-auto text-center space-y-6">
-      <h2 class="text-3xl font-bold font-rajdhani">Ready to Get Started?</h2>
-      <p class="text-gray-600 text-lg">Configure your preferred LLM provider and start chatting with AI in minutes.</p>
-      <% if !user_signed_in? %>
-        <%= link_to "Create Account", new_user_registration_path, class: "btn btn-primary" %>
-      <% end %>
+  <div class="px-6 py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-30 pointer-events-none">
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-100 rounded-full blur-3xl opacity-20"></div>
+    </div>
+    
+    <div class="max-w-2xl mx-auto text-center space-y-8 relative z-10">
+      <div>
+        <h2 class="text-5xl md:text-6xl font-bold font-rajdhani text-gray-900 mb-4">Ready to Launch?</h2>
+        <p class="text-xl text-gray-600 leading-relaxed">Configure your preferred LLM provider and start building with AI in minutes. No credit card required.</p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <% if user_signed_in? %>
+          <%= link_to "Start Chatting", new_chat_session_path, class: "btn-primary px-10 py-4 text-lg font-semibold hover:shadow-glow-lg transition-all transform hover:-translate-y-1 inline-block" %>
+        <% else %>
+          <%= link_to "Create Free Account", new_user_registration_path, class: "btn-primary px-10 py-4 text-lg font-semibold hover:shadow-glow-lg transition-all transform hover:-translate-y-1 inline-block" %>
+          <%= link_to "View Demo", "#features", class: "btn-secondary px-10 py-4 text-lg font-semibold hover:border-orange-500 transition-all inline-block" %>
+        <% end %>
+      </div>
+      
+      <p class="text-sm text-gray-500 pt-4">Join hundreds of developers using Nexus AI to power their applications</p>
     </div>
   </div>
 </div>

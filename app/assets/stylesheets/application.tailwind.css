@@ -153,3 +153,48 @@ a:hover {
   border-color: var(--accent-light);
   box-shadow: 0 0 15px var(--glow-color);
 }
+
+/* Dark Theme Variants for Settings Page */
+.input-modern {
+  &.dark {
+    @apply bg-slate-800 border-slate-600 text-slate-100 placeholder-slate-400;
+  }
+
+  &.dark:focus {
+    @apply border-orange-500 bg-slate-800;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1), inset 0 0 10px rgba(249, 115, 22, 0.05);
+  }
+}
+
+.btn-primary {
+  &.dark {
+    @apply bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700;
+  }
+}
+
+.btn-secondary {
+  &.dark {
+    @apply bg-slate-700 border-slate-600 text-slate-100 hover:bg-slate-600 hover:border-orange-500;
+  }
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold uppercase tracking-wider
+         bg-red-600 text-white cursor-pointer font-rajdhani
+         hover:-translate-y-1 hover:bg-red-700 active:translate-y-0 transition-all duration-200 ease-out;
+}
+
+.btn-danger:disabled {
+  @apply opacity-50 cursor-not-allowed hover:translate-y-0;
+}
+
+.app-card {
+  &.dark {
+    @apply bg-slate-800 border-slate-700;
+  }
+
+  &.dark:hover {
+    @apply border-orange-500/50;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+  }
+}

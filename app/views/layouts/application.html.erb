@@ -18,13 +18,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
-    <!-- Minimal Futuristic Design System -->
-    <%= stylesheet_link_tag "futuristic-minimal", "data-turbo-track": "reload" %>
-    
+    <!-- Vite Assets: Tailwind CSS + JavaScript -->
     <% if respond_to?(:vite_javascript_tag) %>
-      <%= vite_javascript_tag 'application' %>
       <%= vite_stylesheet_tag 'application' %>
+      <%= vite_javascript_tag 'application' %>
     <% end %>
+    
+    <!-- Custom Overrides (if needed - loaded after Tailwind) -->
+    <!-- <div class="comment">futuristic-minimal.css disabled - using Tailwind utilities instead</div> -->
   </head>
 
   <body class="h-full flex flex-col antialiased bg-white text-black">

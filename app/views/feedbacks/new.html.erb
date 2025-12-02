@@ -1,28 +1,43 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold mb-4">Report a Problem for Chat Session: <%= @chat_session.title %></h1>
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
+  <!-- Decorative Background Elements -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+  </div>
 
-  <%= form_with(model: [@chat_session, @feedback], class: "max-w-xl mx-auto") do |f| %>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <div>
-        <%= f.label :category, class: "block text-sm font-medium text-gray-300" %>
-        <%= f.select :category, Feedback.categories.keys.map { |c| [c.humanize, c] }, {}, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
-      </div>
-      <div>
-        <%= f.label :feedback_priority, "Priority", class: "block text-sm font-medium text-gray-300" %>
-        <%= f.select :feedback_priority, Feedback.feedback_priorities.keys.map { |p| [p.humanize, p] }, {}, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
-      </div>
+  <div class="max-w-2xl mx-auto relative z-10">
+    <div class="mb-8">
+      <h1 class="text-4xl font-rajdhani font-bold text-white mb-2">Report Feedback</h1>
+      <p class="text-slate-400">Chat Session: <span class="text-orange-400 font-semibold"><%= @chat_session.title %></span></p>
     </div>
 
-    <div class="mb-4">
-      <%= f.label :message, "What went wrong or what would you like to report?", class: "block text-sm font-medium text-gray-300" %>
-      <%= f.text_area :message, rows: 5, class: "mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50", placeholder: "Please describe the issue in detail.", required: true, maxlength: Feedback::MAX_MESSAGE_LENGTH %>
-      <% if @feedback.errors[:message].any? %>
-        <p class="mt-2 text-sm text-red-500"><%= @feedback.errors[:message].join(", ") %></p>
+    <div class="app-card dark space-y-6">
+      <%= form_with(model: [@chat_session, @feedback], class: "space-y-6") do |f| %>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <%= f.label :category, class: "block text-sm font-semibold text-slate-200 mb-2" %>
+            <%= f.select :category, Feedback.categories.keys.map { |c| [c.humanize, c] }, {}, class: "input-modern dark w-full" %>
+          </div>
+          <div>
+            <%= f.label :feedback_priority, "Priority", class: "block text-sm font-semibold text-slate-200 mb-2" %>
+            <%= f.select :feedback_priority, Feedback.feedback_priorities.keys.map { |p| [p.humanize, p] }, {}, class: "input-modern dark w-full" %>
+          </div>
+        </div>
+
+        <div>
+          <%= f.label :message, "What went wrong or what would you like to report?", class: "block text-sm font-semibold text-slate-200 mb-2" %>
+          <%= f.text_area :message, rows: 6, class: "input-modern dark w-full", placeholder: "Please describe the issue in detail.", required: true, maxlength: Feedback::MAX_MESSAGE_LENGTH %>
+          <% if @feedback.errors[:message].any? %>
+            <p class="mt-2 text-sm text-red-400"><%= @feedback.errors[:message].join(", ") %></p>
+          <% end %>
+          <p class="text-xs text-slate-400 mt-2">Maximum <%= Feedback::MAX_MESSAGE_LENGTH %> characters</p>
+        </div>
+
+        <div class="flex gap-3 justify-end pt-4">
+          <%= link_to "Cancel", chat_session_path(@chat_session), class: "px-6 py-3 rounded-lg font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors duration-200" %>
+          <%= f.submit "Submit Feedback", class: "btn-primary dark" %>
+        </div>
       <% end %>
     </div>
-
-    <div class="flex justify-end">
-      <%= f.submit "Submit Feedback", class: "btn-primary" %>
-    </div>
-  <% end %>
+  </div>
 </div>
