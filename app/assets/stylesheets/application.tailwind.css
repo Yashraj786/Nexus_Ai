@@ -117,17 +117,21 @@ a:hover {
 /* Message Bubble */
 .message-bubble {
   @apply rounded-xl p-4 mb-4;
-  animation: slideIn 0.3s ease-out;
+  animation: slideIn 0.4s ease-out;
+  will-change: transform;
 }
 
 .message-bubble.user {
-  @apply bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-bright)] text-white ml-auto max-w-xs;
+  @apply bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-bright)] text-white ml-auto max-w-xs shadow-lg hover:shadow-orange-300/50 transition-all duration-200;
+  animation: slideInFromRight 0.4s ease-out;
 }
 
 .message-bubble.assistant {
-  @apply bg-[var(--bg-dark-surface)] border-2 border-[var(--border-color)] text-[var(--text-primary)] mr-auto max-w-xs;
+  @apply bg-[var(--bg-dark-surface)] border-2 border-[var(--border-color)] text-[var(--text-primary)] mr-auto max-w-xs shadow-md hover:shadow-lg transition-all duration-200;
+  animation: slideInFromLeft 0.4s ease-out;
 }
 
+/* Animations */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -137,6 +141,109 @@ a:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 107, 53, 0);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Animation utility classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.4s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-shimmer {
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 1.5s ease-in-out infinite;
 }
 
 /* Glass Morphism */
@@ -196,5 +303,130 @@ a:hover {
   &.dark:hover {
     @apply border-orange-500/50;
     box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
+  }
+}
+
+/* Loading States */
+.loading-skeleton {
+  @apply animate-pulse bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700 bg-[length:200px_100%] rounded-lg;
+  background-position: -200px 0;
+  animation: shimmer 2s infinite;
+}
+
+.loading-spinner {
+  @apply inline-block;
+  
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    border-radius: 50%;
+    border-top-color: #ff6b35;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Form States */
+.input-error {
+  @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
+}
+
+.input-success {
+  @apply border-green-500 focus:border-green-500 focus:ring-green-500/20;
+}
+
+.input-disabled {
+  @apply bg-slate-800/50 text-slate-500 cursor-not-allowed opacity-50;
+}
+
+/* Button States */
+.btn-loading {
+  @apply relative text-transparent pointer-events-none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+  }
+}
+
+/* Focus visible states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-orange-500;
+}
+
+/* Smooth transitions on all interactive elements */
+button,
+a,
+input,
+select,
+textarea,
+.app-card,
+.btn-primary,
+.btn-secondary {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+/* Error and success message animations */
+.alert-enter {
+  animation: slideIn 0.3s ease-out;
+}
+
+.alert-exit {
+  animation: fadeOut 0.3s ease-in;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Tooltip styles */
+.tooltip {
+  @apply relative;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &:hover::after {
+    opacity: 1;
   }
 }
