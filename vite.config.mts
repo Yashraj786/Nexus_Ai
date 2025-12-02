@@ -5,4 +5,7 @@ export default defineConfig({
   plugins: [
     RubyPlugin(),
   ],
+  css: {
+    postcss: './postcss.config.cjs',
+  },
 })

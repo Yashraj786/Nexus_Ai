@@ -19,16 +19,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     
     <!-- Vite Assets: Tailwind CSS + JavaScript -->
-    <% if respond_to?(:vite_javascript_tag) %>
-      <%= vite_stylesheet_tag 'application' %>
-      <%= vite_javascript_tag 'application' %>
-    <% end %>
+    <link rel="stylesheet" href="/tailwind.css">
+    <script type="module" src="http://localhost:3036/vite-dev/@vite/client"></script>
+    <script type="module" src="http://localhost:3036/vite-dev/entrypoints/application.js"></script>
     
     <!-- Custom Overrides (if needed - loaded after Tailwind) -->
     <!-- <div class="comment">futuristic-minimal.css disabled - using Tailwind utilities instead</div> -->
   </head>
 
-  <body class="h-full flex flex-col antialiased bg-white text-black">
+  <body class="h-full flex flex-col antialiased">
 
     <!-- Flash Messages (fixed at top for all states) -->
     <% flash.each do |type, msg| %>

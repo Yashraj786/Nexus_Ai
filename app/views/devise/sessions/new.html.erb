@@ -19,7 +19,7 @@
 
     <!-- Login Card -->
     <div class="app-card dark space-y-6 animate-scale-in">
-      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :vertical_form) do |f| %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         
         <!-- Error Messages -->
         <% if resource.errors.any? %>

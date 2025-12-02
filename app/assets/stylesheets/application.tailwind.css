@@ -2,19 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* White & Orange Cyberpunk Theme Variables */
+/* Dark Theme with Orange Accents */
 :root {
-  --bg-deep: #f8f8f8;
-  --bg-surface: #ffffff;
-  --bg-dark-surface: #f0f0f0;
-  --border-color: #e0e0e0;
-  --border-dark: #d0d0d0;
-  --accent-light: #ff6b35;
+  --bg-deep: #050505;
+  --bg-surface: #0a0a0a;
+  --bg-dark-surface: #121212;
+  --border-color: #27272a;
+  --border-dark: #18181b;
+  --accent-light: #00f3ff;
+  --accent-dark: #00a8ff;
   --accent-bright: #ffa86b;
-  --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --text-accent: #ff6b35;
-  --glow-color: rgba(255, 107, 53, 0.4);
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-accent: #00f3ff;
+  --glow-color: rgba(0, 243, 255, 0.5);
   --error-color: #ef4444;
   --warning-color: #f59e0b;
   --success-color: #22c55e;
@@ -50,22 +51,22 @@ a:hover {
 
 /* Sidebar Styling */
 .sidebar-glass {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(4, 4, 4, 0.7);
   backdrop-filter: blur(10px);
   border-right: 2px solid var(--border-color);
-  box-shadow: 2px 0 15px rgba(255, 107, 53, 0.08);
+  box-shadow: 2px 0 15px rgba(0, 243, 255, 0.1);
   @apply h-full overflow-y-auto;
 }
 
 /* Input Styles */
 .input-modern {
-  @apply bg-white border-2 border-[var(--border-color)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg p-3 font-inter;
+  @apply bg-transparent border-2 border-[var(--border-color)] text-[var(--text-primary)] placeholder-[var(--text-secondary)] rounded-lg p-3 font-inter;
   transition: all 0.3s ease-in-out;
 }
 
 .input-modern:focus {
-  @apply outline-none border-[var(--accent-light)] bg-white;
-  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1), inset 0 0 10px rgba(255, 107, 53, 0.05);
+  @apply outline-none border-[var(--accent-light)];
+  box-shadow: 0 0 15px var(--glow-color);
 }
 
 .input-modern:disabled {
@@ -75,30 +76,41 @@ a:hover {
 /* Action Chips */
 .action-chip {
   @apply inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider
-         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-bright)] text-white cursor-pointer font-rajdhani
-         hover:-translate-y-1 hover:shadow-glow-lg active:translate-y-0 transition-all duration-200 ease-out;
+         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-dark)] text-black cursor-pointer font-rajdhani
+         hover:-translate-y-1 hover:shadow-lg active:translate-y-0 transition-all duration-200 ease-out;
   letter-spacing: 0.8px;
+  box-shadow: 0 0 15px var(--glow-color);
 }
 
 /* Primary Button */
 .btn-primary {
   @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-bold uppercase tracking-wider
-         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-bright)] text-white cursor-pointer font-rajdhani
-         hover:-translate-y-1 hover:shadow-glow-lg active:translate-y-0 transition-all duration-200 ease-out;
+         bg-gradient-to-r from-[var(--accent-light)] to-[var(--accent-dark)] text-black cursor-pointer font-rajdhani
+         hover:-translate-y-1 active:translate-y-0 transition-all duration-200 ease-out;
   letter-spacing: 1px;
+  box-shadow: 0 0 20px var(--glow-color);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 25px var(--glow-color);
 }
 
 .btn-primary:disabled {
-  @apply opacity-50 cursor-not-allowed hover:translate-y-0 hover:shadow-none;
+  @apply opacity-50 cursor-not-allowed hover:translate-y-0;
+  box-shadow: none;
 }
 
 /* Secondary Button */
 .btn-secondary {
   @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-semibold uppercase tracking-wider
-         bg-white border-2 border-[var(--border-dark)] text-[var(--text-primary)] cursor-pointer font-rajdhani
-         hover:border-[var(--accent-light)] hover:text-[var(--text-accent)] hover:shadow-glow active:bg-[var(--bg-dark-surface)] 
+         bg-transparent border-2 border-[var(--border-color)] text-[var(--text-primary)] cursor-pointer font-rajdhani
+         hover:border-[var(--accent-light)] hover:text-[var(--text-accent)] active:bg-[var(--bg-dark-surface)] 
          transition-all duration-200 ease-out;
   letter-spacing: 0.8px;
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 0 10px var(--glow-color);
 }
 
 /* Cards */

@@ -37,7 +37,7 @@ test.describe('Responsive Design Tests', () => {
 
     test(`Login Page - ${config.name} (${config.width}x${config.height})`, async ({ page }) => {
       await page.setViewportSize({ width: config.width, height: config.height });
-      await page.goto('http://localhost:3000/users/sign_in', { waitUntil: 'networkidle' });
+      await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle' });
       
       // Check for horizontal overflow
       const bodyWidth = await page.evaluate(() => document.body.scrollWidth);
@@ -114,7 +114,7 @@ test.describe('Responsive Design Tests', () => {
 
     test('Mobile: Form inputs are keyboard accessible', async ({ page }) => {
       await page.setViewportSize({ width: 375, height: 667 });
-      await page.goto('http://localhost:3000/users/sign_in', { waitUntil: 'networkidle' });
+      await page.goto('http://localhost:3000/login', { waitUntil: 'networkidle' });
       
       const emailInput = page.locator('input[type="email"]');
       if (await emailInput.isVisible()) {
