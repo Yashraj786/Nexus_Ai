@@ -1,30 +1,33 @@
-<aside class="w-72 bg-gray-50 border-r border-gray-200 p-6 fixed left-0 top-0 h-full flex flex-col gap-6">
-  <!-- Logo -->
-  <div class="flex items-center gap-3 pb-4 border-b border-gray-200">
-    <div class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center">
-      <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
-    </div>
-    <span class="font-rajdhani text-lg font-bold tracking-wider text-black">NEXUS</span>
+<aside class="w-72 bg-gradient-to-b from-slate-800 to-slate-900 border-r border-slate-700/50 p-4 fixed left-0 top-0 h-full flex flex-col gap-4 overflow-hidden">
+  <!-- Logo Section -->
+  <div class="pb-4 border-b border-slate-700/50">
+    <a href="<%= root_path %>" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700/50 transition-colors group">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all">
+        <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+      </div>
+      <span class="font-rajdhani text-lg font-bold tracking-wider text-white">NEXUS</span>
+    </a>
   </div>
 
   <!-- New Session Button -->
-  <%= link_to new_chat_session_path, class: "btn btn-primary w-full justify-center" do %>
-    <i data-lucide="plus" class="w-4 h-4"></i>New Session
+  <%= link_to new_chat_session_path, class: "btn-primary dark w-full justify-center flex items-center gap-2 px-4 py-3" do %>
+    <i data-lucide="plus" class="w-4 h-4"></i>
+    <span>New</span>
   <% end %>
 
   <!-- Recent Sessions -->
-  <div class="flex-1 overflow-y-auto">
-    <h3 class="text-xs font-rajdhani font-bold text-gray-600 mb-3 uppercase tracking-widest">Recent Sessions</h3>
-    <div class="space-y-2">
+  <div class="flex-1 overflow-y-auto min-h-0">
+    <h3 class="text-xs font-rajdhani font-bold text-slate-400 mb-3 uppercase tracking-widest px-2">Recent</h3>
+    <div class="space-y-2 px-1">
       <% current_user.chat_sessions.order(updated_at: :desc).limit(10).each do |session| %>
-        <%= link_to chat_session_path(session), class: "group block p-3 rounded-lg bg-white border border-gray-200 hover:border-orange-600 transition-all" do %>
-          <div class="flex items-center gap-2">
-            <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-4 h-4 text-orange-600 flex-shrink-0 group-hover:text-orange-700"></i>
-            <span class="text-sm text-gray-700 truncate font-medium group-hover:text-orange-600">
+        <%= link_to chat_session_path(session), class: "group block p-3 rounded-lg bg-slate-700/40 hover:bg-slate-700/60 border border-slate-600/30 hover:border-orange-500/50 transition-all" do %>
+          <div class="flex items-center gap-2 mb-1">
+            <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-4 h-4 text-orange-500 flex-shrink-0"></i>
+            <span class="text-sm text-slate-200 truncate font-medium group-hover:text-orange-300">
               <%= session.title || "#{session.persona.try(:name) || 'Chat'}" %>
             </span>
           </div>
-          <div class="text-xs text-gray-500 mt-1 pl-6">
+          <div class="text-xs text-slate-500 pl-6">
             <%= time_ago_in_words(session.updated_at) %> ago
           </div>
         <% end %>
@@ -33,37 +36,49 @@
   </div>
 
   <!-- Navigation -->
-  <div class="space-y-2 border-t border-gray-200 pt-4">
-    <%= link_to settings_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+  <div class="space-y-1 border-t border-slate-700/50 pt-4">
+    <%= link_to home_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
+      <i data-lucide="home" class="w-4 h-4"></i>
+      Home
+    <% end %>
+    
+    <%= link_to chat_sessions_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
+      <i data-lucide="message-square" class="w-4 h-4"></i>
+      Sessions
+    <% end %>
+
+    <%= link_to settings_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
       <i data-lucide="settings" class="w-4 h-4"></i>
       Settings
     <% end %>
     
-    <%= link_to help_beta_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
+    <%= link_to help_beta_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
       <i data-lucide="info" class="w-4 h-4"></i>
-      Info
+      Help
     <% end %>
     
     <% if current_user.admin? %>
-      <%= link_to admin_dashboard_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
-        <i data-lucide="shield-alert" class="w-4 h-4"></i>
-        Admin
-      <% end %>
-      
-      <%= link_to admin_feedbacks_path, class: "flex items-center gap-2 px-3 py-2 rounded-lg text-gray-700 hover:bg-orange-100 hover:text-orange-600 transition-all font-medium text-sm" do %>
-        <i data-lucide="message-square" class="w-4 h-4"></i>
-        Feedback
-      <% end %>
+      <div class="pt-2 border-t border-slate-700/50">
+        <%= link_to admin_dashboard_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm" do %>
+          <i data-lucide="shield-alert" class="w-4 h-4"></i>
+          Admin
+        <% end %>
+        
+        <%= link_to admin_feedbacks_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm" do %>
+          <i data-lucide="message-square-warning" class="w-4 h-4"></i>
+          Feedback
+        <% end %>
+      </div>
     <% end %>
   </div>
 
   <!-- User Status & Logout -->
-  <div class="space-y-2 border-t border-gray-200 pt-4">
-    <div class="flex items-center gap-2 px-3 py-2 bg-white rounded-lg">
+  <div class="space-y-2 border-t border-slate-700/50 pt-4">
+    <div class="flex items-center gap-2 px-3 py-2 bg-slate-700/40 rounded-lg">
       <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-      <span class="text-xs font-rajdhani font-bold text-gray-600 uppercase tracking-wider">Online</span>
+      <span class="text-xs font-rajdhani font-bold text-slate-300 uppercase tracking-wider">Online</span>
     </div>
-    <%= button_to destroy_user_session_path, method: :delete, class: "w-full btn btn-outline text-red-600 hover:border-red-600 justify-center", data: { confirm: "Are you sure?" } do %>
+    <%= button_to destroy_user_session_path, method: :delete, class: "w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all font-medium text-sm", data: { confirm: "Are you sure?" } do %>
       <i data-lucide="log-out" class="w-4 h-4"></i>
       Logout
     <% end %>
