@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   get 'help/beta', to: 'help#beta'
   get 'help/case_study', to: 'help#case_study'
 
-  # Root and authentication
-    root 'pages#nexus'
-    get 'nexus', to: 'pages#nexus'
-    devise_for :users, path: '', path_names: { sign_in: :login, sign_out: :logout, sign_up: :register }
+   # Root and authentication
+     root 'pages#nexus'
+     get 'nexus', to: 'pages#nexus'
+     devise_for :users, path: '', path_names: { sign_in: :login, sign_out: :logout, sign_up: :register }
 
     # Settings for API configuration
     get 'settings', to: 'settings#show'

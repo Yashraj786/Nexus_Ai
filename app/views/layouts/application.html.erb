@@ -36,21 +36,34 @@
       </div>
     <% end %>
 
-    <div class="flex flex-1 overflow-hidden">
-      <!-- SIDEBAR (Only if logged in) -->
-      <% if user_signed_in? %>
-        <%= render "shared/sidebar" %>
-        <div class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden">
-          <main class="flex-1 bg-cyber-bg overflow-y-auto">
-            <%= yield %>
-          </main>
-        </div>
-      <% else %>
-        <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-cyber-bg overflow-y-auto">
-          <%= yield %>
-        </main>
-      <% end %>
-    </div>
+    <div class="flex flex-1 overflow-hidden" data-controller="mobile-menu">
+       <!-- SIDEBAR (Only if logged in) -->
+       <% if user_signed_in? %>
+         <%= render "shared/sidebar" %>
+         <!-- Mobile Menu Overlay (shown on small screens) -->
+         <div class="fixed inset-0 bg-black/50 hidden lg:hidden z-30 transition-opacity duration-200" data-mobile-menu-target="overlay" data-action="click->mobile-menu#close"></div>
+         <div class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden lg:ml-0">
+           <!-- Mobile Header with Menu Button -->
+           <div class="lg:hidden flex items-center justify-between bg-gradient-to-r from-slate-800 to-slate-900 border-b border-slate-700/50 p-3 z-10">
+             <button data-action="click->mobile-menu#toggle" class="p-2 rounded-lg hover:bg-slate-700/50 transition-colors" title="Toggle menu">
+               <i data-lucide="menu" class="w-6 h-6 text-orange-500"></i>
+             </button>
+             <a href="<%= root_path %>" class="flex items-center gap-2">
+               <i data-lucide="sparkles" class="w-5 h-5 text-orange-500"></i>
+               <span class="font-rajdhani text-sm font-bold text-white">NEXUS</span>
+             </a>
+             <div class="w-10"></div>
+           </div>
+           <main class="flex-1 bg-cyber-bg overflow-y-auto">
+             <%= yield %>
+           </main>
+         </div>
+       <% else %>
+         <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-cyber-bg overflow-y-auto">
+           <%= yield %>
+         </main>
+       <% end %>
+     </div>
 
     <script>
       // Initialize icons on page load and after Turbo navigation

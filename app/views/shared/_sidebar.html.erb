@@ -1,4 +1,4 @@
-<aside class="w-72 bg-gradient-to-b from-slate-800 to-slate-900 border-r border-slate-700/50 p-4 fixed left-0 top-0 h-full flex flex-col gap-4 overflow-hidden">
+<aside class="w-72 bg-gradient-to-b from-slate-800 to-slate-900 border-r border-slate-700/50 p-4 fixed left-0 top-0 h-full flex flex-col gap-4 overflow-hidden hidden lg:flex z-40" data-controller="sidebar" data-sidebar-target="menu">
   <!-- Logo Section -->
   <div class="pb-4 border-b border-slate-700/50">
     <a href="<%= root_path %>" class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-700/50 transition-colors group">
@@ -35,42 +35,42 @@
     </div>
   </div>
 
-  <!-- Navigation -->
-  <div class="space-y-1 border-t border-slate-700/50 pt-4">
-    <%= link_to root_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
-      <i data-lucide="home" class="w-4 h-4"></i>
-      Home
-    <% end %>
-    
-    <%= link_to chat_sessions_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
-      <i data-lucide="message-square" class="w-4 h-4"></i>
-      Sessions
-    <% end %>
+   <!-- Navigation -->
+   <div class="space-y-1 border-t border-slate-700/50 pt-4">
+     <%= link_to root_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+       <i data-lucide="home" class="w-4 h-4"></i>
+       Home
+     <% end %>
+     
+     <%= link_to chat_sessions_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+       <i data-lucide="message-square" class="w-4 h-4"></i>
+       Sessions
+     <% end %>
 
-    <%= link_to settings_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
-      <i data-lucide="settings" class="w-4 h-4"></i>
-      Settings
-    <% end %>
-    
-    <%= link_to help_beta_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm" do %>
-      <i data-lucide="info" class="w-4 h-4"></i>
-      Help
-    <% end %>
-    
-    <% if current_user.admin? %>
-      <div class="pt-2 border-t border-slate-700/50">
-        <%= link_to admin_dashboard_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm" do %>
-          <i data-lucide="shield-alert" class="w-4 h-4"></i>
-          Admin
-        <% end %>
-        
-        <%= link_to admin_feedbacks_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm" do %>
-          <i data-lucide="message-square-warning" class="w-4 h-4"></i>
-          Feedback
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+     <%= link_to settings_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+       <i data-lucide="settings" class="w-4 h-4"></i>
+       Settings
+     <% end %>
+     
+     <%= link_to help_beta_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700/50 hover:text-orange-400 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+       <i data-lucide="info" class="w-4 h-4"></i>
+       Help
+     <% end %>
+     
+     <% if current_user.admin? %>
+       <div class="pt-2 border-t border-slate-700/50">
+         <%= link_to admin_dashboard_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+           <i data-lucide="shield-alert" class="w-4 h-4"></i>
+           Admin
+         <% end %>
+         
+         <%= link_to admin_feedbacks_path, class: "flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-purple-700/50 hover:text-purple-300 transition-all font-medium text-sm", data: { action: "click->mobile-menu#close" } do %>
+           <i data-lucide="message-square-warning" class="w-4 h-4"></i>
+           Feedback
+         <% end %>
+       </div>
+     <% end %>
+   </div>
 
   <!-- User Status & Logout -->
   <div class="space-y-2 border-t border-slate-700/50 pt-4">
