@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 sm:py-12 px-3 sm:px-4">
   <!-- Decorative Background Elements -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden">
     <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
@@ -6,9 +6,9 @@
   </div>
 
   <div class="max-w-5xl mx-auto relative z-10">
-    <div class="text-center mb-12">
-      <h1 class="text-5xl font-rajdhani font-bold text-white mb-3">Select AI Persona</h1>
-      <p class="text-slate-400 text-lg">Choose an AI assistant to start your conversation</p>
+    <div class="text-center mb-8 sm:mb-12">
+      <h1 class="text-3xl sm:text-5xl font-rajdhani font-bold text-white mb-2 sm:mb-3">Select AI Persona</h1>
+      <p class="text-sm sm:text-lg text-slate-400">Choose an AI assistant to start your conversation</p>
     </div>
     
     <% if defined?(@personas) && @personas.present? %>

@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-8 sm:py-12 px-3 sm:px-4">
   <!-- Decorative Background Elements -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden">
     <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
@@ -7,8 +7,8 @@
 
   <div class="max-w-2xl mx-auto relative z-10">
     <div class="mb-8">
-      <h1 class="text-4xl font-rajdhani font-bold text-white mb-2">Report Feedback</h1>
-      <p class="text-slate-400">Chat Session: <span class="text-orange-400 font-semibold"><%= @chat_session.title %></span></p>
+      <h1 class="text-2xl sm:text-4xl font-rajdhani font-bold text-white mb-2">Report Feedback</h1>
+      <p class="text-xs sm:text-base text-slate-400">Chat Session: <span class="text-orange-400 font-semibold truncate"><%= @chat_session.title %></span></p>
     </div>
 
     <div class="app-card dark space-y-6">
@@ -33,8 +33,8 @@
           <p class="text-xs text-slate-400 mt-2">Maximum <%= Feedback::MAX_MESSAGE_LENGTH %> characters</p>
         </div>
 
-        <div class="flex gap-3 justify-end pt-4">
-          <%= link_to "Cancel", chat_session_path(@chat_session), class: "px-6 py-3 rounded-lg font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors duration-200" %>
+        <div class="flex flex-col sm:flex-row gap-3 justify-end pt-4">
+          <%= link_to "Cancel", chat_session_path(@chat_session), class: "px-6 py-3 rounded-lg font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors duration-200 text-center sm:text-left" %>
           <%= f.submit "Submit Feedback", class: "btn-primary dark" %>
         </div>
       <% end %>

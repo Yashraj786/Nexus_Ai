@@ -7,26 +7,41 @@
        data-clipboard-restore-url-value="<%= chat_session_url(@chat_session) %>">
 
     <!-- Header -->
-    <header class="flex-none h-16 border-b border-slate-700/50 flex items-center justify-between px-6 bg-gradient-to-r from-slate-800 to-slate-800/80 backdrop-blur-sm z-10 shadow-lg">
-      <div class="flex items-center gap-4">
+    <header class="flex-none h-16 border-b border-slate-700/50 flex items-center justify-between px-3 sm:px-6 bg-gradient-to-r from-slate-800 to-slate-800/80 backdrop-blur-sm z-10 shadow-lg">
+      <div class="flex items-center gap-2 sm:gap-4 min-w-0">
         <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
           <i data-lucide="<%= @chat_session.persona&.icon || 'message-square' %>" class="w-5 h-5 text-white"></i>
         </div>
-        <h1 class="text-xl font-rajdhani font-bold tracking-wide text-white">
+        <h1 class="text-sm sm:text-xl font-rajdhani font-bold tracking-wide text-white truncate">
           <%= @chat_session.persona&.name&.upcase || 'GENERIC CHAT' %>
         </h1>
       </div>
-      <div class="flex gap-2">
-        <button data-action="click->clipboard#copy" class="px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider bg-orange-500/20 hover:bg-orange-500/30 text-orange-200 hover:text-orange-100 transition-colors duration-200">Save</button>
-        <%= link_to "Report", new_chat_session_feedback_path(@chat_session), class: "px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200" %>
-        <button data-action="click->chat#export" class="px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200">Export</button>
-        <button data-action="app-launcher#toggle" class="px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200">Apps</button>
-        <button data-action="click->sidebar#toggle" class="lg:hidden px-3 py-2 rounded-lg text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200">Info</button>
+      <div class="flex gap-1 sm:gap-2 flex-shrink-0">
+        <button data-action="click->clipboard#copy" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-orange-500/20 hover:bg-orange-500/30 text-orange-200 hover:text-orange-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Save conversation">
+          <span class="hidden sm:inline">Save</span>
+          <i data-lucide="copy" class="w-4 h-4 sm:hidden"></i>
+        </button>
+        <%= link_to new_chat_session_feedback_path(@chat_session), class: "p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" do %>
+          <span class="hidden sm:inline">Report</span>
+          <i data-lucide="alert-circle" class="w-4 h-4 sm:hidden"></i>
+        <% end %>
+        <button data-action="click->chat#export" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Export conversation">
+          <span class="hidden sm:inline">Export</span>
+          <i data-lucide="download" class="w-4 h-4 sm:hidden"></i>
+        </button>
+        <button data-action="app-launcher#toggle" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Launch apps">
+          <span class="hidden sm:inline">Apps</span>
+          <i data-lucide="package" class="w-4 h-4 sm:hidden"></i>
+        </button>
+        <button data-action="click->sidebar#toggle" class="lg:hidden p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Toggle sidebar">
+          <span class="hidden sm:inline">Info</span>
+          <i data-lucide="sidebar" class="w-4 h-4 sm:hidden"></i>
+        </button>
       </div>
     </header>
 
     <!-- Chat Area -->
-    <div id="chat-container" class="flex-1 min-h-0 overflow-y-auto p-6 scroll-smooth space-y-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" data-chat-target="messages" data-clipboard-target="source">
+    <div id="chat-container" class="flex-1 min-h-0 overflow-y-auto p-3 sm:p-6 scroll-smooth space-y-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" data-chat-target="messages" data-clipboard-target="source">
       <!-- Decorative background -->
       <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl"></div>
@@ -53,21 +68,21 @@
     </div>
 
     <!-- Input Area -->
-    <div class="flex-none p-6 bg-gradient-to-b from-slate-800/80 to-slate-800 border-t border-slate-700/50">
-      <div data-chat-target="retryBanner" class="hidden text-center text-sm text-amber-300 mb-3 bg-amber-500/20 p-2 rounded-lg border border-amber-500/30">
+    <div class="flex-none p-3 sm:p-6 bg-gradient-to-b from-slate-800/80 to-slate-800 border-t border-slate-700/50">
+      <div data-chat-target="retryBanner" class="hidden text-center text-xs sm:text-sm text-amber-300 mb-3 bg-amber-500/20 p-2 rounded-lg border border-amber-500/30">
         The AI is taking longer than usual; retrying safely…
       </div>
       <%= form_with(model: [@chat_session, Message.new], class: "max-w-4xl mx-auto relative group", data: { action: "submit->chat#sendMessage", chat_target: "form", chat_max_length_value: Message::MAX_CONTENT_LENGTH }) do |f| %>
         
-        <div class="relative flex items-end gap-3 bg-slate-700/60 p-3 rounded-xl border border-slate-600/50 focus-within:border-orange-500/50 focus-within:shadow-lg focus-within:shadow-orange-500/20 transition-all backdrop-blur-sm">
+        <div class="relative flex items-end gap-2 sm:gap-3 bg-slate-700/60 p-2 sm:p-3 rounded-xl border border-slate-600/50 focus-within:border-orange-500/50 focus-within:shadow-lg focus-within:shadow-orange-500/20 transition-all backdrop-blur-sm">
           
           <%= f.text_area :content, rows: 1, 
               data: { chat_target: "input" },
               maxlength: Message::MAX_CONTENT_LENGTH,
-              class: "flex-1 bg-transparent border-none text-slate-100 placeholder-slate-500 p-3 min-h-[50px] max-h-[200px] resize-none focus:ring-0 text-sm font-inter",
+              class: "flex-1 bg-transparent border-none text-slate-100 placeholder-slate-500 p-2 sm:p-3 min-h-[44px] max-h-[200px] resize-none focus:ring-0 text-sm font-inter",
               placeholder: "Ask anything..." %>
               
-          <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-lg p-3 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/40 active:translate-y-0 flex-shrink-0">
+          <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-lg p-2 sm:p-3 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/40 active:translate-y-0 flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center">
             <i data-lucide="arrow-up" class="w-5 h-5"></i>
           </button>
           
