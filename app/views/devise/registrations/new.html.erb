@@ -1,112 +1,128 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center px-4 relative overflow-hidden">
-  <!-- Decorative Background Elements -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-  </div>
-
-  <div class="w-full max-w-md relative z-10">
+<div class="min-h-screen flex items-center justify-center px-4 bg-white" data-controller="password-toggle">
+  <div class="w-full max-w-md">
     <!-- Header -->
-    <div class="text-center mb-8 animate-fade-in">
-      <a href="<%= root_path %>" class="inline-block mb-6 hover:scale-110 transition-transform">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-2xl shadow-orange-500/50">
-          <i data-lucide="sparkles" class="w-8 h-8 text-white"></i>
+    <div class="text-center mb-8">
+      <a href="<%= root_path %>" class="inline-block mb-6 hover:opacity-70 transition-opacity">
+        <div class="w-12 h-12 rounded-lg bg-neutral-100 flex items-center justify-center">
+          <i data-lucide="sparkles" class="w-6 h-6 text-neutral-900"></i>
         </div>
       </a>
-      <h1 class="text-4xl font-bold font-rajdhani text-white mb-2">Create Account</h1>
-      <p class="text-slate-400">Join Nexus AI and unlock multi-model AI</p>
+      <h1 class="text-3xl font-bold text-neutral-900 mb-2">Create Account</h1>
+      <p class="text-neutral-600">Join Nexus AI and unlock multi-model AI</p>
     </div>
 
     <!-- Signup Card -->
-    <div class="app-card dark space-y-6 animate-scale-in">
+    <div class="border border-neutral-200 rounded-lg p-8 space-y-6">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <!-- Error Messages -->
-        <% if resource.errors.any? %>
-          <div class="p-4 rounded-lg bg-red-500/10 border border-red-500/30 space-y-2">
-            <p class="text-red-200 font-semibold">
-              <i data-lucide="alert-circle" class="w-4 h-4 inline mr-2"></i>
-              <%= pluralize(resource.errors.count, "error") %> prevented signup:
-            </p>
-            <ul class="list-disc list-inside text-sm text-red-100/80 space-y-1">
-              <% resource.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+         <!-- Error Messages -->
+         <% if resource.errors.any? %>
+           <div class="p-4 rounded-lg bg-red-50 border border-red-200 space-y-2">
+             <p class="text-red-900 font-semibold">
+               <i data-lucide="alert-circle" class="w-4 h-4 inline mr-2"></i>
+               <%= pluralize(resource.errors.count, "error") %> prevented signup:
+             </p>
+             <ul class="list-disc list-inside text-sm text-red-700 space-y-1">
+               <% resource.errors.full_messages.each do |message| %>
+                 <li><%= message %></li>
+               <% end %>
+             </ul>
+           </div>
+         <% end %>
 
-        <!-- Email Input -->
-        <div>
-          <%= f.label :email, "Email Address", class: "block text-sm font-semibold text-slate-200 mb-2" %>
-          <%= f.email_field :email,
-              required: true,
-              autofocus: true,
-              placeholder: "you@example.com",
-              class: "input-modern dark w-full",
-              autocomplete: "email" %>
-          <p class="text-xs text-slate-400 mt-1">We'll never share your email with anyone else.</p>
-        </div>
+         <!-- Email Input -->
+         <div>
+           <%= f.label :email, "Email Address", class: "block text-sm font-semibold text-neutral-900 mb-2" %>
+           <%= f.email_field :email,
+               required: true,
+               autofocus: true,
+               placeholder: "you@example.com",
+               class: "w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
+               autocomplete: "email" %>
+           <p class="text-xs text-neutral-600 mt-1">We'll never share your email with anyone else.</p>
+         </div>
 
-        <!-- Password Input -->
-        <div>
-          <%= f.label :password, "Password", class: "block text-sm font-semibold text-slate-200 mb-2" %>
-          <%= f.password_field :password,
-              required: true,
-              placeholder: "••••••••",
-              class: "input-modern dark w-full",
-              autocomplete: "new-password" %>
-          <% if @minimum_password_length %>
-            <p class="text-xs text-slate-400 mt-1"><%= @minimum_password_length %> characters minimum</p>
-          <% end %>
-        </div>
+         <!-- Password Input with Toggle -->
+         <div>
+           <div class="flex items-center justify-between mb-2">
+             <%= f.label :password, "Password", class: "block text-sm font-semibold text-neutral-900" %>
+           </div>
+           <div class="relative">
+             <%= f.password_field :password,
+                 required: true,
+                 placeholder: "••••••••",
+                 class: "w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
+                 autocomplete: "new-password",
+                 data: { "password-toggle-target" => "input" } %>
+             <button type="button" 
+                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors p-1" 
+                     data-action="click->password-toggle#toggle"
+                     title="Show/hide password">
+               <i data-lucide="eye" class="w-4 h-4" data-password-toggle-target="eyeIcon"></i>
+             </button>
+           </div>
+           <% if @minimum_password_length %>
+             <p class="text-xs text-neutral-600 mt-1"><%= @minimum_password_length %> characters minimum</p>
+           <% end %>
+         </div>
 
-        <!-- Password Confirmation Input -->
-        <div>
-          <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-semibold text-slate-200 mb-2" %>
-          <%= f.password_field :password_confirmation,
-              required: true,
-              placeholder: "••••••••",
-              class: "input-modern dark w-full",
-              autocomplete: "new-password" %>
-        </div>
+         <!-- Password Confirmation Input with Toggle -->
+         <div>
+           <div class="flex items-center justify-between mb-2">
+             <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-semibold text-neutral-900" %>
+           </div>
+           <div class="relative">
+             <%= f.password_field :password_confirmation,
+                 required: true,
+                 placeholder: "••••••••",
+                 class: "w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
+                 autocomplete: "new-password",
+                 data: { "password-toggle-target" => "input" } %>
+             <button type="button" 
+                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors p-1" 
+                     data-action="click->password-toggle#toggle"
+                     title="Show/hide password">
+               <i data-lucide="eye" class="w-4 h-4" data-password-toggle-target="eyeIcon"></i>
+             </button>
+           </div>
+         </div>
 
-        <!-- Terms Checkbox -->
-        <div class="flex items-start gap-3 p-3 bg-slate-700/30 rounded-lg border border-slate-600/30">
-          <input type="checkbox" id="terms_agree" class="w-4 h-4 mt-1 accent-orange-500 cursor-pointer" required>
-          <label for="terms_agree" class="text-sm text-slate-300 cursor-pointer">
-            I agree to the <a href="#" class="text-orange-400 hover:text-orange-300">Terms of Service</a> and <a href="#" class="text-orange-400 hover:text-orange-300">Privacy Policy</a>
-          </label>
-        </div>
+         <!-- Terms Checkbox -->
+         <div class="flex items-start gap-3 p-3 bg-neutral-50 rounded-lg border border-neutral-200">
+           <input type="checkbox" id="terms_agree" class="w-4 h-4 mt-1 rounded border-neutral-300 text-black focus:ring-2 focus:ring-black cursor-pointer" required>
+           <label for="terms_agree" class="text-sm text-neutral-700 cursor-pointer">
+             I agree to the <a href="#" class="text-black hover:underline font-medium">Terms of Service</a> and <a href="#" class="text-black hover:underline font-medium">Privacy Policy</a>
+           </label>
+         </div>
 
-        <!-- Submit Button -->
-        <%= f.button :submit, "Create Account", class: "w-full btn-primary dark py-3 font-semibold text-lg" %>
-      <% end %>
+         <!-- Submit Button -->
+         <%= f.button :submit, "Create Account", class: "w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-neutral-800 transition-colors" %>
+       <% end %>
 
-      <!-- Divider -->
-      <div class="relative">
-        <div class="absolute inset-0 flex items-center">
-          <div class="w-full border-t border-slate-600/50"></div>
-        </div>
-        <div class="relative flex justify-center text-sm">
-          <span class="px-3 bg-slate-800 text-slate-400">or</span>
-        </div>
-      </div>
+       <!-- Divider -->
+       <div class="relative">
+         <div class="absolute inset-0 flex items-center">
+           <div class="w-full border-t border-neutral-200"></div>
+         </div>
+         <div class="relative flex justify-center text-sm">
+           <span class="px-3 bg-white text-neutral-500">or</span>
+         </div>
+       </div>
 
-      <!-- Sign In Link -->
-      <div class="text-center">
-        <p class="text-sm text-slate-400 mb-3">Already have an account?</p>
-        <%= link_to new_session_path(resource_name), class: "btn-secondary dark w-full py-3 font-semibold" do %>
-          Sign In Instead
-        <% end %>
-      </div>
-    </div>
+       <!-- Sign In Link -->
+       <div class="text-center">
+         <p class="text-sm text-neutral-600 mb-3">Already have an account?</p>
+         <%= link_to new_session_path(resource_name), class: "block w-full px-4 py-2 border border-neutral-300 rounded-lg font-semibold text-neutral-900 hover:bg-neutral-50 transition-colors text-center" do %>
+           Sign In Instead
+         <% end %>
+       </div>
+     </div>
 
-    <!-- Back to Home Link -->
-    <div class="text-center mt-6">
-      <%= link_to root_path, class: "text-slate-400 hover:text-slate-300 text-sm flex items-center justify-center gap-2 transition-colors" do %>
-        <i data-lucide="arrow-left" class="w-4 h-4"></i>
-        Back to Home
-      <% end %>
-    </div>
-  </div>
-</div>
+     <!-- Back to Home Link -->
+     <div class="text-center mt-6">
+       <%= link_to root_path, class: "text-neutral-600 hover:text-neutral-900 text-sm flex items-center justify-center gap-2 transition-colors" do %>
+         <i data-lucide="arrow-left" class="w-4 h-4"></i>
+         Back to Home
+       <% end %>
+     </div>
+   </div>
+ </div>
