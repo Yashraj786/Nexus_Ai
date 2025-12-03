@@ -1,99 +1,71 @@
-<div class="h-full flex" data-controller="sidebar">
-  <div class="flex-1 flex flex-col"
-       data-controller="chat clipboard"
-       data-chat-session-id-value="<%= @chat_session.id %>"
-       data-clipboard-title-value="<%= @chat_session.title %>"
-       data-clipboard-persona-value="<%= @chat_session.persona&.name %>"
-       data-clipboard-restore-url-value="<%= chat_session_url(@chat_session) %>">
+<div class="h-full flex bg-white" data-controller="sidebar">
+   <div class="flex-1 flex flex-col"
+        data-controller="chat clipboard"
+        data-chat-session-id-value="<%= @chat_session.id %>"
+        data-clipboard-title-value="<%= @chat_session.title %>"
+        data-clipboard-persona-value="<%= @chat_session.persona&.name %>"
+        data-clipboard-restore-url-value="<%= chat_session_url(@chat_session) %>">
 
-    <!-- Header -->
-    <header class="flex-none h-16 border-b border-slate-700/50 flex items-center justify-between px-3 sm:px-6 bg-gradient-to-r from-slate-800 to-slate-800/80 backdrop-blur-sm z-10 shadow-lg">
-      <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-          <i data-lucide="<%= @chat_session.persona&.icon || 'message-square' %>" class="w-5 h-5 text-white"></i>
-        </div>
-        <h1 class="text-sm sm:text-xl font-rajdhani font-bold tracking-wide text-white truncate">
-          <%= @chat_session.persona&.name&.upcase || 'GENERIC CHAT' %>
-        </h1>
-      </div>
-      <div class="flex gap-1 sm:gap-2 flex-shrink-0">
-        <button data-action="click->clipboard#copy" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-orange-500/20 hover:bg-orange-500/30 text-orange-200 hover:text-orange-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Save conversation">
-          <span class="hidden sm:inline">Save</span>
-          <i data-lucide="copy" class="w-4 h-4 sm:hidden"></i>
-        </button>
-        <%= link_to new_chat_session_feedback_path(@chat_session), class: "p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" do %>
-          <span class="hidden sm:inline">Report</span>
-          <i data-lucide="alert-circle" class="w-4 h-4 sm:hidden"></i>
-        <% end %>
-        <button data-action="click->chat#export" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Export conversation">
-          <span class="hidden sm:inline">Export</span>
-          <i data-lucide="download" class="w-4 h-4 sm:hidden"></i>
-        </button>
-        <button data-action="app-launcher#toggle" class="p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Launch apps">
-          <span class="hidden sm:inline">Apps</span>
-          <i data-lucide="package" class="w-4 h-4 sm:hidden"></i>
-        </button>
-        <button data-action="click->sidebar#toggle" class="lg:hidden p-2 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 hover:text-slate-100 transition-colors duration-200 min-h-[44px] min-w-[44px] sm:min-w-auto flex items-center justify-center" title="Toggle sidebar">
-          <span class="hidden sm:inline">Info</span>
-          <i data-lucide="sidebar" class="w-4 h-4 sm:hidden"></i>
-        </button>
-      </div>
-    </header>
+     <!-- Header -->
+     <header class="flex-none h-14 border-b border-neutral-200 flex items-center justify-between px-4 sm:px-6 bg-white z-10">
+       <div class="flex items-center gap-3 min-w-0">
+         <div class="w-8 h-8 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
+           <i data-lucide="<%= @chat_session.persona&.icon || 'message-square' %>" class="w-4 h-4 text-neutral-700"></i>
+         </div>
+         <h1 class="text-sm font-semibold text-neutral-900 truncate">
+           <%= @chat_session.persona&.name || 'Chat' %>
+         </h1>
+       </div>
+       <div class="flex gap-1 flex-shrink-0">
+         <button data-action="click->clipboard#copy" class="p-2 rounded hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 transition-colors" title="Save">
+           <i data-lucide="copy" class="w-4 h-4"></i>
+         </button>
+         <%= link_to new_chat_session_feedback_path(@chat_session), class: "p-2 rounded hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 transition-colors", title: "Report" do %>
+           <i data-lucide="alert-circle" class="w-4 h-4"></i>
+         <% end %>
+         <button data-action="click->chat#export" class="p-2 rounded hover:bg-neutral-100 text-neutral-600 hover:text-neutral-900 transition-colors" title="Export">
+           <i data-lucide="download" class="w-4 h-4"></i>
+         </button>
+       </div>
+     </header>
 
-    <!-- Chat Area -->
-    <div id="chat-container" class="flex-1 min-h-0 overflow-y-auto p-3 sm:p-6 scroll-smooth space-y-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" data-chat-target="messages" data-clipboard-target="source">
-      <!-- Decorative background -->
-      <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl"></div>
-      </div>
+     <!-- Chat Area -->
+     <div id="chat-container" class="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 scroll-smooth space-y-4 bg-white" data-chat-target="messages" data-clipboard-target="source">
 
-      <% @chat_session.messages.order(:created_at).each do |msg| %>
-        <div class="message flex w-full <%= msg.user? ? 'justify-end' : 'justify-start' %> relative z-10" data-role="<%= msg.role %>" data-content="<%= msg.content %>">
-          <div class="max-w-[85%] p-4 text-sm leading-relaxed rounded-xl 
-            <%= msg.user? ? 
-              'bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg hover:shadow-orange-500/40 transition-all duration-200' : 
-              'bg-slate-700/60 border border-slate-600/50 text-slate-100 shadow-md hover:shadow-lg hover:bg-slate-700/80 transition-all duration-200 backdrop-blur-sm' %>">
-            
-            <div class="<%= msg.user? ? 'prose prose-sm max-w-none text-white prose-invert' : 'prose prose-sm max-w-none text-slate-100 prose-invert' %>">
-               <%= markdown(msg.content) %> 
-               <% if msg.sanitized? %>
-                 <span class="text-xs <%= msg.user? ? 'text-orange-100' : 'text-slate-400' %> ml-2 block mt-2 italic" title="Content was sanitized for security or formatting.">(sanitized)</span>
-               <% end %>
-            </div>
-            
-          </div>
-        </div>
-      <% end %>
-    </div>
+       <% @chat_session.messages.order(:created_at).each do |msg| %>
+         <div class="message flex w-full <%= msg.user? ? 'justify-end' : 'justify-start' %>" data-role="<%= msg.role %>" data-content="<%= msg.content %>">
+           <div class="max-w-[80%] p-3 text-sm leading-relaxed <%= msg.user? ? 'bg-black text-white rounded-2xl rounded-tr-sm' : 'bg-neutral-100 text-neutral-900 rounded-2xl rounded-tl-sm' %>">
+             <div class="<%= msg.user? ? 'prose prose-sm max-w-none text-white prose-invert' : 'prose prose-sm max-w-none text-neutral-900' %>">
+                <%= markdown(msg.content) %> 
+             </div>
+           </div>
+         </div>
+       <% end %>
+     </div>
 
-    <!-- Input Area -->
-    <div class="flex-none p-3 sm:p-6 bg-gradient-to-b from-slate-800/80 to-slate-800 border-t border-slate-700/50">
-      <div data-chat-target="retryBanner" class="hidden text-center text-xs sm:text-sm text-amber-300 mb-3 bg-amber-500/20 p-2 rounded-lg border border-amber-500/30">
-        The AI is taking longer than usual; retrying safely…
-      </div>
-      <%= form_with(model: [@chat_session, Message.new], class: "max-w-4xl mx-auto relative group", data: { action: "submit->chat#sendMessage", chat_target: "form", chat_max_length_value: Message::MAX_CONTENT_LENGTH }) do |f| %>
-        
-        <div class="relative flex items-end gap-2 sm:gap-3 bg-slate-700/60 p-2 sm:p-3 rounded-xl border border-slate-600/50 focus-within:border-orange-500/50 focus-within:shadow-lg focus-within:shadow-orange-500/20 transition-all backdrop-blur-sm">
-          
-          <%= f.text_area :content, rows: 1, 
-              data: { chat_target: "input" },
-              maxlength: Message::MAX_CONTENT_LENGTH,
-              class: "flex-1 bg-transparent border-none text-slate-100 placeholder-slate-500 p-2 sm:p-3 min-h-[44px] max-h-[200px] resize-none focus:ring-0 text-sm font-inter",
-              placeholder: "Ask anything..." %>
-              
-          <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-lg p-2 sm:p-3 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-orange-500/40 active:translate-y-0 flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center">
-            <i data-lucide="arrow-up" class="w-5 h-5"></i>
-          </button>
-          
-        </div>
-      <% end %>
-    </div>
-  </div>
+     <!-- Input Area -->
+     <div class="flex-none p-4 sm:p-6 bg-white border-t border-neutral-200">
+       <div data-chat-target="retryBanner" class="hidden text-center text-xs text-neutral-600 mb-3 bg-neutral-100 p-2 rounded">
+         The AI is processing your message...
+       </div>
+       <%= form_with(model: [@chat_session, Message.new], class: "max-w-2xl mx-auto", data: { action: "submit->chat#sendMessage", chat_target: "form", chat_max_length_value: Message::MAX_CONTENT_LENGTH }) do |f| %>
+         <div class="relative flex items-end gap-2 bg-white border border-neutral-300 p-3 rounded-lg focus-within:border-neutral-400 focus-within:ring-1 focus-within:ring-neutral-400 transition-all">
+           <%= f.text_area :content, rows: 1, 
+               data: { chat_target: "input" },
+               maxlength: Message::MAX_CONTENT_LENGTH,
+               class: "flex-1 bg-transparent border-none text-neutral-900 placeholder-neutral-400 p-2 min-h-[40px] max-h-[200px] resize-none focus:ring-0 text-sm",
+               placeholder: "Message..." %>
+           <button type="submit" class="bg-black text-white rounded p-2 hover:bg-neutral-800 transition-colors flex-shrink-0 flex items-center justify-center min-w-[40px] min-h-[40px]">
+             <i data-lucide="send" class="w-4 h-4"></i>
+           </button>
+         </div>
+       <% end %>
+     </div>
+   </div>
 
-  <div class="w-72 border-l border-slate-700/50 hidden lg:block bg-slate-800/60 backdrop-blur-sm" data-sidebar-target="sidebar">
-    <%= render "session_insights" %>
-  </div>
-</div>
+   <div class="w-64 border-l border-neutral-200 hidden lg:block bg-neutral-50" data-sidebar-target="sidebar">
+     <%= render "session_insights" %>
+   </div>
+ </div>
 
 <%= render "app_launcher_modal" %>

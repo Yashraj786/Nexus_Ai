@@ -1,28 +1,20 @@
-<div class="min-h-screen lg:ml-72 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
-  <!-- Decorative Background -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-  </div>
-
+<div class="min-h-screen lg:ml-64 bg-white flex flex-col">
   <!-- Header -->
-  <header class="border-b border-slate-700/50 px-6 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-slate-800/50 to-slate-800/30 backdrop-blur-sm relative z-10">
-    <div class="max-w-6xl mx-auto flex items-center justify-between">
+  <header class="border-b border-neutral-200 px-4 sm:px-8 py-4 sm:py-6 bg-white sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div>
-        <h1 class="text-2xl sm:text-4xl font-bold font-rajdhani text-white mb-2">My Sessions</h1>
-        <p class="text-sm sm:text-base text-slate-400">Browse and manage your AI conversations</p>
+        <h1 class="text-2xl sm:text-3xl font-bold text-neutral-900">Chats</h1>
       </div>
-      <%= link_to new_chat_session_path, class: "btn-primary dark px-6 sm:px-8 py-3 flex items-center gap-2" do %>
+      <%= link_to new_chat_session_path, class: "flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-neutral-800 transition-colors font-medium text-sm" do %>
         <i data-lucide="plus" class="w-4 h-4"></i>
-        <span class="hidden sm:inline">New Session</span>
-        <span class="sm:hidden">New</span>
+        <span>New</span>
       <% end %>
     </div>
   </header>
 
   <!-- Content Area -->
-  <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 relative z-10">
-    <div class="max-w-6xl mx-auto">
+  <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8">
+    <div class="max-w-7xl mx-auto">
       <% if current_user.feature_enabled?(:pro_session_analytics) %>
         <div class="mb-8">
           <%= render "shared/onboarding_checklist" %>
@@ -30,77 +22,48 @@
       <% end %>
 
       <% if @chat_sessions.any? %>
-        <!-- Filter/Sort Options -->
-        <div class="mb-6 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-          <div class="text-sm text-slate-400">
-            <i data-lucide="message-circle" class="w-4 h-4 inline mr-2"></i>
-            <%= @chat_sessions.count %> session<%= 's' if @chat_sessions.count != 1 %>
-          </div>
-          <!-- Sort options could be added here -->
-        </div>
+         <div class="text-sm text-neutral-500 mb-6">
+           <%= @chat_sessions.count %> chat<%= 's' if @chat_sessions.count != 1 %>
+         </div>
 
-        <!-- Sessions Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <% @chat_sessions.each do |session| %>
-            <a href="<%= chat_session_path(session) %>" class="app-card dark group cursor-pointer hover:border-orange-500/50 transition-all duration-300">
-              <!-- Header -->
-              <div class="flex items-start justify-between mb-3">
-                <div class="flex items-center gap-3 flex-1 min-w-0">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-                    <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-5 h-5 text-white"></i>
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <h3 class="font-bold text-white truncate group-hover:text-orange-400 transition-colors">
-                      <%= session.title || "Untitled Session" %>
-                    </h3>
-                  </div>
-                </div>
-                <i data-lucide="arrow-right" class="w-5 h-5 text-slate-500 group-hover:text-orange-400 transition-colors flex-shrink-0 ml-2"></i>
-              </div>
+         <!-- Sessions Grid -->
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+           <% @chat_sessions.each do |session| %>
+             <a href="<%= chat_session_path(session) %>" class="group p-4 border border-neutral-200 rounded-lg hover:border-neutral-300 hover:bg-neutral-50 transition-all cursor-pointer">
+               <div class="flex items-start justify-between mb-3">
+                 <div class="flex items-center gap-3 flex-1 min-w-0">
+                   <div class="w-8 h-8 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
+                     <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-4 h-4 text-neutral-700"></i>
+                   </div>
+                   <div class="min-w-0 flex-1">
+                     <h3 class="font-medium text-neutral-900 truncate">
+                       <%= session.title || "Untitled" %>
+                     </h3>
+                   </div>
+                 </div>
+               </div>
 
-              <!-- Metadata -->
-              <div class="space-y-2 text-sm">
-                <div class="flex items-center text-slate-400">
-                  <i data-lucide="user" class="w-4 h-4 mr-2"></i>
-                  <span><%= session.persona&.name || "General" %></span>
-                </div>
-                <div class="flex items-center text-slate-400">
-                  <i data-lucide="message-square" class="w-4 h-4 mr-2"></i>
-                  <span><%= session.messages_count || 0 %> messages</span>
-                </div>
-                <div class="flex items-center text-slate-500">
-                  <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
-                  <span>Updated <%= time_ago_in_words(session.updated_at) %> ago</span>
-                </div>
-              </div>
-
-              <!-- Status Badge -->
-              <div class="mt-4 pt-3 border-t border-slate-700/50 flex items-center justify-between">
-                <span class="inline-block px-2 py-1 rounded text-xs font-semibold 
-                  <%= session.status == 'active' ? 'bg-green-500/20 text-green-200' : 'bg-slate-700/50 text-slate-300' %>">
-                  <%= session.status.humanize %>
-                </span>
-                <span class="text-xs text-slate-500">
-                  Created <%= time_ago_in_words(session.created_at) %> ago
-                </span>
-              </div>
-            </a>
-          <% end %>
-        </div>
-      <% else %>
-        <!-- Empty State -->
-        <div class="app-card dark border border-slate-600/50 text-center py-16 sm:py-24">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/10 mb-6">
-            <i data-lucide="message-circle" class="w-8 h-8 text-orange-500"></i>
-          </div>
-          <h2 class="text-2xl font-bold text-white mb-3">No Sessions Yet</h2>
-          <p class="text-slate-400 mb-8 max-w-md mx-auto">Start your first conversation with an AI assistant. Choose a persona and begin exploring the power of multi-model AI.</p>
-          <%= link_to new_chat_session_path, class: "btn-primary dark inline-flex items-center gap-2" do %>
-            <i data-lucide="plus" class="w-4 h-4"></i>
-            Create First Session
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-  </main>
-</div>
+               <div class="text-xs text-neutral-500 space-y-1">
+                 <div><%= session.persona&.name || "General" %> • <%= session.messages_count || 0 %> messages</div>
+                 <div>Updated <%= time_ago_in_words(session.updated_at) %> ago</div>
+               </div>
+             </a>
+           <% end %>
+         </div>
+       <% else %>
+         <!-- Empty State -->
+         <div class="text-center py-16">
+           <div class="inline-flex items-center justify-center w-14 h-14 bg-neutral-100 rounded-full mb-4">
+             <i data-lucide="message-circle" class="w-7 h-7 text-neutral-400"></i>
+           </div>
+           <h2 class="text-xl font-semibold text-neutral-900 mb-2">No chats yet</h2>
+           <p class="text-neutral-600 mb-6">Start your first conversation with an AI assistant.</p>
+           <%= link_to new_chat_session_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-black text-white rounded hover:bg-neutral-800 transition-colors font-medium text-sm" do %>
+             <i data-lucide="plus" class="w-4 h-4"></i>
+             Create Chat
+           <% end %>
+         </div>
+       <% end %>
+     </div>
+   </main>
+ </div>

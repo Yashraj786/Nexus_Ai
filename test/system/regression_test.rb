@@ -14,10 +14,10 @@ class RegressionTest < ApplicationSystemTestCase
     assert_text "Select AI Persona"
     click_button "developer"
 
-    assert_text "DEVELOPER"
+    assert_text "Developer"
 
     # Fill in the message input and submit
-    fill_in placeholder: "Ask anything...", with: "Hello AI"
+    fill_in placeholder: "Message...", with: "Hello AI"
     
     # Submit the form using JavaScript since Stimulus might intercept the submit
     page.execute_script("document.querySelector('[data-chat-target=\"form\"]').submit()")
@@ -26,12 +26,12 @@ class RegressionTest < ApplicationSystemTestCase
     sleep 2
     
     # Page should still be on the chat page
-    assert_text "DEVELOPER"
+    assert_text "Developer"
   end
 
   test "feedback submission and reporting" do
     visit chat_session_url(chat_sessions(:one))
-    click_link "Report"
+    find('a[title="Report"]').click
 
     assert_text "Report Feedback"
     select "Bug", from: "Category"

@@ -32,7 +32,7 @@ class NPlusOneTest < ApplicationSystemTestCase
 
     visit chat_sessions_url
     # Verify the page loaded with no N+1 queries (Bullet.raise would have failed if there were)
-    assert_text "My Sessions"
+    assert_text "Chats"
   end
 
   test "no N+1 queries when loading a chat session show page" do
