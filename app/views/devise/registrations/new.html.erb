@@ -43,20 +43,19 @@
 
          <!-- Password Input with Toggle -->
          <div>
-           <div class="flex items-center justify-between mb-2">
-             <%= f.label :password, "Password", class: "block text-sm font-semibold text-neutral-900" %>
-           </div>
+           <label class="block text-sm font-semibold text-neutral-900 mb-2">Password</label>
            <div class="relative">
              <%= f.password_field :password,
                  required: true,
                  placeholder: "••••••••",
-                 class: "w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
+                 class: "w-full px-3 py-2 pr-10 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
                  autocomplete: "new-password",
-                 data: { "password-toggle-target" => "input" } %>
+                 data: { password_toggle_target: "input" } %>
              <button type="button" 
-                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors p-1" 
+                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors flex items-center justify-center" 
                      data-action="click->password-toggle#toggle"
-                     title="Show/hide password">
+                     title="Show/hide password"
+                     tabindex="-1">
                <i data-lucide="eye" class="w-4 h-4" data-password-toggle-target="eyeIcon"></i>
              </button>
            </div>
@@ -67,20 +66,19 @@
 
          <!-- Password Confirmation Input with Toggle -->
          <div>
-           <div class="flex items-center justify-between mb-2">
-             <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-semibold text-neutral-900" %>
-           </div>
+           <label class="block text-sm font-semibold text-neutral-900 mb-2">Confirm Password</label>
            <div class="relative">
              <%= f.password_field :password_confirmation,
                  required: true,
                  placeholder: "••••••••",
-                 class: "w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
+                 class: "w-full px-3 py-2 pr-10 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-0 text-neutral-900 placeholder-neutral-400",
                  autocomplete: "new-password",
-                 data: { "password-toggle-target" => "input" } %>
+                 data: { password_toggle_target: "input" } %>
              <button type="button" 
-                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors p-1" 
+                     class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700 transition-colors flex items-center justify-center" 
                      data-action="click->password-toggle#toggle"
-                     title="Show/hide password">
+                     title="Show/hide password"
+                     tabindex="-1">
                <i data-lucide="eye" class="w-4 h-4" data-password-toggle-target="eyeIcon"></i>
              </button>
            </div>
