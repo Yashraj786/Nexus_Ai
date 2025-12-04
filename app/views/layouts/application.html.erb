@@ -39,31 +39,44 @@
     <div class="flex flex-1 overflow-hidden" data-controller="mobile-menu">
        <!-- SIDEBAR (Only if logged in) -->
        <% if user_signed_in? %>
-         <%= render "shared/sidebar" %>
-         <!-- Mobile Menu Overlay (shown on small screens) -->
-         <div class="fixed inset-0 bg-black/30 hidden lg:hidden z-30 transition-opacity duration-200" data-mobile-menu-target="overlay" data-action="click->mobile-menu#close"></div>
-         <div class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden lg:ml-0">
-           <!-- Mobile Header with Menu Button -->
-           <div class="lg:hidden flex items-center justify-between bg-white border-b border-neutral-200 p-3 z-10">
-             <button data-action="click->mobile-menu#toggle" class="p-2 rounded hover:bg-neutral-100 transition-colors" title="Toggle menu">
-               <i data-lucide="menu" class="w-5 h-5 text-neutral-900"></i>
-             </button>
-             <a href="<%= root_path %>" class="flex items-center gap-2">
-               <i data-lucide="sparkles" class="w-4 h-4 text-neutral-900"></i>
-               <span class="text-sm font-semibold text-neutral-900">Nexus</span>
-             </a>
-             <div class="w-10"></div>
-           </div>
-           <main class="flex-1 bg-white overflow-y-auto">
-             <%= yield %>
-           </main>
-         </div>
-       <% else %>
-         <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-white overflow-y-auto">
-           <%= yield %>
-         </main>
-       <% end %>
-     </div>
+          <%= render "shared/sidebar" %>
+          <!-- Mobile Menu Overlay (shown on small screens) -->
+          <div class="fixed inset-0 bg-black/30 hidden lg:hidden z-30 transition-opacity duration-200" data-mobile-menu-target="overlay" data-action="click->mobile-menu#close"></div>
+          <div class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden lg:ml-0">
+            <!-- Mobile Header with Menu Button -->
+            <div class="lg:hidden flex items-center justify-between bg-white border-b border-neutral-200 p-3 z-10">
+              <button data-action="click->mobile-menu#toggle" class="p-2 rounded hover:bg-neutral-100 transition-colors" title="Toggle menu">
+                <i data-lucide="menu" class="w-5 h-5 text-neutral-900"></i>
+              </button>
+              <a href="<%= root_path %>" class="flex items-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4 text-neutral-900"></i>
+                <span class="text-sm font-semibold text-neutral-900">Nexus</span>
+              </a>
+              <div class="w-10"></div>
+            </div>
+            <main class="flex-1 bg-white overflow-y-auto">
+              <%= yield %>
+            </main>
+          </div>
+        <% else %>
+          <!-- Top Navigation Bar for Unauthenticated Users -->
+          <div class="flex-none h-16 bg-white border-b border-neutral-200 flex items-center justify-between px-6 z-50">
+            <a href="<%= root_path %>" class="flex items-center gap-2">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+                <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+              </div>
+              <span class="font-bold text-neutral-900">Nexus AI</span>
+            </a>
+            <div class="flex items-center gap-3">
+              <%= link_to "Sign In", new_user_session_path, class: "px-4 py-2 text-neutral-900 hover:text-orange-600 font-medium transition-colors" %>
+              <%= link_to "Sign Up", new_user_registration_path, class: "px-4 py-2 bg-black text-white rounded-lg hover:bg-neutral-800 font-medium transition-colors" %>
+            </div>
+          </div>
+          <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-white overflow-y-auto">
+            <%= yield %>
+          </main>
+        <% end %>
+      </div>
 
     <script>
       // Initialize icons on page load and after Turbo navigation
