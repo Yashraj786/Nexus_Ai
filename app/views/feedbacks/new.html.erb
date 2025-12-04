@@ -11,8 +11,9 @@
       <p class="text-xs sm:text-base text-slate-400">Chat Session: <span class="text-orange-400 font-semibold truncate"><%= @chat_session.title %></span></p>
     </div>
 
-    <div class="app-card dark space-y-6">
-      <%= form_with(model: [@chat_session, @feedback], class: "space-y-6") do |f| %>
+     <div class="app-card dark space-y-6">
+       <div id="feedback-form-errors" class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"></div>
+       <%= form_with(model: [@chat_session, @feedback], id: "feedback-form", class: "space-y-6", local: true) do |f| %>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <%= f.label :category, class: "block text-sm font-semibold text-slate-200 mb-2" %>
@@ -33,10 +34,10 @@
           <p class="text-xs text-slate-400 mt-2">Maximum <%= Feedback::MAX_MESSAGE_LENGTH %> characters</p>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-3 justify-end pt-4">
-          <%= link_to "Cancel", chat_session_path(@chat_session), class: "px-6 py-3 rounded-lg font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors duration-200 text-center sm:text-left" %>
-          <%= f.submit "Submit Feedback", class: "btn-primary dark" %>
-        </div>
+         <div class="flex flex-col sm:flex-row gap-3 justify-end pt-4">
+           <%= link_to "Cancel", chat_session_path(@chat_session), class: "px-6 py-3 rounded-lg font-semibold uppercase tracking-wider bg-slate-700 hover:bg-slate-600 text-slate-200 transition-colors duration-200 text-center sm:text-left" %>
+           <%= f.submit "Submit Feedback", class: "btn-primary dark", id: "submit-feedback-btn" %>
+         </div>
       <% end %>
     </div>
   </div>

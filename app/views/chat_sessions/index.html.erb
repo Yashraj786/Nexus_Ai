@@ -12,9 +12,9 @@
     </div>
   </header>
 
-  <!-- Content Area -->
-  <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8">
-    <div class="max-w-7xl mx-auto">
+   <!-- Content Area -->
+   <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8" id="chat-sessions-main" data-controller="chat-sessions-list">
+     <div class="max-w-7xl mx-auto">
       <% if current_user.feature_enabled?(:pro_session_analytics) %>
         <div class="mb-8">
           <%= render "shared/onboarding_checklist" %>

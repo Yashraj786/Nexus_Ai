@@ -1,4 +1,5 @@
 import "@hotwired/turbo-rails"
-import "../../../app/assets/stylesheets/application.tailwind.css"
+import "../../../app/frontend/entrypoints/controllers"
+import "../../../app/frontend/entrypoints/tailwind.css"
 
-console.log('Vite ⚡️ Ruby - Tailwind CSS loaded')
+console.log('Vite ⚡️ Ruby loaded')

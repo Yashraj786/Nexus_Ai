@@ -17,3 +17,6 @@ application.register("onboarding", OnboardingController)
 
 import SidebarController from "./sidebar_controller"
 application.register("sidebar", SidebarController)
+
+import SettingsController from "./settings_controller"
+application.register("settings", SettingsController)

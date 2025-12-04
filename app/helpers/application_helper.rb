@@ -7,6 +7,7 @@ module ApplicationHelper
   def markdown(text)
     return "" if text.blank?
 
+    # Security: filter_html removes HTML tags to prevent XSS attacks
     options = {
       filter_html: true,
       hard_wrap: true,

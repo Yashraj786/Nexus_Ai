@@ -27,18 +27,24 @@ export default class extends Controller {
     });
 
     navigator.clipboard.writeText(markdownContent).then(() => {
-      const originalText = button.textContent;
-      button.textContent = "Copied!";
-      setTimeout(() => {
-        button.textContent = originalText;
-      }, 2000);
+      this.showToast('✓ Copied to clipboard!', 'success');
       window.open('https://keep.google.com/', '_blank');
     }).catch(err => {
       console.error('Failed to copy text: ', err);
-      button.textContent = "Failed to copy!";
-      setTimeout(() => {
-        button.textContent = originalText;
-      }, 2000);
+      this.showToast('✗ Failed to copy', 'error');
     });
+  }
+
+  showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+    toast.className = `fixed bottom-4 right-4 ${bgColor} text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-opacity duration-300`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
   }
 }

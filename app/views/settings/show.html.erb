@@ -1,38 +1,32 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-  <!-- Decorative Background Elements -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-  </div>
-
-  <div class="max-w-4xl mx-auto px-6 py-12 relative z-10">
+<div class="min-h-screen bg-white">
+  <div class="max-w-4xl mx-auto px-6 py-12">
     <!-- Header -->
     <div class="mb-12">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center flex-shrink-0">
-            <i data-lucide="settings" class="w-6 h-6 text-white"></i>
+            <i data-lucide="settings" class="w-6 h-6 text-neutral-900"></i>
           </div>
-          <h1 class="text-2xl sm:text-4xl font-bold font-rajdhani tracking-wider text-white">SETTINGS</h1>
+          <h1 class="text-2xl sm:text-4xl font-bold font-rajdhani tracking-wider text-neutral-900">SETTINGS</h1>
         </div>
-        <%= link_to root_path, class: "flex items-center justify-center sm:justify-start gap-2 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white transition-colors duration-200 w-full sm:w-auto" do %>
+         <%= link_to root_path, class: "flex items-center justify-center sm:justify-start gap-2 px-4 py-2 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-900 transition-colors duration-200 w-full sm:w-auto" do %>
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Back</span>
           <span class="sm:hidden">Home</span>
         <% end %>
       </div>
-      <p class="text-slate-400 text-sm sm:text-base">Configure your AI providers and manage your account</p>
+      <p class="text-neutral-600 text-sm sm:text-base">Configure your AI providers and manage your account</p>
     </div>
 
     <!-- Primary API Configuration -->
-    <div class="app-card mb-8">
+    <div class="app-card mb-8" data-controller="settings">
       <div class="space-y-6">
         <div>
           <div class="flex items-center gap-2 mb-2">
             <i data-lucide="key" class="w-6 h-6 text-orange-500"></i>
-            <h2 class="text-2xl font-bold font-rajdhani text-white">Primary Provider</h2>
+            <h2 class="text-2xl font-bold font-rajdhani text-neutral-900">Primary Provider</h2>
           </div>
-          <p class="text-slate-400 text-sm ml-8">Your main LLM provider for all conversations</p>
+          <p class="text-neutral-600 text-sm ml-8">Your main LLM provider for all conversations</p>
         </div>
 
         <% if @api_configured %>
@@ -43,7 +37,7 @@
             </div>
             <div class="text-sm text-green-100 space-y-1 ml-7">
               <p><strong>Provider:</strong> <span class="inline-block px-2 py-1 rounded bg-green-600/40 text-green-100"><%= @user.api_provider.upcase %></span></p>
-              <p><strong>Model:</strong> <code class="text-xs bg-slate-700/50 px-2 py-1 rounded"><%= @user.api_model_name %></code></p>
+              <p><strong>Model:</strong> <code class="text-xs bg-neutral-100/50 px-2 py-1 rounded"><%= @user.api_model_name %></code></p>
               <p><strong>Configured:</strong> <%= @user.api_configured_at.strftime("%B %d, %Y") %></p>
             </div>
           </div>
@@ -57,12 +51,13 @@
           </div>
         <% end %>
 
-        <form action="<%= settings_update_api_key_path %>" method="POST" class="space-y-4">
-          <input type="hidden" name="_method" value="PATCH">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+         <div id="api-form-errors" class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"></div>
+         <form id="api-settings-form" action="<%= settings_update_api_key_path %>" method="POST" class="space-y-4">
+           <input type="hidden" name="_method" value="PATCH">
+           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               API Provider <span class="text-orange-500">*</span>
             </label>
             <select name="user[api_provider]" class="input-modern dark w-full" required>
@@ -73,36 +68,46 @@
               <option value="ollama" <%= 'selected' if @user.api_provider == 'ollama' %>>Ollama (Local)</option>
               <option value="custom" <%= 'selected' if @user.api_provider == 'custom' %>>Custom API</option>
             </select>
-            <p class="text-xs text-slate-400 mt-1">Choose your preferred LLM provider</p>
+            <p class="text-xs text-neutral-600 mt-1">Choose your preferred LLM provider</p>
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               Model Name <span class="text-orange-500">*</span>
             </label>
             <input type="text" name="user[api_model_name]" placeholder="e.g., gpt-4, claude-3-opus-20240229, gemini-1.5-flash" 
               value="<%= @user.api_model_name %>" class="input-modern dark w-full" required />
-            <p class="text-xs text-slate-400 mt-1">The specific model variant to use</p>
+            <p class="text-xs text-neutral-600 mt-1">The specific model variant to use</p>
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               API Key <span class="text-orange-500">*</span>
             </label>
             <input type="password" name="user[encrypted_api_key]" placeholder="Your API key (leave blank to keep current)" 
               class="input-modern dark w-full" />
-            <p class="text-xs text-slate-400 mt-1">Keys are encrypted and never logged</p>
+            <p class="text-xs text-neutral-600 mt-1">Keys are encrypted and never logged</p>
           </div>
 
-          <div class="flex gap-3 pt-4">
-            <button type="submit" class="btn-primary dark">
-              <i data-lucide="save" class="w-4 h-4"></i>
-              Save Configuration
-            </button>
-            <button type="button" class="btn-secondary dark" onclick="testConnection(event)">
-              <i data-lucide="zap" class="w-4 h-4"></i>
-              Test Connection
-            </button>
+           <div class="flex gap-3 pt-4">
+             <button type="submit" class="btn-primary dark" id="save-api-btn">
+               <i data-lucide="save" class="w-4 h-4"></i>
+               <span id="save-api-text">Save Configuration</span>
+               <span id="save-api-spinner" class="hidden">
+                 <svg class="animate-spin h-4 w-4 ml-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                 </svg>
+               </span>
+             </button>
+             <button type="button"
+                     class="btn-secondary dark"
+                     data-settings-target="testButton"
+                     data-action="click->settings#testApi"
+                     data-test-url="<%= settings_test_api_path %>">
+               <i data-lucide="zap" class="w-4 h-4"></i>
+               <span>Test Connection</span>
+             </button>
             <% if @api_configured %>
               <%= button_to settings_clear_api_key_path, method: :delete, class: "btn-danger", 
                 data: { confirm: "This will disable your API configuration. Continue?" } do %>
@@ -114,22 +119,22 @@
         </form>
 
         <!-- Setup Guides -->
-        <div class="bg-slate-700/30 border border-slate-600/50 rounded-lg p-4 space-y-3">
-          <h4 class="font-bold text-sm uppercase tracking-wide text-slate-200">Provider Setup Guides</h4>
+        <div class="bg-neutral-100/30 border border-neutral-300/50 rounded-lg p-4 space-y-3">
+          <h4 class="font-bold text-sm uppercase tracking-wide text-neutral-800">Provider Setup Guides</h4>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-            <a href="https://platform.openai.com/account/api-keys" target="_blank" class="flex items-center gap-2 p-3 bg-slate-700/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
+            <a href="https://platform.openai.com/account/api-keys" target="_blank" class="flex items-center gap-2 p-3 bg-neutral-100/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
               <i data-lucide="external-link" class="w-4 h-4 text-orange-500"></i>
               <span>OpenAI API Keys</span>
             </a>
-            <a href="https://console.anthropic.com/" target="_blank" class="flex items-center gap-2 p-3 bg-slate-700/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
+            <a href="https://console.anthropic.com/" target="_blank" class="flex items-center gap-2 p-3 bg-neutral-100/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
               <i data-lucide="external-link" class="w-4 h-4 text-orange-500"></i>
               <span>Anthropic Console</span>
             </a>
-            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="flex items-center gap-2 p-3 bg-slate-700/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="flex items-center gap-2 p-3 bg-neutral-100/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
               <i data-lucide="external-link" class="w-4 h-4 text-orange-500"></i>
               <span>Google AI Studio</span>
             </a>
-            <a href="https://ollama.ai" target="_blank" class="flex items-center gap-2 p-3 bg-slate-700/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
+            <a href="https://ollama.ai" target="_blank" class="flex items-center gap-2 p-3 bg-neutral-100/40 hover:bg-slate-600/40 rounded-lg transition-colors text-slate-300 hover:text-slate-100">
               <i data-lucide="external-link" class="w-4 h-4 text-orange-500"></i>
               <span>Ollama Setup</span>
             </a>
@@ -144,9 +149,9 @@
         <div>
           <div class="flex items-center gap-2 mb-2">
             <i data-lucide="shield-check" class="w-6 h-6 text-blue-500"></i>
-            <h2 class="text-2xl font-bold font-rajdhani text-white">Fallback Provider</h2>
+            <h2 class="text-2xl font-bold font-rajdhani text-neutral-900">Fallback Provider</h2>
           </div>
-          <p class="text-slate-400 text-sm ml-8">Automatic failover when primary provider fails</p>
+          <p class="text-neutral-600 text-sm ml-8">Automatic failover when primary provider fails</p>
         </div>
 
         <% if @fallback_configured %>
@@ -157,7 +162,7 @@
             </div>
             <div class="text-sm text-blue-100 space-y-1 ml-7">
               <p><strong>Provider:</strong> <span class="inline-block px-2 py-1 rounded bg-blue-600/40 text-blue-100"><%= @user.fallback_provider.upcase %></span></p>
-              <p><strong>Model:</strong> <code class="text-xs bg-slate-700/50 px-2 py-1 rounded"><%= @user.fallback_model_name %></code></p>
+              <p><strong>Model:</strong> <code class="text-xs bg-neutral-100/50 px-2 py-1 rounded"><%= @user.fallback_model_name %></code></p>
             </div>
           </div>
         <% else %>
@@ -170,12 +175,13 @@
           </div>
         <% end %>
 
-        <form action="<%= settings_update_fallback_provider_path %>" method="POST" class="space-y-4">
-          <input type="hidden" name="_method" value="PATCH">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+         <div id="fallback-form-errors" class="hidden mb-4 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm dark:bg-red-900/20 dark:border-red-800 dark:text-red-400"></div>
+         <form id="fallback-settings-form" action="<%= settings_update_fallback_provider_path %>" method="POST" class="space-y-4">
+           <input type="hidden" name="_method" value="PATCH">
+           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               Fallback Provider
             </label>
             <select name="user[fallback_provider]" class="input-modern dark w-full">
@@ -189,7 +195,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               Fallback Model
             </label>
             <input type="text" name="user[fallback_model_name]" placeholder="e.g., gpt-3.5-turbo" 
@@ -197,27 +203,33 @@
           </div>
 
           <div>
-            <label class="block text-sm font-semibold text-slate-200 mb-2">
+            <label class="block text-sm font-semibold text-neutral-800 mb-2">
               Fallback API Key
             </label>
             <input type="password" name="user[encrypted_fallback_api_key]" placeholder="Leave blank to keep current" 
               class="input-modern dark w-full" />
           </div>
 
-          <div class="flex gap-3 pt-4">
-            <button type="submit" class="btn-primary dark">
-              <i data-lucide="save" class="w-4 h-4"></i>
-              Save Fallback
-            </button>
-            <% if @fallback_configured %>
-              <%= button_to settings_clear_fallback_provider_path, method: :delete, class: "btn-danger",
-                data: { confirm: "Remove fallback provider?" } do %>
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-                Clear Fallback
-              <% end %>
-            <% end %>
-          </div>
-        </form>
+           <div class="flex gap-3 pt-4">
+             <button type="submit" class="btn-primary dark" id="save-fallback-btn">
+               <i data-lucide="save" class="w-4 h-4"></i>
+               <span id="save-fallback-text">Save Fallback</span>
+               <span id="save-fallback-spinner" class="hidden">
+                 <svg class="animate-spin h-4 w-4 ml-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                   <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                 </svg>
+               </span>
+             </button>
+             <% if @fallback_configured %>
+               <%= button_to settings_clear_fallback_provider_path, method: :delete, class: "btn-danger",
+                 data: { confirm: "Remove fallback provider?" } do %>
+                 <i data-lucide="trash-2" class="w-4 h-4"></i>
+                 Clear Fallback
+               <% end %>
+             <% end %>
+           </div>
+         </form>
       </div>
     </div>
 
@@ -226,37 +238,37 @@
       <div class="space-y-6">
         <div class="flex items-center gap-2">
           <i data-lucide="bar-chart-2" class="w-6 h-6 text-purple-500"></i>
-          <h2 class="text-2xl font-bold font-rajdhani text-white">Usage Analytics</h2>
+          <h2 class="text-2xl font-bold font-rajdhani text-neutral-900">Usage Analytics</h2>
         </div>
 
         <% if @usage_stats[:total_requests] > 0 %>
           <!-- Statistics Grid -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="p-4 rounded-lg bg-slate-700/40 border border-slate-600/50 space-y-1">
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Total Requests</div>
+            <div class="p-4 rounded-lg bg-neutral-100/40 border border-neutral-300/50 space-y-1">
+              <div class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">Total Requests</div>
               <div class="text-3xl font-bold text-orange-500"><%= @usage_stats[:total_requests] %></div>
             </div>
-            <div class="p-4 rounded-lg bg-slate-700/40 border border-slate-600/50 space-y-1">
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Success Rate</div>
+            <div class="p-4 rounded-lg bg-neutral-100/40 border border-neutral-300/50 space-y-1">
+              <div class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">Success Rate</div>
               <div class="text-3xl font-bold text-green-500"><%= @usage_stats[:success_rate] %>%</div>
             </div>
-            <div class="p-4 rounded-lg bg-slate-700/40 border border-slate-600/50 space-y-1">
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Total Tokens</div>
+            <div class="p-4 rounded-lg bg-neutral-100/40 border border-neutral-300/50 space-y-1">
+              <div class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">Total Tokens</div>
               <div class="text-3xl font-bold text-blue-500"><%= number_with_delimiter(@usage_stats[:total_tokens_used]) %></div>
             </div>
-            <div class="p-4 rounded-lg bg-slate-700/40 border border-slate-600/50 space-y-1">
-              <div class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Today</div>
+            <div class="p-4 rounded-lg bg-neutral-100/40 border border-neutral-300/50 space-y-1">
+              <div class="text-xs font-semibold text-neutral-600 uppercase tracking-wide">Today</div>
               <div class="text-3xl font-bold text-purple-500"><%= @today_stats[:requests_today] %></div>
             </div>
           </div>
 
           <!-- Recent API Calls -->
           <div>
-            <h3 class="font-bold text-slate-200 mb-4">Recent Calls (Last 10)</h3>
+            <h3 class="font-bold text-neutral-800 mb-4">Recent Calls (Last 10)</h3>
             <div class="overflow-x-auto">
               <table class="w-full text-sm">
                 <thead>
-                  <tr class="border-b border-slate-600/50">
+                  <tr class="border-b border-neutral-300/50">
                     <th class="text-left px-4 py-3 text-slate-300 font-semibold">Provider</th>
                     <th class="text-left px-4 py-3 text-slate-300 font-semibold">Model</th>
                     <th class="text-left px-4 py-3 text-slate-300 font-semibold">Status</th>
@@ -266,9 +278,9 @@
                 </thead>
                 <tbody>
                   <% @recent_logs.each do |log| %>
-                    <tr class="border-b border-slate-700/50 hover:bg-slate-700/20 transition-colors">
+                    <tr class="border-b border-neutral-200/50 hover:bg-neutral-50 transition-colors">
                       <td class="px-4 py-3"><span class="inline-block px-2 py-1 rounded bg-orange-600/40 text-orange-200 text-xs font-semibold"><%= log.provider.upcase %></span></td>
-                      <td class="px-4 py-3"><code class="text-xs bg-slate-700/50 px-2 py-1 rounded text-slate-300"><%= log.model %></code></td>
+                      <td class="px-4 py-3"><code class="text-xs bg-neutral-100/50 px-2 py-1 rounded text-slate-300"><%= log.model %></code></td>
                       <td class="px-4 py-3">
                         <% case log.status %>
                         <% when 'success' %>
@@ -279,8 +291,8 @@
                           <span class="inline-block px-2 py-1 rounded bg-red-600/40 text-red-200 text-xs font-semibold"><%= log.status.titleize %></span>
                         <% end %>
                       </td>
-                      <td class="px-4 py-3 text-slate-400"><%= log.total_tokens || '—' %></td>
-                      <td class="px-4 py-3 text-slate-400"><%= time_ago_in_words(log.created_at) %> ago</td>
+                      <td class="px-4 py-3 text-neutral-600"><%= log.total_tokens || '—' %></td>
+                      <td class="px-4 py-3 text-neutral-600"><%= time_ago_in_words(log.created_at) %> ago</td>
                     </tr>
                   <% end %>
                 </tbody>
@@ -304,19 +316,19 @@
       <div class="space-y-6">
         <div class="flex items-center gap-2">
           <i data-lucide="zap" class="w-6 h-6 text-yellow-500"></i>
-          <h2 class="text-2xl font-bold font-rajdhani text-white">Rate Limits</h2>
+          <h2 class="text-2xl font-bold font-rajdhani text-neutral-900">Rate Limits</h2>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Per Minute -->
           <div class="space-y-3">
-            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wide">Per Minute</h3>
+            <h3 class="font-bold text-sm text-neutral-800 uppercase tracking-wide">Per Minute</h3>
             <div class="space-y-3">
-              <div class="w-full h-2 bg-slate-700/50 rounded-full overflow-hidden">
+              <div class="w-full h-2 bg-neutral-100/50 rounded-full overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-orange-500 to-orange-400 transition-all duration-300" style="width: <%= (@rate_limits[:minute][:used].to_f / @rate_limits[:minute][:limit] * 100).to_i %>%"></div>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-400"><%= @rate_limits[:minute][:used] %> / <%= @rate_limits[:minute][:limit] %></span>
+                <span class="text-neutral-600"><%= @rate_limits[:minute][:used] %> / <%= @rate_limits[:minute][:limit] %></span>
                 <span class="text-green-400 font-bold"><%= @rate_limits[:minute][:remaining] %> left</span>
               </div>
             </div>
@@ -324,13 +336,13 @@
 
           <!-- Per Hour -->
           <div class="space-y-3">
-            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wide">Per Hour</h3>
+            <h3 class="font-bold text-sm text-neutral-800 uppercase tracking-wide">Per Hour</h3>
             <div class="space-y-3">
-              <div class="w-full h-2 bg-slate-700/50 rounded-full overflow-hidden">
+              <div class="w-full h-2 bg-neutral-100/50 rounded-full overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 transition-all duration-300" style="width: <%= (@rate_limits[:hour][:used].to_f / @rate_limits[:hour][:limit] * 100).to_i %>%"></div>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-400"><%= @rate_limits[:hour][:used] %> / <%= @rate_limits[:hour][:limit] %></span>
+                <span class="text-neutral-600"><%= @rate_limits[:hour][:used] %> / <%= @rate_limits[:hour][:limit] %></span>
                 <span class="text-green-400 font-bold"><%= @rate_limits[:hour][:remaining] %> left</span>
               </div>
             </div>
@@ -338,13 +350,13 @@
 
           <!-- Per Day -->
           <div class="space-y-3">
-            <h3 class="font-bold text-sm text-slate-200 uppercase tracking-wide">Per Day</h3>
+            <h3 class="font-bold text-sm text-neutral-800 uppercase tracking-wide">Per Day</h3>
             <div class="space-y-3">
-              <div class="w-full h-2 bg-slate-700/50 rounded-full overflow-hidden">
+              <div class="w-full h-2 bg-neutral-100/50 rounded-full overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-purple-500 to-purple-400 transition-all duration-300" style="width: <%= (@rate_limits[:day][:used].to_f / @rate_limits[:day][:limit] * 100).to_i %>%"></div>
               </div>
               <div class="flex justify-between text-sm">
-                <span class="text-slate-400"><%= @rate_limits[:day][:used] %> / <%= @rate_limits[:day][:limit] %></span>
+                <span class="text-neutral-600"><%= @rate_limits[:day][:used] %> / <%= @rate_limits[:day][:limit] %></span>
                 <span class="text-green-400 font-bold"><%= @rate_limits[:day][:remaining] %> left</span>
               </div>
             </div>
@@ -363,37 +375,3 @@
   </div>
 </div>
 
-<script>
-async function testConnection(event) {
-  event.preventDefault();
-  
-  const btn = event.target;
-  const originalText = btn.innerHTML;
-  btn.disabled = true;
-  btn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i>Testing...';
-  
-  try {
-    const response = await fetch('<%= settings_test_api_path %>', {
-      method: 'POST',
-      headers: {
-        'X-CSRF-Token': document.querySelector('input[name="authenticity_token"]').value,
-        'Accept': 'application/json'
-      }
-    });
-    
-    const data = await response.json();
-    
-    if (data.success) {
-      alert('✅ Connection Successful!\n\n' + data.data);
-    } else {
-      alert('❌ Connection Failed\n\n' + data.error);
-    }
-  } catch (error) {
-    alert('❌ Error Testing API\n\n' + error.message);
-  }
-  
-  btn.disabled = false;
-  btn.innerHTML = originalText;
-  lucide.createIcons();
-}
-</script>

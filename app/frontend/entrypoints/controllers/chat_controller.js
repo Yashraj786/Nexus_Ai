@@ -2,11 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 import consumer from "../channels/consumer"
 
 export default class extends Controller {
-  static targets = [ "messages", "input", "form", "retryBanner" ]
-  static values = {
-    chatSessionId: String,
-    maxLength: Number
-  }
+   static targets = [ "messages", "input", "form", "retryBanner", "loadingIndicator", "formErrors" ]
+   static values = {
+     chatSessionId: String,
+     maxLength: Number
+   }
 
   connect() {
     this.subscription = consumer.subscriptions.create(
@@ -35,49 +35,55 @@ export default class extends Controller {
     console.log(`✗ Disconnected from ChatChannel for session ${this.chatSessionIdValue}`);
   }
 
-  _received(data) {
-    if (data.turbo_stream) {
-      Turbo.renderStreamMessage(data.turbo_stream);
-      this.scrollToBottom();
-    } else if (data.is_retrying) {
-      this.retryBannerTarget.classList.remove('hidden');
-    } else {
-      this.retryBannerTarget.classList.add('hidden');
-    }
-    
-    if (data.error) {
-      this.showError(data);
-    }
-  }
+   _received(data) {
+     if (data.turbo_stream) {
+       Turbo.renderStreamMessage(data.turbo_stream);
+       this.hideLoadingIndicator();
+       this.scrollToBottom();
+     } else if (data.is_retrying) {
+       this.retryBannerTarget.classList.remove('hidden');
+       this.showLoadingIndicator();
+     } else {
+       this.retryBannerTarget.classList.add('hidden');
+       this.hideLoadingIndicator();
+     }
+     
+     if (data.error) {
+       this.hideLoadingIndicator();
+       this.showError(data);
+     }
+   }
 
-  sendMessage(event) {
-    event.preventDefault();
+   sendMessage(event) {
+     event.preventDefault();
 
-    const form = this.formTarget;
-    const input = this.inputTarget;
-    const content = input.value.trim();
+     const form = this.formTarget;
+     const input = this.inputTarget;
+     const content = input.value.trim();
 
-    if (!content) {
-      this.showError("Please enter a message");
-      return;
-    }
+     if (!content) {
+       this.showFormError("Please enter a message");
+       return;
+     }
 
-    if (content.length > this.maxLengthValue) {
-      this.showError(`Message is too long (maximum ${this.maxLengthValue} characters)`);
-      return;
-    }
+     if (content.length > this.maxLengthValue) {
+       this.showFormError(`Message is too long (maximum ${this.maxLengthValue} characters)`);
+       return;
+     }
 
-    this.setFormDisabled(true);
-    
-    // Use requestSubmit() to trigger Turbo Drive to handle the form submission
-    form.requestSubmit();
+     this.clearFormErrors();
+     this.setFormDisabled(true);
+     this.showLoadingIndicator();
+     
+     // Use requestSubmit() to trigger Turbo Drive to handle the form submission
+     form.requestSubmit();
 
-    // Clear the input and reset its height after submission
-    input.value = '';
-    input.style.height = 'auto';
-    this.setFormDisabled(false);
-    input.focus();
-  }
+     // Clear the input and reset its height after submission
+     input.value = '';
+     input.style.height = 'auto';
+     this.setFormDisabled(false);
+     input.focus();
+   }
 
   resizeInput() {
     this.inputTarget.style.height = 'auto';
@@ -90,15 +96,43 @@ export default class extends Controller {
     }
   }
 
-  setFormDisabled(disabled) {
-    const submitButton = this.formTarget.querySelector('[type="submit"]');
-    this.inputTarget.disabled = disabled;
-    if (submitButton) {
-      submitButton.disabled = disabled;
-    }
-  }
+   setFormDisabled(disabled) {
+     const submitButton = this.formTarget.querySelector('[type="submit"]');
+     this.inputTarget.disabled = disabled;
+     if (submitButton) {
+       submitButton.disabled = disabled;
+     }
+   }
 
-  showError(data) {
+   showLoadingIndicator() {
+     if (this.hasLoadingIndicatorTarget) {
+       this.loadingIndicatorTarget.classList.remove('hidden');
+       this.scrollToBottom();
+     }
+   }
+
+   hideLoadingIndicator() {
+     if (this.hasLoadingIndicatorTarget) {
+       this.loadingIndicatorTarget.classList.add('hidden');
+     }
+   }
+
+   showFormError(errorMessage) {
+     if (this.hasFormErrorsTarget) {
+       this.formErrorsTarget.textContent = errorMessage;
+       this.formErrorsTarget.classList.remove('hidden');
+       setTimeout(() => this.clearFormErrors(), 5000);
+     }
+   }
+
+   clearFormErrors() {
+     if (this.hasFormErrorsTarget) {
+       this.formErrorsTarget.classList.add('hidden');
+       this.formErrorsTarget.textContent = '';
+     }
+   }
+
+   showError(data) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'bg-red-500/10 border border-red-500 text-red-400 px-4 py-2 rounded-lg mb-4 flex justify-between items-center';
     

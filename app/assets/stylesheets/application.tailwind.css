@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Light Theme with Minimal Design */
 :root {
   --bg-primary: #ffffff;

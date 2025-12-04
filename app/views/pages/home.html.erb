@@ -1,164 +1,159 @@
-<div class="<%= user_signed_in? ? 'ml-72' : '' %> min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
-  <!-- Decorative Background -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-40 -right-40 w-80 h-80 bg-orange-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
-  </div>
+<div class="<%= user_signed_in? ? 'ml-64' : '' %> min-h-screen bg-white flex flex-col">
 
   <% if user_signed_in? %>
     <!-- Authenticated User - Dashboard View -->
-    <div class="flex-1 flex flex-col relative z-10">
+    <div class="flex-1 flex flex-col">
       <!-- Header -->
-      <header class="border-b border-slate-700/50 px-6 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-slate-800/50 to-slate-800/30 backdrop-blur-sm">
+      <header class="border-b border-neutral-200 px-6 sm:px-8 py-4 sm:py-6 bg-white">
         <div class="max-w-6xl mx-auto">
-          <h1 class="text-2xl sm:text-4xl font-bold font-rajdhani text-white mb-2">Dashboard</h1>
-          <p class="text-sm sm:text-base text-slate-400">Welcome back! Let's continue your AI conversations.</p>
+          <h1 class="text-2xl sm:text-4xl font-bold font-rajdhani text-neutral-900 mb-2">Dashboard</h1>
+          <p class="text-sm sm:text-base text-neutral-600">Welcome back! Let's continue your AI conversations.</p>
         </div>
       </header>
 
-      <!-- Content Area -->
-      <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8">
-        <div class="max-w-6xl mx-auto">
-          <!-- Quick Actions -->
-          <div class="mb-8">
-            <h2 class="text-lg sm:text-xl font-bold font-rajdhani text-white mb-4">Quick Actions</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- New Session Card -->
-              <a href="<%= new_chat_session_path %>" class="app-card dark group cursor-pointer hover:border-orange-500/50 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
-                    <i data-lucide="plus" class="w-6 h-6 text-white"></i>
-                  </div>
-                  <h3 class="text-lg font-bold text-white">New Session</h3>
-                </div>
-                <p class="text-sm text-slate-400">Start a fresh conversation with any AI assistant</p>
-                <div class="flex items-center text-orange-400 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
-                  Start Now <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </div>
-              </a>
+       <!-- Content Area -->
+       <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 bg-white">
+         <div class="max-w-6xl mx-auto">
+           <!-- Quick Actions -->
+           <div class="mb-8">
+             <h2 class="text-lg sm:text-xl font-bold font-rajdhani text-neutral-900 mb-4">Quick Actions</h2>
+             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+               <!-- New Session Card -->
+               <a href="<%= new_chat_session_path %>" class="group cursor-pointer p-6 rounded-lg border border-neutral-200 bg-white hover:border-orange-500 hover:shadow-md transition-all duration-300">
+                 <div class="flex items-center gap-3 mb-3">
+                   <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center">
+                     <i data-lucide="plus" class="w-6 h-6 text-orange-600"></i>
+                   </div>
+                   <h3 class="text-lg font-bold text-neutral-900">New Session</h3>
+                 </div>
+                 <p class="text-sm text-neutral-600">Start a fresh conversation with any AI assistant</p>
+                 <div class="flex items-center text-orange-600 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
+                   Start Now <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                 </div>
+               </a>
 
-              <!-- My Sessions Card -->
-              <a href="<%= chat_sessions_path %>" class="app-card dark group cursor-pointer hover:border-blue-500/50 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                    <i data-lucide="history" class="w-6 h-6 text-white"></i>
-                  </div>
-                  <h3 class="text-lg font-bold text-white">My Sessions</h3>
-                </div>
-                <p class="text-sm text-slate-400">View and continue your previous conversations</p>
-                <div class="flex items-center text-blue-400 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
-                  Browse <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </div>
-              </a>
+               <!-- My Sessions Card -->
+               <a href="<%= chat_sessions_path %>" class="group cursor-pointer p-6 rounded-lg border border-neutral-200 bg-white hover:border-blue-500 hover:shadow-md transition-all duration-300">
+                 <div class="flex items-center gap-3 mb-3">
+                   <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                     <i data-lucide="history" class="w-6 h-6 text-blue-600"></i>
+                   </div>
+                   <h3 class="text-lg font-bold text-neutral-900">My Sessions</h3>
+                 </div>
+                 <p class="text-sm text-neutral-600">View and continue your previous conversations</p>
+                 <div class="flex items-center text-blue-600 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
+                   Browse <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                 </div>
+               </a>
 
-              <!-- Settings Card -->
-              <a href="<%= settings_path %>" class="app-card dark group cursor-pointer hover:border-purple-500/50 transition-all duration-300">
-                <div class="flex items-center gap-3 mb-3">
-                  <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
-                    <i data-lucide="settings" class="w-6 h-6 text-white"></i>
-                  </div>
-                  <h3 class="text-lg font-bold text-white">Settings</h3>
-                </div>
-                <p class="text-sm text-slate-400">Configure your AI providers and preferences</p>
-                <div class="flex items-center text-purple-400 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
-                  Configure <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                </div>
-              </a>
-            </div>
-          </div>
+               <!-- Settings Card -->
+               <a href="<%= settings_path %>" class="group cursor-pointer p-6 rounded-lg border border-neutral-200 bg-white hover:border-purple-500 hover:shadow-md transition-all duration-300">
+                 <div class="flex items-center gap-3 mb-3">
+                   <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                     <i data-lucide="settings" class="w-6 h-6 text-purple-600"></i>
+                   </div>
+                   <h3 class="text-lg font-bold text-neutral-900">Settings</h3>
+                 </div>
+                 <p class="text-sm text-neutral-600">Configure your AI providers and preferences</p>
+                 <div class="flex items-center text-purple-600 font-semibold text-sm mt-4 group-hover:translate-x-1 transition-transform">
+                   Configure <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                 </div>
+               </a>
+             </div>
+           </div>
 
-          <!-- Recent Sessions Section -->
-          <div>
-            <div class="flex items-center justify-between mb-4">
-              <h2 class="text-lg sm:text-xl font-bold font-rajdhani text-white">Recent Conversations</h2>
-              <a href="<%= chat_sessions_path %>" class="text-orange-400 hover:text-orange-300 text-sm font-semibold flex items-center gap-2">
-                View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
-              </a>
-            </div>
-            
-            <% if current_user.chat_sessions.any? %>
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
-                <% current_user.chat_sessions.order(updated_at: :desc).limit(6).each do |session| %>
-                  <a href="<%= chat_session_path(session) %>" class="app-card dark group cursor-pointer">
-                    <div class="flex items-start justify-between">
-                      <div class="flex-1">
-                        <div class="flex items-center gap-2 mb-2">
-                          <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-5 h-5 text-orange-500 flex-shrink-0"></i>
-                          <h4 class="font-bold text-white truncate"><%= session.title || "Untitled Session" %></h4>
-                        </div>
-                        <p class="text-xs text-slate-400">
-                          <%= session.persona&.name || "General" %> • <%= session.messages_count || 0 %> messages
-                        </p>
-                        <p class="text-xs text-slate-500 mt-1">
-                          <i data-lucide="clock" class="w-3 h-3 inline mr-1"></i>
-                          <%= time_ago_in_words(session.updated_at) %> ago
-                        </p>
-                      </div>
-                      <i data-lucide="arrow-right" class="w-5 h-5 text-slate-500 group-hover:text-orange-400 transition-colors flex-shrink-0"></i>
-                    </div>
-                  </a>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="app-card dark border border-slate-600/50 text-center py-12">
-                <i data-lucide="message-circle" class="w-16 h-16 text-slate-500 mx-auto mb-4"></i>
-                <h3 class="text-xl font-bold text-slate-200 mb-2">No Conversations Yet</h3>
-                <p class="text-slate-400 mb-6">Start your first conversation with an AI assistant</p>
-                <a href="<%= new_chat_session_path %>" class="btn-primary dark inline-flex items-center gap-2">
-                  <i data-lucide="plus" class="w-4 h-4"></i>
-                  Create First Session
-                </a>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </main>
+           <!-- Recent Sessions Section -->
+           <div>
+             <div class="flex items-center justify-between mb-4">
+               <h2 class="text-lg sm:text-xl font-bold font-rajdhani text-neutral-900">Recent Conversations</h2>
+               <a href="<%= chat_sessions_path %>" class="text-orange-600 hover:text-orange-700 text-sm font-semibold flex items-center gap-2">
+                 View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
+               </a>
+             </div>
+             
+             <% if current_user.chat_sessions.any? %>
+               <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+                 <% current_user.chat_sessions.order(updated_at: :desc).limit(6).each do |session| %>
+                   <a href="<%= chat_session_path(session) %>" class="group cursor-pointer p-4 rounded-lg border border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-md transition-all">
+                     <div class="flex items-start justify-between">
+                       <div class="flex-1">
+                         <div class="flex items-center gap-2 mb-2">
+                           <i data-lucide="<%= session.persona&.icon || 'message-circle' %>" class="w-5 h-5 text-orange-600 flex-shrink-0"></i>
+                           <h4 class="font-bold text-neutral-900 truncate"><%= session.title || "Untitled Session" %></h4>
+                         </div>
+                         <p class="text-xs text-neutral-600">
+                           <%= session.persona&.name || "General" %> • <%= session.messages_count || 0 %> messages
+                         </p>
+                         <p class="text-xs text-neutral-500 mt-1">
+                           <i data-lucide="clock" class="w-3 h-3 inline mr-1"></i>
+                           <%= time_ago_in_words(session.updated_at) %> ago
+                         </p>
+                       </div>
+                       <i data-lucide="arrow-right" class="w-5 h-5 text-neutral-400 group-hover:text-orange-600 transition-colors flex-shrink-0"></i>
+                     </div>
+                   </a>
+                 <% end %>
+               </div>
+             <% else %>
+               <div class="p-12 rounded-lg border border-neutral-200 bg-neutral-50 text-center">
+                 <i data-lucide="message-circle" class="w-16 h-16 text-neutral-400 mx-auto mb-4"></i>
+                 <h3 class="text-xl font-bold text-neutral-900 mb-2">No Conversations Yet</h3>
+                 <p class="text-neutral-600 mb-6">Start your first conversation with an AI assistant</p>
+                 <a href="<%= new_chat_session_path %>" class="inline-flex items-center justify-center gap-2 px-6 py-2 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors font-medium">
+                   <i data-lucide="plus" class="w-4 h-4"></i>
+                   Create First Session
+                 </a>
+               </div>
+             <% end %>
+           </div>
+         </div>
+       </main>
     </div>
   <% else %>
     <!-- Unauthenticated User - Landing Page -->
-    <div class="flex-1 flex items-center justify-center relative z-10 px-4">
+    <div class="flex-1 flex items-center justify-center px-4">
       <div class="max-w-3xl text-center">
         <!-- Logo -->
-        <div class="inline-block mb-8 animate-scale-in">
-          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-2xl shadow-orange-500/50">
+        <div class="inline-block mb-8">
+          <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg">
             <i data-lucide="sparkles" class="w-10 h-10 text-white"></i>
           </div>
         </div>
 
         <!-- Main Content -->
-        <h1 class="text-4xl sm:text-6xl font-bold font-rajdhani text-white mb-4 animate-fade-in">
+        <h1 class="text-4xl sm:text-6xl font-bold font-rajdhani text-neutral-900 mb-4">
           NEXUS AI
         </h1>
-        <p class="text-lg sm:text-xl text-slate-300 mb-4 animate-fade-in" style="animation-delay: 0.1s">
+        <p class="text-lg sm:text-xl text-neutral-600 mb-4">
           Unified AI Intelligence Platform
         </p>
-        <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl mx-auto animate-fade-in" style="animation-delay: 0.2s">
+        <p class="text-base sm:text-lg text-neutral-600 mb-8 max-w-2xl mx-auto">
           Seamlessly work with multiple AI models and personas. Manage your conversations, configure your providers, and get the insights you need—all in one place.
         </p>
 
         <!-- Features Preview -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 animate-fade-in" style="animation-delay: 0.3s">
-          <div class="app-card dark text-left">
-            <i data-lucide="zap" class="w-6 h-6 text-orange-500 mb-3"></i>
-            <h3 class="font-bold text-white mb-2">Multi-Model Support</h3>
-            <p class="text-sm text-slate-400">Connect to OpenAI, Anthropic, Google Gemini, and more</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+          <div class="p-6 rounded-lg border border-neutral-200 bg-white text-left">
+            <i data-lucide="zap" class="w-6 h-6 text-orange-600 mb-3"></i>
+            <h3 class="font-bold text-neutral-900 mb-2">Multi-Model Support</h3>
+            <p class="text-sm text-neutral-600">Connect to OpenAI, Anthropic, Google Gemini, and more</p>
           </div>
-          <div class="app-card dark text-left">
-            <i data-lucide="users" class="w-6 h-6 text-blue-500 mb-3"></i>
-            <h3 class="font-bold text-white mb-2">AI Personas</h3>
-            <p class="text-sm text-slate-400">Choose from specialized AI assistants for different tasks</p>
+          <div class="p-6 rounded-lg border border-neutral-200 bg-white text-left">
+            <i data-lucide="users" class="w-6 h-6 text-blue-600 mb-3"></i>
+            <h3 class="font-bold text-neutral-900 mb-2">AI Personas</h3>
+            <p class="text-sm text-neutral-600">Choose from specialized AI assistants for different tasks</p>
           </div>
-          <div class="app-card dark text-left">
-            <i data-lucide="shield-check" class="w-6 h-6 text-green-500 mb-3"></i>
-            <h3 class="font-bold text-white mb-2">Secure & Private</h3>
-            <p class="text-sm text-slate-400">Your API keys are encrypted and never logged</p>
+          <div class="p-6 rounded-lg border border-neutral-200 bg-white text-left">
+            <i data-lucide="shield-check" class="w-6 h-6 text-green-600 mb-3"></i>
+            <h3 class="font-bold text-neutral-900 mb-2">Secure & Private</h3>
+            <p class="text-sm text-neutral-600">Your API keys are encrypted and never logged</p>
           </div>
         </div>
 
         <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 0.4s">
-          <%= link_to "Get Started Free", new_user_registration_path, class: "btn-primary dark px-8 py-4 text-lg font-bold" %>
-          <%= link_to "Sign In", new_user_session_path, class: "btn-secondary dark px-8 py-4 text-lg font-bold" %>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <%= link_to "Get Started Free", new_user_registration_path, class: "inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors" %>
+          <%= link_to "Sign In", new_user_session_path, class: "inline-flex items-center justify-center px-8 py-4 text-lg font-bold bg-white text-neutral-900 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors" %>
         </div>
       </div>
     </div>
