@@ -31,7 +31,7 @@
 
     <!-- Flash Messages (fixed at top for all states) -->
     <% flash.each do |type, msg| %>
-      <div class="fixed top-4 right-4 z-50 px-4 py-3 rounded-lg border-2 border-cyber-accent bg-white text-cyber-accent shadow-glow-lg font-semibold">
+      <div class="fixed top-4 right-4 z-50 px-4 py-3 rounded-lg border border-neutral-300 bg-white text-neutral-900 shadow-lg font-semibold">
         <%= msg %>
       </div>
     <% end %>
@@ -54,12 +54,12 @@
              </a>
              <div class="w-10"></div>
            </div>
-           <main class="flex-1 bg-cyber-bg overflow-y-auto">
+           <main class="flex-1 bg-white overflow-y-auto">
              <%= yield %>
            </main>
          </div>
        <% else %>
-         <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-cyber-bg overflow-y-auto">
+         <main class="flex-1 h-full relative min-w-0 w-full flex flex-col overflow-hidden bg-white overflow-y-auto">
            <%= yield %>
          </main>
        <% end %>
