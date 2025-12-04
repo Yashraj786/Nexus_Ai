@@ -3,6 +3,9 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "mocha/minitest"
 require "bullet"
+require "webmock/minitest"
+
+WebMock.disable_net_connect!
 
 module ActiveSupport
   class TestCase

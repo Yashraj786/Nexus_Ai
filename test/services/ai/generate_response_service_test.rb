@@ -22,11 +22,28 @@ module Ai
       @message1.reload
       @message2.reload
       @message3.reload
+
+      WebMock.enable!
     end
 
     test "should generate response with valid chat session" do
-      # Skip API tests - would need WebMock or VCR
-      skip "Requires API mocking - test passes with WebMock setup"
+      # Set up user with API configuration
+      @user.update_api_config("gemini", "test_api_key_123", "gemini-2.0-flash")
+
+      # Mock the Gemini API response
+      mock_response = {
+        data: "I'm doing great! How can I assist you today?",
+        success: true
+      }
+
+      # Mock the LLM client generate_content call
+      Ai::LlmClient.any_instance.stubs(:generate_content).returns(mock_response)
+
+      service = Ai::GenerateResponseService.new(@chat_session)
+      result = service.call
+
+      assert result[:success]
+      assert_includes result[:content].downcase, "great"
     end
 
     test "should handle nil chat session" do
@@ -54,16 +71,34 @@ module Ai
         assert_includes context[0]["parts"][0]["text"], @chat_session.persona.system_instruction
       end
 
-    test "should handle API errors" do
-      # Skip - needs proper HTTP mocking
-      skip "Requires WebMock or VCR for HTTP mocking"
-    end
+     test "should handle API errors" do
+       # Set up user with API configuration
+       @user.update_api_config("gemini", "test_api_key_123", "gemini-2.0-flash")
 
-     test "should handle network errors gracefully" do
-       # Skip this test as it requires proper HTTP mocking with WebMock or VCR
-       # The error handling is tested through unit testing of the method itself
-       skip "Requires WebMock or VCR for proper HTTP mocking"
+       # Mock the LLM client returning an error
+       Ai::LlmClient.any_instance.stubs(:generate_content).returns({ success: false, error: "API error occurred" })
+
+       service = Ai::GenerateResponseService.new(@chat_session)
+       result = service.call
+
+       assert_not result[:success]
+       assert_not_nil result[:error]
      end
+
+      test "should handle network errors gracefully" do
+        # Set up user with API configuration
+        @user.update_api_config("gemini", "test_api_key_123", "gemini-2.0-flash")
+
+        # Mock the LLM client raising a network error
+        Ai::LlmClient.any_instance.stubs(:generate_content).raises(Net::OpenTimeout)
+
+        service = Ai::GenerateResponseService.new(@chat_session)
+        result = service.call
+
+        assert_not result[:success]
+        assert_not_nil result[:error]
+        assert_includes result[:error].downcase, "unavailable"
+      end
 
     def teardown
       mocha_teardown

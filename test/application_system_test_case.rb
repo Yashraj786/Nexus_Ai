@@ -3,6 +3,16 @@ require "test_helper"
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
 
+  # Disable WebMock for system tests - they don't mock HTTP and need real connections
+  setup do
+    WebMock.disable!
+  end
+
+  teardown do
+    WebMock.enable!
+    WebMock.disable_net_connect!
+  end
+
   private
 
   # Helper to create chat sessions, messages, and feedback using fixture-based approach

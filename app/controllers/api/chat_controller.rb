@@ -30,7 +30,7 @@ class Api::ChatController < ApplicationController
 
   # Strong parameters validation
   def chat_params
-    params.require(:chat).permit(:persona_key, chat_history: [])
+    params.require(:chat).permit(:persona_key, chat_history: [ { role: :string, parts: [ { text: :string } ] } ])
   rescue ActionController::ParameterMissing
     {}
   end
