@@ -1,11 +1,11 @@
 # app/services/dashboard_service.rb
 class DashboardService
-  LOG_FILE = Rails.root.join('log', 'api_events.log')
+  LOG_FILE = Rails.root.join("log", "api_events.log")
   TIME_WINDOW = 60.minutes
 
   # --- SLO Definitions ---
   # p95 latency should be less than 3 seconds
-  P95_LATENCY_THRESHOLD_S = 3.0 
+  P95_LATENCY_THRESHOLD_S = 3.0
   # Success rate should be at least 99.5%
   SUCCESS_RATE_THRESHOLD = 99.5
   # ---
@@ -42,21 +42,21 @@ class DashboardService
   def calculate_metrics(events)
     return default_metrics if events.empty?
 
-    requests = events.count { |e| e[:event] == 'request_start' }
-    failures = events.count { |e| e[:event] == 'request_error' }
-    retries = events.count { |e| e[:event] == 'job_retry' }
+    requests = events.count { |e| e[:event] == "request_start" }
+    failures = events.count { |e| e[:event] == "request_error" }
+    retries = events.count { |e| e[:event] == "job_retry" }
 
-    successful_requests = events.select { |e| e[:event] == 'request_end' && e[:success] }
+    successful_requests = events.select { |e| e[:event] == "request_end" && e[:success] }
     total_latency = successful_requests.sum { |e| e[:latency].to_f }
     average_latency = successful_requests.any? ? (total_latency / successful_requests.count).round(4) : 0
 
-    latencies = events.select { |e| e[:event] == 'request_end' }.map { |e| e[:latency].to_f }.sort
+    latencies = events.select { |e| e[:event] == "request_end" }.map { |e| e[:latency].to_f }.sort
     p95_index = (0.95 * latencies.size).ceil - 1
     p95_latency = p95_index >= 0 ? latencies[p95_index].round(4) : 0
-    
+
     success_rate = requests > 0 ? ((requests - failures).to_f / requests * 100).round(2) : 100
 
-    error_events = events.select { |e| e[:event] == 'request_error' || e[:event] == 'job_failure_attempt' }
+    error_events = events.select { |e| e[:event] == "request_error" || e[:event] == "job_failure_attempt" }
     error_counts = error_events.group_by { |e| e[:error] }.transform_values(&:count)
     top_error_types = error_counts.sort_by { |_, count| -count }.first(5)
 
@@ -86,7 +86,7 @@ class DashboardService
 
   def calculate_feedback_metrics
     {
-      user_reported_issues_7_days: Feedback.where('created_at >= ?', 7.days.ago).count,
+      user_reported_issues_7_days: Feedback.where("created_at >= ?", 7.days.ago).count,
       open_incidents: Feedback.order(created_at: :desc).limit(5) # Assuming all feedback are "open" for now
     }
   end

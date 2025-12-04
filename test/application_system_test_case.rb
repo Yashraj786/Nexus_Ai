@@ -18,11 +18,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     ChatSession.create!(user: user, persona: persona, title: "Test Session")
   end
 
-  def create_message(chat_session:, role: 'user', content: 'Test message')
+  def create_message(chat_session:, role: "user", content: "Test message")
     chat_session.messages.create!(role: role, content: content)
   end
 
-  def create_feedback(chat_session:, user:, message: 'Test feedback', category: 'bug', feedback_priority: 'low')
+  def create_feedback(chat_session:, user:, message: "Test feedback", category: "bug", feedback_priority: "low")
     chat_session.feedbacks.create!(user: user, message: message, category: category, feedback_priority: feedback_priority)
   end
 end

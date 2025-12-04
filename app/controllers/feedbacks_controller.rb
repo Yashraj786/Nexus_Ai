@@ -2,8 +2,8 @@
 
 class FeedbacksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_chat_session, only: [:new, :create, :show]
-  before_action :set_feedback, only: [:show]
+  before_action :set_chat_session, only: [ :new, :create, :show ]
+  before_action :set_feedback, only: [ :show ]
 
   def new
     @feedback = @chat_session.feedbacks.build(user: current_user)
@@ -20,14 +20,14 @@ class FeedbacksController < ApplicationController
     ))
 
     if @feedback.save
-      log_audit_event(@chat_session, 'created_feedback', { feedback_id: @feedback.id })
-      current_user.complete_onboarding_step('submitted_feedback')
-      
+      log_audit_event(@chat_session, "created_feedback", { feedback_id: @feedback.id })
+      current_user.complete_onboarding_step("submitted_feedback")
+
       handle_bug_report(@chat_session) if @feedback.bug?
-      
-      redirect_to @chat_session, notice: 'Feedback submitted successfully. Thank you for your help in making Nexus AI better!'
+
+      redirect_to @chat_session, notice: "Feedback submitted successfully. Thank you for your help in making Nexus AI better!"
     else
-      flash.now[:alert] = 'Could not submit feedback. Please check the errors below.'
+      flash.now[:alert] = "Could not submit feedback. Please check the errors below."
       render :new, status: :unprocessable_entity
     end
   end
@@ -41,13 +41,13 @@ class FeedbacksController < ApplicationController
     chat_session_id = params[:chat_session_id] || params.dig(:feedback, :chat_session_id)
     @chat_session = current_user.chat_sessions.find(chat_session_id)
   rescue ActiveRecord::RecordNotFound, NoMethodError, ArgumentError
-    redirect_to chat_sessions_path, alert: 'Chat session not found.'
+    redirect_to chat_sessions_path, alert: "Chat session not found."
   end
 
   def set_feedback
     @feedback = @chat_session.feedbacks.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_to @chat_session, alert: 'Feedback not found.'
+    redirect_to @chat_session, alert: "Feedback not found."
   end
 
   def feedback_params
@@ -69,14 +69,14 @@ class FeedbacksController < ApplicationController
   # Capture recent API events for debugging
   def capture_api_events_snapshot(limit = 20)
     snapshot = []
-    
+
     begin
       log_file = DashboardService::LOG_FILE
       return snapshot unless File.exist?(log_file)
 
       # Read last N lines more efficiently
       lines = read_last_n_lines(log_file, limit * 2)
-      
+
       lines.reverse_each do |line|
         next if line.strip.empty?
 
@@ -88,7 +88,7 @@ class FeedbacksController < ApplicationController
           Rails.logger.debug("Skipped malformed log line: #{e.message}")
         end
       end
-      
+
       snapshot.reverse
     rescue StandardError => e
       Rails.logger.warn("Failed to capture API events snapshot: #{e.class.name} - #{e.message}")

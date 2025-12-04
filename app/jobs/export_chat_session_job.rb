@@ -9,7 +9,7 @@ class ExportChatSessionJob < ApplicationJob
     chat_session = ChatSession.find(chat_session_id)
 
     # Generate the JSON with all associated data
-    json_data = chat_session.to_json(include: [:messages, :feedbacks], methods: [:run_metrics, :timeline])
+    json_data = chat_session.to_json(include: [ :messages, :feedbacks ], methods: [ :run_metrics, :timeline ])
 
     # Store the JSON in cache for later download
     # TODO: In production, migrate to S3 or other persistent storage

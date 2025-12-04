@@ -27,8 +27,8 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
       post feedbacks_url, params: {
         feedback: {
           chat_session_id: chat_sessions(:one).id,
-          category: 'bug',
-          feedback_priority: 'high',
+          category: "bug",
+          feedback_priority: "high",
           message: "Internal Server Error at http://www.example.com/500"
         }
       }

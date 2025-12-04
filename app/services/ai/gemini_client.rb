@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 module Ai
   # DEPRECATED: This class is kept for backward compatibility only.
@@ -23,7 +23,7 @@ module Ai
     # Checks if the Google Gemini API key is configured.
     # @return [Boolean] true if the API key is present, false otherwise.
     def self.api_key_configured?
-      ENV.fetch('GOOGLE_API_KEY', nil).present? ||
+      ENV.fetch("GOOGLE_API_KEY", nil).present? ||
         Rails.application.credentials.dig(:google, :api_key).present?
     end
 
@@ -63,7 +63,7 @@ module Ai
 
     def fetch_api_key
       # Try environment variable first, then credentials file
-      ENV.fetch('GOOGLE_API_KEY', nil) ||
+      ENV.fetch("GOOGLE_API_KEY", nil) ||
         Rails.application.credentials.dig(:google, :api_key)
     end
 
@@ -104,7 +104,7 @@ module Ai
       http.read_timeout = TIMEOUT
       http.open_timeout = TIMEOUT
 
-      request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
+      request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json")
       request.body = payload.to_json
 
       http.request(request)
@@ -152,7 +152,7 @@ module Ai
 
     def extract_error_message(response)
       body = JSON.parse(response.body)
-      body.dig('error', 'message') || body['error'] || response.body
+      body.dig("error", "message") || body["error"] || response.body
     rescue JSON::ParserError
       response.body
     end

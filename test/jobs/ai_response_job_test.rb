@@ -7,16 +7,16 @@ class AiResponseJobTest < ActionDispatch::IntegrationTest
 
   setup do
     @chat_session = chat_sessions(:one)
-    @message = @chat_session.messages.create!(role: 'user', content: 'Hello')
+    @message = @chat_session.messages.create!(role: "user", content: "Hello")
     ActionCable.server.pubsub.clear
   end
 
   test "should succeed and create an assistant message" do
     Ai::GenerateResponseService.stubs(:call).returns({ success: true, content: "AI Response" })
 
-    before = @chat_session.messages.where(role: 'assistant').count
+    before = @chat_session.messages.where(role: "assistant").count
     AiResponseJob.perform_now(@message.id)
-    after = @chat_session.messages.where(role: 'assistant').count
+    after = @chat_session.messages.where(role: "assistant").count
 
     assert_operator(after - before, :>=, 1)
   end
@@ -29,13 +29,13 @@ class AiResponseJobTest < ActionDispatch::IntegrationTest
     end
 
     # Perform with retries - in test mode, retries are synchronous
-    before = @chat_session.messages.where(role: 'assistant').count
-    
+    before = @chat_session.messages.where(role: "assistant").count
+
     # Note: perform_now doesn't actually trigger retries - it just executes once
     # This test verifies the initial execution logic works
     AiResponseJob.perform_now(@message.id)
-    
-    after = @chat_session.messages.where(role: 'assistant').count
+
+    after = @chat_session.messages.where(role: "assistant").count
     # Since the first call fails, no assistant message should be created
     assert_equal before, after
   end
@@ -43,9 +43,9 @@ class AiResponseJobTest < ActionDispatch::IntegrationTest
   test "should handle failure gracefully" do
     Ai::GenerateResponseService.stubs(:call).returns({ success: false, error: "API Error" })
 
-    before = @chat_session.messages.where(role: 'assistant').count
+    before = @chat_session.messages.where(role: "assistant").count
     AiResponseJob.perform_now(@message.id)
-    after = @chat_session.messages.where(role: 'assistant').count
+    after = @chat_session.messages.where(role: "assistant").count
 
     # No assistant message should be created on failure
     assert_equal before, after

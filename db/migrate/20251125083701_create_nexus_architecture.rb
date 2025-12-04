@@ -7,7 +7,7 @@ class CreateNexusArchitecture < ActiveRecord::Migration[7.1]
     create_table :users, id: :uuid do |t|
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -36,7 +36,7 @@ class CreateNexusArchitecture < ActiveRecord::Migration[7.1]
       t.string :color_theme, null: false   # Tailwind color class e.g., "text-green-400"
       t.text :system_instruction, null: false # The "Brain" of the persona
       t.text :description                  # Short description for UI selection
-      
+
       t.timestamps
     end
 

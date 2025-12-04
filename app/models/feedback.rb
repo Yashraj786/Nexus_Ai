@@ -18,7 +18,7 @@ class Feedback < ApplicationRecord
   validate :sanitize_message
 
   def bug?
-    category == 'bug'
+    category == "bug"
   end
 
   private
@@ -34,8 +34,8 @@ class Feedback < ApplicationRecord
     )
 
     # Remove non-printable and control characters, preserving newlines
-    final_sanitized_content = sanitized_content_html.gsub(/[^\p{Print}\n\r\t]/, '').strip
-    
+    final_sanitized_content = sanitized_content_html.gsub(/[^\p{Print}\n\r\t]/, "").strip
+
     self.message = final_sanitized_content
   end
 end

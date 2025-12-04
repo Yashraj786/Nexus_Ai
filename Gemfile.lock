@@ -85,6 +85,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    ast (2.4.3)
     autoprefixer-rails (10.4.21.0)
       execjs (~> 2)
     base64 (0.3.0)
@@ -96,10 +97,15 @@ GEM
     bindex (0.8.1)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
+    brakeman (7.1.1)
+      racc
     builder (3.3.0)
     bullet (8.1.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
+    bundler-audit (0.9.3)
+      bundler (>= 1.2.0)
+      thor (~> 1.0)
     byebug (12.0.0)
     capybara (3.40.0)
       addressable
@@ -205,6 +211,8 @@ GEM
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
+    language_server-protocol (3.17.0.5)
+    lint_roller (1.1.0)
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -268,6 +276,10 @@ GEM
     pagy (43.1.4)
       json
       yaml
+    parallel (1.27.0)
+    parser (3.3.10.0)
+      ast (~> 2.4.1)
+      racc
     pg (1.6.2)
     pg (1.6.2-aarch64-linux)
     pg (1.6.2-aarch64-linux-musl)
@@ -278,6 +290,7 @@ GEM
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
+    prism (1.6.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -339,6 +352,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
+    rainbow (3.1.1)
     rake (13.3.1)
     rdoc (6.16.0)
       erb
@@ -356,6 +370,35 @@ GEM
       actionpack (>= 7.0)
       railties (>= 7.0)
     rexml (3.4.4)
+    rubocop (1.81.7)
+      json (~> 2.3)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.1.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.47.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.48.0)
+      parser (>= 3.3.7.2)
+      prism (~> 1.4)
+    rubocop-performance (1.26.1)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.47.1, < 2.0)
+    rubocop-rails (2.34.2)
+      activesupport (>= 4.2.0)
+      lint_roller (~> 1.1)
+      rack (>= 1.1)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.44.0, < 2.0)
+    rubocop-rails-omakase (1.1.0)
+      rubocop (>= 1.72)
+      rubocop-performance (>= 1.24)
+      rubocop-rails (>= 2.30)
+    ruby-progressbar (1.13.0)
     ruby-vips (2.2.5)
       ffi (~> 1.12)
       logger
@@ -415,6 +458,9 @@ GEM
       ethon (>= 0.9.0, < 0.16.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (3.2.0)
+      unicode-emoji (~> 4.1)
+    unicode-emoji (4.1.0)
     uniform_notifier (1.18.0)
     uri (1.1.1)
     useragent (0.16.11)
@@ -456,7 +502,9 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootsnap
+  brakeman
   bullet
+  bundler-audit
   byebug
   capybara
   devise
@@ -476,6 +524,7 @@ DEPENDENCIES
   rails-controller-testing
   redcarpet (~> 3.6)
   redis (~> 5.0)
+  rubocop-rails-omakase
   selenium-webdriver
   simple_form!
   solid_cable

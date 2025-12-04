@@ -1,6 +1,6 @@
 class ChatSessionsController < ApplicationController
-  before_action :set_chat_session, only: [:show, :update, :destroy, :export, :export_status, :download]
-  after_action :verify_authorized, except: [:index, :new, :create, :export, :export_status, :download]
+  before_action :set_chat_session, only: [ :show, :update, :destroy, :export, :export_status, :download ]
+  after_action :verify_authorized, except: [ :index, :new, :create, :export, :export_status, :download ]
   after_action :verify_policy_scoped, only: :index
 
   rescue_from ActiveRecord::StatementInvalid, with: :handle_corrupted_session
@@ -13,7 +13,7 @@ class ChatSessionsController < ApplicationController
 
   def show
     authorize @chat_session
-    
+
     if @chat_session.persona.nil? || @chat_session.messages.nil?
       redirect_to chat_sessions_path, alert: "This chat session is corrupted or incomplete."
       return
@@ -28,12 +28,12 @@ class ChatSessionsController < ApplicationController
 
   def export
     authorize @chat_session
-    log_audit_event(@chat_session, 'exported_session')
+    log_audit_event(@chat_session, "exported_session")
     current_user.complete_onboarding_step("exported_session")
 
     download_key = "export-#{SecureRandom.uuid}"
     ExportChatSessionJob.perform_later(@chat_session.id, download_key)
-    
+
     render json: { download_key: download_key, status: "processing" }, status: :accepted
   end
 
@@ -80,7 +80,7 @@ class ChatSessionsController < ApplicationController
     authorize @chat_session
 
     if @chat_session.save
-      log_audit_event(@chat_session, 'created_session', { persona: @persona.name })
+      log_audit_event(@chat_session, "created_session", { persona: @persona.name })
       current_user.complete_onboarding_step("created_first_session")
       redirect_to @chat_session, notice: "Chat session started successfully."
     else
@@ -95,7 +95,7 @@ class ChatSessionsController < ApplicationController
   def update
     authorize @chat_session
     if @chat_session.update(chat_session_params)
-      redirect_to @chat_session, notice: 'Chat session was successfully updated.'
+      redirect_to @chat_session, notice: "Chat session was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -104,7 +104,7 @@ class ChatSessionsController < ApplicationController
   def destroy
     authorize @chat_session
     @chat_session.destroy
-    redirect_to chat_sessions_url, notice: 'Chat session was successfully destroyed.'
+    redirect_to chat_sessions_url, notice: "Chat session was successfully destroyed."
   end
 
   private

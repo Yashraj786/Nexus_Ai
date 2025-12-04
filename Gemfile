@@ -65,6 +65,10 @@ group :development, :test do
   gem "spring"
   gem "mocha", require: false
   gem "bullet"
+  # Code style and security audits
+  gem "rubocop-rails-omakase", require: false
+  gem "bundler-audit", require: false
+  gem "brakeman", require: false
 end
 
 group :development do

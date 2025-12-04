@@ -30,10 +30,10 @@ class SettingsController < ApplicationController
     @user.api_configured_at = Time.current
 
     if @user.save
-      AuditEvent.log_action(@user, 'api_key_updated', { provider: @user.api_provider })
-      render json: { success: true, message: 'API configuration saved successfully!' }
+      AuditEvent.log_action(@user, "api_key_updated", { provider: @user.api_provider })
+      render json: { success: true, message: "API configuration saved successfully!" }
     else
-      errors = @user.errors.full_messages.join(', ')
+      errors = @user.errors.full_messages.join(", ")
       render json: { success: false, error: errors }, status: :unprocessable_entity
     end
   end
@@ -41,52 +41,52 @@ class SettingsController < ApplicationController
   # Clear API configuration
   def clear_api_key
     @user.clear_api_config
-    AuditEvent.log_action(@user, 'api_key_cleared', {})
-    redirect_to settings_path, notice: 'API configuration cleared.'
+    AuditEvent.log_action(@user, "api_key_cleared", {})
+    redirect_to settings_path, notice: "API configuration cleared."
   end
 
   # Update fallback provider
   def update_fallback_provider
     @user.fallback_provider = settings_params[:fallback_provider]
     @user.fallback_model_name = settings_params[:fallback_model_name]
-    
+
     if settings_params[:encrypted_fallback_api_key].present?
       @user.encrypted_fallback_api_key = settings_params[:encrypted_fallback_api_key]
     end
 
     if @user.save
-      AuditEvent.log_action(@user, 'fallback_provider_updated', { provider: @user.fallback_provider })
-      redirect_to settings_path, notice: 'Fallback provider configured successfully.'
+      AuditEvent.log_action(@user, "fallback_provider_updated", { provider: @user.fallback_provider })
+      redirect_to settings_path, notice: "Fallback provider configured successfully."
     else
-      redirect_to settings_path, alert: 'Failed to update fallback provider.'
+      redirect_to settings_path, alert: "Failed to update fallback provider."
     end
   end
 
   # Clear fallback provider
   def clear_fallback_provider
     @user.clear_fallback_config
-    AuditEvent.log_action(@user, 'fallback_provider_cleared', {})
-    redirect_to settings_path, notice: 'Fallback provider cleared.'
+    AuditEvent.log_action(@user, "fallback_provider_cleared", {})
+    redirect_to settings_path, notice: "Fallback provider cleared."
   end
 
   # Test API connection
   def test_api
     unless @user.api_configured?
-      render json: { success: false, error: 'API not configured' }, status: :unprocessable_entity
+      render json: { success: false, error: "API not configured" }, status: :unprocessable_entity
       return
     end
 
     begin
       client = Ai::LlmClient.new(@user)
       test_context = [
-        { 'role' => 'system', 'parts' => [{ 'text' => 'You are a helpful assistant.' }] },
-        { 'role' => 'user', 'parts' => [{ 'text' => 'Say "API connection successful" if you receive this message.' }] }
+        { "role" => "system", "parts" => [ { "text" => "You are a helpful assistant." } ] },
+        { "role" => "user", "parts" => [ { "text" => 'Say "API connection successful" if you receive this message.' } ] }
       ]
-      
+
       response = client.generate_content(test_context)
-      
+
       if response[:success]
-        render json: { success: true, message: 'API connection successful!', data: response[:data] }
+        render json: { success: true, message: "API connection successful!", data: response[:data] }
       else
         render json: { success: false, error: response[:error] }, status: :unprocessable_entity
       end

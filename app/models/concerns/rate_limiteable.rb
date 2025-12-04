@@ -17,8 +17,8 @@ module RateLimiteable
 
       # Check minute limit
       minute_ago = now - 1.minute
-      minute_requests = where(user: user).where('created_at > ?', minute_ago).count
-      
+      minute_requests = where(user: user).where("created_at > ?", minute_ago).count
+
       if minute_requests >= RATE_LIMITS[:requests_per_minute]
         return {
           limited: true,
@@ -29,8 +29,8 @@ module RateLimiteable
 
       # Check hour limit
       hour_ago = now - 1.hour
-      hour_requests = where(user: user).where('created_at > ?', hour_ago).count
-      
+      hour_requests = where(user: user).where("created_at > ?", hour_ago).count
+
       if hour_requests >= RATE_LIMITS[:requests_per_hour]
         return {
           limited: true,
@@ -41,8 +41,8 @@ module RateLimiteable
 
       # Check day limit
       day_ago = now - 1.day
-      day_requests = where(user: user).where('created_at > ?', day_ago).count
-      
+      day_requests = where(user: user).where("created_at > ?", day_ago).count
+
       if day_requests >= RATE_LIMITS[:requests_per_day]
         return {
           limited: true,
@@ -61,14 +61,14 @@ module RateLimiteable
       hour_ago = now - 1.hour
       day_ago = now - 1.day
 
-      minute_count = where(user: user).where('created_at > ?', minute_ago).count
-      hour_count = where(user: user).where('created_at > ?', hour_ago).count
-      day_count = where(user: user).where('created_at > ?', day_ago).count
+      minute_count = where(user: user).where("created_at > ?", minute_ago).count
+      hour_count = where(user: user).where("created_at > ?", hour_ago).count
+      day_count = where(user: user).where("created_at > ?", day_ago).count
 
       {
-        minute: { used: minute_count, limit: RATE_LIMITS[:requests_per_minute], remaining: [0, RATE_LIMITS[:requests_per_minute] - minute_count].max },
-        hour: { used: hour_count, limit: RATE_LIMITS[:requests_per_hour], remaining: [0, RATE_LIMITS[:requests_per_hour] - hour_count].max },
-        day: { used: day_count, limit: RATE_LIMITS[:requests_per_day], remaining: [0, RATE_LIMITS[:requests_per_day] - day_count].max }
+        minute: { used: minute_count, limit: RATE_LIMITS[:requests_per_minute], remaining: [ 0, RATE_LIMITS[:requests_per_minute] - minute_count ].max },
+        hour: { used: hour_count, limit: RATE_LIMITS[:requests_per_hour], remaining: [ 0, RATE_LIMITS[:requests_per_hour] - hour_count ].max },
+        day: { used: day_count, limit: RATE_LIMITS[:requests_per_day], remaining: [ 0, RATE_LIMITS[:requests_per_day] - day_count ].max }
       }
     end
   end

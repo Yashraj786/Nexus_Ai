@@ -12,9 +12,9 @@ class RunMetricsTest < ApplicationSystemTestCase
 
   test "visiting a chat session with run metrics" do
     # Create messages to ensure metrics are calculated correctly
-    @chat_session.messages.create!(role: 'user', content: 'User message 1')
-    @chat_session.messages.create!(role: 'assistant', content: 'Assistant reply 1')
-    @chat_session.messages.create!(role: 'user', content: 'User message 2')
+    @chat_session.messages.create!(role: "user", content: "User message 1")
+    @chat_session.messages.create!(role: "assistant", content: "Assistant reply 1")
+    @chat_session.messages.create!(role: "user", content: "User message 2")
 
     visit chat_session_url(@chat_session)
 

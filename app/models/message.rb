@@ -10,15 +10,15 @@ class Message < ApplicationRecord
 
   # Helper methods for role checking
   def user?
-    role == 'user'
+    role == "user"
   end
 
   def assistant?
-    role == 'assistant'
+    role == "assistant"
   end
 
   def system?
-    role == 'system'
+    role == "system"
   end
 
   # Helper method for sanitized check

@@ -9,9 +9,9 @@ class GenerateTitleJob < ApplicationJob
     return unless chat_session
 
     # Skip if already has a custom title or less than 2 messages
-    return if chat_session.title.present? && !chat_session.title.start_with?('New')
+    return if chat_session.title.present? && !chat_session.title.start_with?("New")
 
-    user_messages_count = chat_session.messages.where(role: 'user').count
+    user_messages_count = chat_session.messages.where(role: "user").count
     return if user_messages_count < 2
 
     # Build a short prompt to generate title
@@ -22,8 +22,8 @@ class GenerateTitleJob < ApplicationJob
     response = Ai::GenerateResponseService.call_for_title(title_prompt)
 
     # Clean up and save the title
-    generated_title = response.strip.gsub(/["']/, '').truncate(50)
-    
+    generated_title = response.strip.gsub(/["']/, "").truncate(50)
+
     if chat_session.update(title: generated_title)
       Rails.logger.info("Generated title for session #{chat_session.id}: #{generated_title}")
     else

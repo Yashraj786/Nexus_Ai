@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 module Ai
   # Generic LLM client that supports multiple providers
@@ -12,7 +12,7 @@ module Ai
 
     def initialize(user, use_fallback: false)
       @user = user
-      
+
       if use_fallback && user.fallback_configured?
         @provider = user.fallback_provider
         @api_key = user.encrypted_fallback_api_key
@@ -46,15 +46,15 @@ module Ai
       end
 
       result = case @provider
-      when 'openai'
+      when "openai"
         generate_with_openai(context)
-      when 'anthropic'
+      when "anthropic"
         generate_with_anthropic(context)
-      when 'gemini'
+      when "gemini"
         generate_with_gemini(context)
-      when 'ollama'
+      when "ollama"
         generate_with_ollama(context)
-      when 'custom'
+      when "custom"
         generate_with_custom(context)
       else
         { success: false, error: "Unsupported provider: #{@provider}" }
@@ -83,9 +83,9 @@ module Ai
 
     # OpenAI API (ChatGPT)
     def generate_with_openai(context)
-      uri = URI('https://api.openai.com/v1/chat/completions')
+      uri = URI("https://api.openai.com/v1/chat/completions")
       payload = build_openai_payload(context)
-      response = make_request(uri, payload, 'Bearer', @api_key)
+      response = make_request(uri, payload, "Bearer", @api_key)
       parse_openai_response(response)
     end
 
@@ -101,8 +101,8 @@ module Ai
     def format_for_openai(context)
       context.map do |msg|
         {
-          role: msg['role'] == 'system' ? 'system' : msg['role'],
-          content: msg['parts'].map { |p| p['text'] }.join(' ')
+          role: msg["role"] == "system" ? "system" : msg["role"],
+          content: msg["parts"].map { |p| p["text"] }.join(" ")
         }
       end
     end
@@ -113,7 +113,7 @@ module Ai
         body = JSON.parse(response.body)
         {
           success: true,
-          data: body.dig('choices', 0, 'message', 'content')
+          data: body.dig("choices", 0, "message", "content")
         }
       when 401
         { success: false, error: "Invalid OpenAI API key" }
@@ -128,9 +128,9 @@ module Ai
 
     # Anthropic API (Claude)
     def generate_with_anthropic(context)
-      uri = URI('https://api.anthropic.com/v1/messages')
+      uri = URI("https://api.anthropic.com/v1/messages")
       payload = build_anthropic_payload(context)
-      response = make_request(uri, payload, 'Bearer', @api_key)
+      response = make_request(uri, payload, "Bearer", @api_key)
       parse_anthropic_response(response)
     end
 
@@ -144,18 +144,18 @@ module Ai
     end
 
     def format_for_anthropic(context)
-      context.reject { |msg| msg['role'] == 'system' }
+      context.reject { |msg| msg["role"] == "system" }
              .map do |msg|
         {
-          role: msg['role'],
-          content: msg['parts'].map { |p| p['text'] }.join(' ')
+          role: msg["role"],
+          content: msg["parts"].map { |p| p["text"] }.join(" ")
         }
       end
     end
 
     def extract_system_prompt(context)
-      system_msg = context.find { |msg| msg['role'] == 'system' }
-      system_msg ? system_msg['parts'].map { |p| p['text'] }.join(' ') : nil
+      system_msg = context.find { |msg| msg["role"] == "system" }
+      system_msg ? system_msg["parts"].map { |p| p["text"] }.join(" ") : nil
     end
 
     def parse_anthropic_response(response)
@@ -164,7 +164,7 @@ module Ai
         body = JSON.parse(response.body)
         {
           success: true,
-          data: body.dig('content', 0, 'text')
+          data: body.dig("content", 0, "text")
         }
       when 401
         { success: false, error: "Invalid Anthropic API key" }
@@ -204,7 +204,7 @@ module Ai
         body = JSON.parse(response.body)
         {
           success: true,
-          data: body.dig('candidates', 0, 'content', 'parts', 0, 'text')
+          data: body.dig("candidates", 0, "content", "parts", 0, "text")
         }
       when 401
         { success: false, error: "Invalid Gemini API key" }
@@ -241,7 +241,7 @@ module Ai
         body = JSON.parse(response.body)
         {
           success: true,
-          data: body['response']
+          data: body["response"]
         }
       else
         { success: false, error: "Ollama API error: #{response.code}" }
@@ -265,7 +265,7 @@ module Ai
         body = JSON.parse(response.body)
         {
           success: true,
-          data: body['response'] || body['data'] || body['content']
+          data: body["response"] || body["data"] || body["content"]
         }
       else
         { success: false, error: "Custom API error: #{response.code}" }
@@ -277,12 +277,12 @@ module Ai
     # HTTP request helper
     def make_request(uri, payload, auth_type = nil, auth_token = nil)
       http = Net::HTTP.new(uri.host, uri.port)
-      http.use_ssl = uri.scheme == 'https'
+      http.use_ssl = uri.scheme == "https"
       http.read_timeout = TIMEOUT
       http.open_timeout = TIMEOUT
 
-      request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json')
-      request['Authorization'] = "#{auth_type} #{auth_token}" if auth_type && auth_token
+      request = Net::HTTP::Post.new(uri, "Content-Type" => "application/json")
+      request["Authorization"] = "#{auth_type} #{auth_token}" if auth_type && auth_token
       request.body = payload.to_json
 
       http.request(request)
@@ -297,7 +297,7 @@ module Ai
     end
 
     def log_usage(result)
-      status = result[:success] ? 'success' : 'error'
+      status = result[:success] ? "success" : "error"
       error_message = result[:error] if result[:error]
       request_tokens = result[:request_tokens]
       response_tokens = result[:response_tokens]

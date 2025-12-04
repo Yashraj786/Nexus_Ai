@@ -1,12 +1,12 @@
 # config/initializers/api_event_logger.rb
-require 'logger'
+require "logger"
 
 class ApiEventLogger
   # Returns the logger instance, creating it if it doesn't already exist.
   # The logger writes to 'log/api_events.log'.
   # @return [Logger] The logger instance.
   def self.logger
-    @logger ||= Logger.new(Rails.root.join('log', 'api_events.log'))
+    @logger ||= Logger.new(Rails.root.join("log", "api_events.log"))
   end
 
   # Logs a structured event to the 'api_events.log' file.

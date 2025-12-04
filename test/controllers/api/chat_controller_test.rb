@@ -3,7 +3,7 @@ require "test_helper"
 class Api::ChatControllerTest < ActionDispatch::IntegrationTest
   setup do
     # Clear API token for test isolation
-    ENV['API_TOKEN'] = nil
+    ENV["API_TOKEN"] = nil
   end
 
   test "should create with valid request in test mode" do
@@ -30,7 +30,7 @@ class Api::ChatControllerTest < ActionDispatch::IntegrationTest
     post api_chat_url,
          params: {
            chat: {
-             chat_history: [{ role: "user", parts: [{ text: "Hello" }] }]
+             chat_history: [ { role: "user", parts: [ { text: "Hello" } ] } ]
            }
          },
          as: :json

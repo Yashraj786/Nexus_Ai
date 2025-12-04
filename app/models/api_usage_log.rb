@@ -10,14 +10,14 @@ class ApiUsageLog < ApplicationRecord
 
   scope :by_user, ->(user) { where(user: user) }
   scope :by_provider, ->(provider) { where(provider: provider) }
-  scope :successful, -> { where(status: 'success') }
+  scope :successful, -> { where(status: "success") }
   scope :failed, -> { where(status: %w[error timeout]) }
   scope :recent, -> { order(created_at: :desc) }
-  scope :today, -> { where('DATE(created_at) = ?', Date.current) }
-  scope :this_month, -> { where('EXTRACT(YEAR FROM created_at) = ? AND EXTRACT(MONTH FROM created_at) = ?', Date.current.year, Date.current.month) }
+  scope :today, -> { where("DATE(created_at) = ?", Date.current) }
+  scope :this_month, -> { where("EXTRACT(YEAR FROM created_at) = ? AND EXTRACT(MONTH FROM created_at) = ?", Date.current.year, Date.current.month) }
 
   class << self
-    def log_request(user, provider, model, status: 'success', request_tokens: nil, response_tokens: nil, error_message: nil)
+    def log_request(user, provider, model, status: "success", request_tokens: nil, response_tokens: nil, error_message: nil)
       total_tokens = (request_tokens.to_i + response_tokens.to_i) if request_tokens && response_tokens
 
       create(

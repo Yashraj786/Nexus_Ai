@@ -3,7 +3,7 @@ class ChatSessions::MessagesController < ApplicationController
   before_action :set_chat_session
 
   def create
-    @message = @chat_session.messages.new(message_params.merge(role: 'user'))
+    @message = @chat_session.messages.new(message_params.merge(role: "user"))
     authorize @chat_session, :show? # Pundit ensures user owns the session
 
     if @message.save
@@ -15,8 +15,8 @@ class ChatSessions::MessagesController < ApplicationController
       end
     else
       render turbo_stream: turbo_stream.replace(
-        'new_message_form',
-        partial: 'chat_sessions/new_message_form',
+        "new_message_form",
+        partial: "chat_sessions/new_message_form",
         locals: { chat_session: @chat_session, message: @message }
       ), status: :unprocessable_entity
     end

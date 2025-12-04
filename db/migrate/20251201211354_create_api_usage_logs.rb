@@ -11,8 +11,8 @@ class CreateApiUsageLogs < ActiveRecord::Migration[8.1]
       t.text :error_message
       t.timestamps
 
-      t.index [:user_id, :created_at]
-      t.index [:provider, :created_at]
+      t.index [ :user_id, :created_at ]
+      t.index [ :provider, :created_at ]
       t.foreign_key :users, column: :user_id
     end
   end

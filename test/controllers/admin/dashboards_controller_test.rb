@@ -12,13 +12,13 @@ class Admin::DashboardsControllerTest < ActionDispatch::IntegrationTest
     sign_in @regular_user
     get admin_dashboard_url
     assert_redirected_to root_path
-    assert_equal 'You are not authorized to view this page.', flash[:alert]
+    assert_equal "You are not authorized to view this page.", flash[:alert]
   end
 
   test "should redirect unauthenticated users from dashboard" do
     get admin_dashboard_url
     assert_redirected_to new_user_session_path # Devise redirects to login page
-    assert_equal 'You need to sign in or sign up before continuing.', flash[:alert]
+    assert_equal "You need to sign in or sign up before continuing.", flash[:alert]
   end
 
   test "should get dashboard for admin user" do
@@ -32,7 +32,7 @@ class Admin::DashboardsControllerTest < ActionDispatch::IntegrationTest
       failures_per_minute: 1.0,
       retries_per_minute: 2.0,
       average_latency: 0.5,
-      top_error_types: [["Net::ReadTimeout", 10]]
+      top_error_types: [ [ "Net::ReadTimeout", 10 ] ]
     })
 
     get admin_dashboard_url

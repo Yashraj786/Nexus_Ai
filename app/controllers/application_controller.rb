@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   # Handle favicon requests gracefully
   def favicon
-    send_file Rails.root.join('public', 'favicon.ico'), type: 'image/x-icon', disposition: 'inline'
+    send_file Rails.root.join("public", "favicon.ico"), type: "image/x-icon", disposition: "inline"
   end
 
   # Handle Pundit authorization failures

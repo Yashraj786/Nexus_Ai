@@ -16,13 +16,13 @@ class AiResponseJob < ApplicationJob
     started_at = Time.now.utc.to_f
     queue_time = enqueued_at ? (started_at - enqueued_at).round(3) : nil
 
-    ApiEventLogger.log('job_started', { message_id: message_id, started_at: started_at, queue_time: queue_time })
+    ApiEventLogger.log("job_started", { message_id: message_id, started_at: started_at, queue_time: queue_time })
 
     message = Message.find(message_id)
     chat_session = message.chat_session
 
     begin
-      ApiEventLogger.log('job_start_attempt', {
+      ApiEventLogger.log("job_start_attempt", {
         chat_session_id: chat_session.id,
         user_id: chat_session.user.id,
         message_id: message.id,
@@ -33,14 +33,14 @@ class AiResponseJob < ApplicationJob
 
       if result[:success]
         assistant_message = chat_session.messages.create!(
-          role: 'assistant',
+          role: "assistant",
           content: result[:content]
         )
 
         # Broadcast the response using proper Turbo Stream format
         broadcast_response(chat_session, assistant_message)
 
-        ApiEventLogger.log('job_success', {
+        ApiEventLogger.log("job_success", {
           chat_session_id: chat_session.id,
           user_id: chat_session.user.id,
           message_id: message.id
@@ -51,7 +51,7 @@ class AiResponseJob < ApplicationJob
     ensure
       finished_at = Time.now.utc.to_f
       execution_time = (finished_at - started_at).round(3)
-      ApiEventLogger.log('job_finished', {
+      ApiEventLogger.log("job_finished", {
         message_id: message_id,
         finished_at: finished_at,
         execution_time: execution_time
@@ -73,7 +73,7 @@ class AiResponseJob < ApplicationJob
 
     ActionCable.server.broadcast(
       "chat_session_#{chat_session.id}",
-      type: 'success',
+      type: "success",
       message_id: message.id,
       html: turbo_html,
       is_retrying: false
@@ -84,8 +84,8 @@ class AiResponseJob < ApplicationJob
   def broadcast_error(chat_session, message)
     ActionCable.server.broadcast(
       "chat_session_#{chat_session.id}",
-      type: 'error',
-      error: 'The AI service is currently unavailable. Please try again later.',
+      type: "error",
+      error: "The AI service is currently unavailable. Please try again later.",
       message_id: message.id,
       retryable: true,
       is_retrying: false

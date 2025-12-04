@@ -17,7 +17,7 @@ class HealthController < ApplicationController
   private
 
   def check_database
-    ActiveRecord::Base.connection.execute('SELECT 1')
+    ActiveRecord::Base.connection.execute("SELECT 1")
     true
   rescue StandardError => e
     Rails.logger.error "Health check: Database connection failed - #{e.message}"
@@ -25,13 +25,13 @@ class HealthController < ApplicationController
   end
 
   def check_redis
-    Redis.new.ping == 'PONG'
+    Redis.new.ping == "PONG"
   rescue StandardError => e
     Rails.logger.error "Health check: Redis connection failed - #{e.message}"
     false
   end
 
   def check_ai_api_key
-    ENV['GOOGLE_API_KEY'].present? || Rails.application.credentials.dig(:google_api_key).present?
+    ENV["GOOGLE_API_KEY"].present? || Rails.application.credentials.dig(:google_api_key).present?
   end
 end

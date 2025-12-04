@@ -7,7 +7,7 @@ class ErrorsController < ApplicationController
   end
 
   def internal_server_error
-    exception = request.env['action_dispatch.exception']
+    exception = request.env["action_dispatch.exception"]
     context = { user: current_user.try(:email), params: request.params }
     ErrorNotifierService.call(exception, context: context)
     render status: :internal_server_error

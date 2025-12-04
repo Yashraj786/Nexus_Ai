@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :encrypted_api_key, presence: true, if: :api_configured?
 
   # Supported LLM providers
-  SUPPORTED_PROVIDERS = ['openai', 'anthropic', 'gemini', 'ollama', 'custom'].freeze
+  SUPPORTED_PROVIDERS = [ "openai", "anthropic", "gemini", "ollama", "custom" ].freeze
 
   ONBOARDING_STEPS = [
     "created_first_session",
@@ -43,7 +43,7 @@ class User < ApplicationRecord
 
   def complete_onboarding_step(step)
     return if onboarding_steps_completed.include?(step)
-    update(onboarding_steps: onboarding_steps_completed + [step])
+    update(onboarding_steps: onboarding_steps_completed + [ step ])
   end
 
   def all_onboarding_steps_completed?

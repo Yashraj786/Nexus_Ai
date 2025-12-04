@@ -10,9 +10,9 @@ module Ai
       @chat_session = chat_sessions(:one)
 
       # Create some messages for context
-      @message1 = @chat_session.messages.create!(role: 'user', content: 'Hello')
-      @message2 = @chat_session.messages.create!(role: 'assistant', content: 'Hi there!')
-      @message3 = @chat_session.messages.create!(role: 'user', content: 'How are you?')
+      @message1 = @chat_session.messages.create!(role: "user", content: "Hello")
+      @message2 = @chat_session.messages.create!(role: "assistant", content: "Hi there!")
+      @message3 = @chat_session.messages.create!(role: "user", content: "How are you?")
 
       assert @message1.valid?
       assert_not_nil @message1.role
@@ -41,7 +41,7 @@ module Ai
       result = service.call
 
       assert_not result[:success]
-      assert_includes result[:error], 'must have a persona'
+      assert_includes result[:error], "must have a persona"
     end
 
       test "should build context with system instruction" do
@@ -50,8 +50,8 @@ module Ai
 
         # Should have system instruction + 3 messages
         assert_equal 4, context.length
-        assert_equal 'system', context[0]['role']
-        assert_includes context[0]['parts'][0]['text'], @chat_session.persona.system_instruction
+        assert_equal "system", context[0]["role"]
+        assert_includes context[0]["parts"][0]["text"], @chat_session.persona.system_instruction
       end
 
     test "should handle API errors" do

@@ -14,7 +14,7 @@ class CaptureLogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create capture_log" do
-    assert_difference('CaptureLog.count') do
+    assert_difference("CaptureLog.count") do
       post capture_logs_url, params: { capture_log: { content: "Test log", title: "Test" } }
     end
     assert_redirected_to capture_logs_path

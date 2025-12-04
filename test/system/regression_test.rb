@@ -18,13 +18,13 @@ class RegressionTest < ApplicationSystemTestCase
 
     # Fill in the message input and submit
     fill_in placeholder: "Message...", with: "Hello AI"
-    
+
     # Submit the form using JavaScript since Stimulus might intercept the submit
     page.execute_script("document.querySelector('[data-chat-target=\"form\"]').submit()")
-    
+
     # Give the async submission time to process
     sleep 2
-    
+
     # Page should still be on the chat page
     assert_text "Developer"
   end

@@ -7,7 +7,7 @@ class ChatSession < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
   has_many :audit_events, dependent: :destroy
-  
+
   validates :persona, presence: true
   validates :user, presence: true
 
@@ -21,7 +21,7 @@ class ChatSession < ApplicationRecord
 
   # Scopes
   scope :recent, -> { order(last_active_at: :desc) }
-  scope :active, -> { where('last_active_at > ?', ACTIVE_THRESHOLD) }
+  scope :active, -> { where("last_active_at > ?", ACTIVE_THRESHOLD) }
   scope :with_persona, -> { includes(:persona) }
   scope :with_messages, -> { includes(:messages) }
 
@@ -31,7 +31,7 @@ class ChatSession < ApplicationRecord
   end
 
   def status
-    updated_at > STATUS_ACTIVE_THRESHOLD ? 'active' : 'inactive'
+    updated_at > STATUS_ACTIVE_THRESHOLD ? "active" : "inactive"
   end
 
   def run_metrics
@@ -39,15 +39,15 @@ class ChatSession < ApplicationRecord
     message_counts = messages.group(:role).count
     {
       total_messages: messages.count,
-      user_messages: message_counts['user'] || 0,
-      assistant_messages: message_counts['assistant'] || 0,
+      user_messages: message_counts["user"] || 0,
+      assistant_messages: message_counts["assistant"] || 0,
       session_length: (updated_at - created_at).round(2)
     }
   end
 
   def timeline
     # Optimize by loading all message timestamps in one query
-    assistant_messages = messages.where(role: 'assistant')
+    assistant_messages = messages.where(role: "assistant")
     {
       started_at: created_at,
       first_reply_at: assistant_messages.minimum(:created_at),
