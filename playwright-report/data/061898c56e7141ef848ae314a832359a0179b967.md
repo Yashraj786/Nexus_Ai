@@ -1,0 +1,63 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]: You need to sign in or sign up before continuing.
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - link "Nexus AI" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e10]: Nexus AI
+      - generic [ref=e11]:
+        - link "Sign In" [ref=e12] [cursor=pointer]:
+          - /url: /login
+        - link "Sign Up" [ref=e13] [cursor=pointer]:
+          - /url: /register
+    - main [ref=e14]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - link "Nexus" [ref=e18] [cursor=pointer]:
+            - /url: /
+            - img [ref=e20]
+            - generic [ref=e23]: Nexus
+          - heading "Welcome back" [level=1] [ref=e24]
+          - paragraph [ref=e25]: Sign in to your account to continue
+        - generic [ref=e26]:
+          - generic [ref=e27]:
+            - generic [ref=e28]:
+              - generic [ref=e29]: Email
+              - textbox "Email" [active] [ref=e30]:
+                - /placeholder: you@example.com
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - generic [ref=e33]: Password
+                - link "Forgot?" [ref=e34] [cursor=pointer]:
+                  - /url: /password/new
+              - generic [ref=e35]:
+                - textbox "••••••••" [ref=e36]
+                - button "Show/hide password" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e41]:
+              - checkbox [ref=e42] [cursor=pointer]
+              - generic [ref=e43] [cursor=pointer]: Remember for 30 days
+            - button "Sign in" [ref=e44] [cursor=pointer]:
+              - generic [ref=e45]: Sign in
+          - generic [ref=e50]: New to Nexus?
+          - link "Create account" [ref=e51] [cursor=pointer]:
+            - /url: /register
+            - img [ref=e52]
+            - text: Create account
+        - generic [ref=e53]:
+          - paragraph [ref=e54]:
+            - text: By signing in, you agree to our
+            - link "Terms" [ref=e55] [cursor=pointer]:
+              - /url: "#"
+            - text: and
+            - link "Privacy Policy" [ref=e56] [cursor=pointer]:
+              - /url: "#"
+          - link "Back to home" [ref=e57] [cursor=pointer]:
+            - /url: /
+            - img [ref=e58]
+            - text: Back to home
+```

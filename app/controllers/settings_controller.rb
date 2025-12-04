@@ -4,30 +4,37 @@ class SettingsController < ApplicationController
 
   # Show settings page
   def show
-    @supported_providers = User::SUPPORTED_PROVIDERS
     @api_configured = @user.api_configured?
-    @fallback_configured = @user.fallback_configured?
-    @usage_stats = ApiUsageLog.usage_stats(@user)
-    @today_stats = ApiUsageLog.today_stats(@user)
-    @rate_limits = ApiUsageLog.get_user_limits(@user)
-    @recent_logs = @user.api_usage_logs.recent.limit(10)
   end
 
   # Update API configuration
   def update_api_key
+    # Validate provider
+    unless User::SUPPORTED_PROVIDERS.include?(settings_params[:api_provider])
+      return render json: { success: false, error: "Invalid provider selected" }, status: :unprocessable_entity
+    end
+
+    # Validate required fields
+    if settings_params[:api_model_name].blank?
+      return render json: { success: false, error: "Model name is required" }, status: :unprocessable_entity
+    end
+
+    if settings_params[:encrypted_api_key].blank?
+      return render json: { success: false, error: "API key is required" }, status: :unprocessable_entity
+    end
+
+    # Update user with new API configuration
     @user.api_provider = settings_params[:api_provider]
     @user.api_model_name = settings_params[:api_model_name]
-    
-    # Only update API key if it's provided (for security)
-    if settings_params[:encrypted_api_key].present?
-      @user.encrypted_api_key = settings_params[:encrypted_api_key]
-    end
+    @user.encrypted_api_key = settings_params[:encrypted_api_key]
+    @user.api_configured_at = Time.current
 
     if @user.save
       AuditEvent.log_action(@user, 'api_key_updated', { provider: @user.api_provider })
-      redirect_to settings_path, notice: 'API configuration updated successfully.'
+      render json: { success: true, message: 'API configuration saved successfully!' }
     else
-      redirect_to settings_path, alert: 'Failed to update API configuration.'
+      errors = @user.errors.full_messages.join(', ')
+      render json: { success: false, error: errors }, status: :unprocessable_entity
     end
   end
 
