@@ -5,6 +5,9 @@ class Message < ApplicationRecord
 
   MAX_CONTENT_LENGTH = 10_000
 
+  # Trigger AI response job for user messages
+  after_create :enqueue_ai_response, if: :user?
+
   # Helper methods for role checking
   def user?
     role == 'user'
@@ -21,5 +24,15 @@ class Message < ApplicationRecord
   # Helper method for sanitized check
   def sanitized?
     respond_to?(:sanitized) && sanitized
+  end
+
+  private
+
+  # Enqueue the AI response job when a user message is created
+  def enqueue_ai_response
+    AiResponseJob.set(wait: 0).perform_later(
+      id,
+      enqueued_at: Time.now.utc.to_f
+    )
   end
 end
